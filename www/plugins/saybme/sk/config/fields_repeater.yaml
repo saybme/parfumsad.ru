@@ -1,0 +1,25 @@
+rows:
+  name: Списки
+  description: Параметр списки
+  icon: icon-file-text-o
+  fields:
+    title:
+      label: Заголовок
+      span: auto
+    code:
+      label: API код 
+      span: auto
+    items:
+      label: Списки 
+      span: full
+      type: repeater 
+      form:
+        fields:
+          title:
+            label: Заголовок 
+            span: full 
+          description:
+            label: Описание 
+            span: full 
+            type: richeditor
+            size: small

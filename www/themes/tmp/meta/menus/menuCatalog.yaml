@@ -1,0 +1,143 @@
+items:
+    -
+        title: Бренды
+        nesting: 0
+        type: static-page
+        code: ''
+        reference: brendy
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Предзаказ
+        nesting: 0
+        type: sk-category
+        url: null
+        code: ''
+        reference: '349'
+        cmsPage: catalog/kategorii
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Новинки
+        nesting: null
+        type: url
+        url: /
+        code: ''
+        reference: null
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Travel-формат
+        nesting: 0
+        type: sk-category
+        url: null
+        code: ''
+        reference: '314'
+        cmsPage: catalog/kategorii
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Основной уход'
+        nesting: 0
+        type: sk-category
+        url: null
+        code: ''
+        reference: '245'
+        cmsPage: catalog/kategorii
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Волосы
+        nesting: 0
+        type: sk-category
+        url: null
+        code: ''
+        reference: '249'
+        cmsPage: catalog/kategorii
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Всё для макияжа'
+        nesting: 0
+        type: sk-category
+        url: null
+        code: ''
+        reference: '246'
+        cmsPage: catalog/kategorii
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Тело
+        nesting: 0
+        type: sk-category
+        url: null
+        code: ''
+        reference: '248'
+        cmsPage: catalog/kategorii
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Идеи подарков'
+        nesting: 0
+        type: sk-category
+        url: null
+        code: ''
+        reference: '250'
+        cmsPage: catalog/kategorii
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Для дома'
+        nesting: 0
+        type: sk-category
+        url: null
+        code: ''
+        reference: '243'
+        cmsPage: catalog/kategorii
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Скидки до 50%'
+        nesting: 0
+        type: sk-category
+        url: null
+        code: ''
+        reference: '251'
+        cmsPage: catalog/kategorii
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+name: 'Меню каталога'

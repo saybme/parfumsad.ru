@@ -1,0 +1,6 @@
+{% for item in products %}
+    <div class="flex flex-col">
+        {% partial 'products/item' item=item %}   
+    </div>
+{% endfor %}
+

@@ -1,0 +1,22 @@
+<h3 class="text-3xl font-semibold">Свежее в блоге</h3>
+
+<div class="mt-8 f-carousel" id="posts">
+    {% for item in posts %}
+        <div class="f-carousel__slide">
+            <a href="{{ item.link }}" class="block relative overflow-hidden  hover:opacity-80">
+                <img src="{{ item.preview.thumb(360,280,{mode:'crop'}) }}" alt="{{ item.name }}" class="block w-full h-auto rounded-2xl">
+                <div class="relative pt-3 space-y-1">                    
+                    <span class="block text-xs text-purple-1">{{ item.created_at | date('d.m.Y год.') }}</span>
+                    <h3 class="text-lg font-bold leading-tight">{{ item.name }}</h3>
+                </div>
+            </a>                
+        </div>
+    {% endfor %}
+</div>
+
+{% put scripts %}
+    <script>
+        scrollPOsts();
+    </script>
+{% endput %}
+

@@ -1,0 +1,89 @@
+[staticMenu headerMenu]
+code = "headerMenu"
+
+[staticMenu catalogMenu]
+code = "menuCatalog"
+==
+
+<div class="">
+    <div class="container flex items-center py-5">    
+        <ul class="header-menu flex-1">
+            {% partial headerMenu ~ "::items" items=headerMenu.menuItems %}
+        </ul>   
+        <div class="text-base text-gray-1">
+            {{ global.timework }}
+        </div>
+        <div class="flex space-x-2 pl-6">            
+            <div class="">
+                <a href="{{ networks.whatsapp.link }}" target="_blank" rel="noopener noreferrer" title="{{ networks.whatsapp.title }}" class="flex gap-x-2 items-center font-semibold text-xl text-purple-10">
+                    <img src="{{ networks.whatsapp.icon }}" alt="" class="block size-[28px] hover:opacity-80 flex-none">
+                    <span class="">{{ networks.whatsapp.value }}</span>
+                </a>
+            </div>           
+        </div>
+    </div>
+</div>
+
+<div class="bg-purple text-white">
+    <div class="container py-2">
+        <div class="flex items-center">
+            <div class="w-full max-w-[387px]">
+                <a href="/" title="Вернуться на главную" class="block flex-none">
+                    <img src="{{ global.logo.path }}" alt="" class="block">
+                </a>  
+            </div>  
+            <div class="me-[30px]">
+                <button class="btn h-[58px] w-[230px] bg-white text-lg font-semibold text-purple-10">
+                    <svg class="size-[24px] me-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1.5" y="1.5" width="8" height="8" rx="4" stroke="currentColor" stroke-width="3"/><rect x="1.5" y="14.5" width="8" height="8" rx="4" stroke="currentColor" stroke-width="3"/><rect x="14.5" y="1.5" width="8" height="8" rx="4" stroke="currentColor" stroke-width="3"/><rect x="14.5" y="14.5" width="8" height="8" rx="4" stroke="currentColor" stroke-width="3"/></svg>                        
+                    <span class="">Каталог</span>
+                </button>
+            </div>
+            <div class="flex-1">
+                {% partial 'forms/h-search' %}            
+            </div>    
+            <div class="flex items-center">
+                <div class="me-6">
+                    {% partial 'cart/header-cart' %}
+                </div>
+                <button class="size-[42px] border border-white rounded-[10px] flex items-center justify-center hover:bg-purple-10 hover:border-purple-10">                     
+                    <svg class="size-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.589 0.000151099H5.411C3.98874 -0.0105102 2.62033 0.543393 1.60593 1.54035C0.591536 2.53731 0.013995 3.89592 0 5.31815L0 7.18215C0 7.57998 0.158035 7.96151 0.43934 8.24281C0.720644 8.52412 1.10218 8.68215 1.5 8.68215C1.89782 8.68215 2.27936 8.52412 2.56066 8.24281C2.84196 7.96151 3 7.57998 3 7.18215V5.31815C3.01339 4.6914 3.27467 4.0955 3.72658 3.66102C4.1785 3.22654 4.7842 2.98889 5.411 3.00015H18.589C19.2158 2.98889 19.8215 3.22654 20.2734 3.66102C20.7253 4.0955 20.9866 4.6914 21 5.31815V18.6822C20.9866 19.3089 20.7253 19.9048 20.2734 20.3393C19.8215 20.7738 19.2158 21.0114 18.589 21.0002H5.411C4.7842 21.0114 4.1785 20.7738 3.72658 20.3393C3.27467 19.9048 3.01339 19.3089 3 18.6822V16.8182C3 16.4203 2.84196 16.0388 2.56066 15.7575C2.27936 15.4762 1.89782 15.3182 1.5 15.3182C1.10218 15.3182 0.720644 15.4762 0.43934 15.7575C0.158035 16.0388 0 16.4203 0 16.8182L0 18.6822C0.013995 20.1044 0.591536 21.463 1.60593 22.4599C2.62033 23.4569 3.98874 24.0108 5.411 24.0002H18.589C20.0113 24.0108 21.3797 23.4569 22.3941 22.4599C23.4085 21.463 23.986 20.1044 24 18.6822V5.31815C23.986 3.89592 23.4085 2.53731 22.3941 1.54035C21.3797 0.543393 20.0113 -0.0105102 18.589 0.000151099Z" fill="currentColor"/>
+                        <path d="M3.5 11.9987C3.5 12.3965 3.65804 12.778 3.93934 13.0593C4.22064 13.3406 4.60218 13.4987 5 13.4987L14.975 13.4717L11.509 16.9377C11.2276 17.2189 11.0695 17.6005 11.0694 17.9983C11.0693 18.3962 11.2272 18.7778 11.5085 19.0592C11.7898 19.3406 12.1713 19.4987 12.5691 19.4988C12.967 19.4989 13.3486 19.3409 13.63 19.0597L18.216 14.4737C18.541 14.1487 18.7989 13.7628 18.9748 13.3381C19.1507 12.9135 19.2413 12.4583 19.2413 11.9987C19.2413 11.539 19.1507 11.0839 18.9748 10.6592C18.7989 10.2345 18.541 9.84867 18.216 9.52366L13.634 4.93766C13.4947 4.7984 13.3293 4.68794 13.1472 4.61259C12.9652 4.53724 12.7701 4.49849 12.5731 4.49854C12.3761 4.49858 12.1811 4.53743 11.9991 4.61286C11.8171 4.68829 11.6518 4.79883 11.5125 4.93816C11.2312 5.21956 11.0733 5.60116 11.0734 5.99902C11.0734 6.19602 11.1123 6.39108 11.1877 6.57306C11.2631 6.75505 11.3737 6.9204 11.513 7.05966L14.926 10.4717L5 10.4987C4.60218 10.4987 4.22064 10.6567 3.93934 10.938C3.65804 11.2193 3.5 11.6008 3.5 11.9987Z" fill="currentColor"/>
+                    </svg>                                            
+                </button>
+            </div>
+        </div>        
+    </div>
+</div>
+
+
+<div class="hidden" id="mobileMenuWrap">
+    <div class="bg-white w-full h-full max-w-[320px] relative px-4 py-6">
+        <div class="">
+            <button class="absolute right-2 top-2 hover:text-rose" onclick="showMobileMenu()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>                  
+            </button>
+        </div>
+        <div class="">
+            <div class="block">
+                <a href="/" title="Вернуться на главную" class="block flex-none">
+                    <img src="{{ global.logo.path }}" alt="" class="block w-auto h-[60px]">
+                </a>
+                <div class="leading-tight block mt-2">
+                    <h2 class="text-xs font-medium">Корейская косметика</h2>
+                    <h3 class="text-base font-medium mb-2 leading-none">Интернет магазин sakuradv.online</h3>
+                    <p class="text-xs text-gray-400">Максимум торговый центр ​Октябрьская, 146 Благовещенск, 675000</p>
+                </div>
+            </div>     
+        </div>
+        <ul class="text-lg mt-4 list-disc ml-5">
+            {% for item in catalogMenu.menuItems %}
+                <li class="">
+                    <a href="{{ item.url }}" class="block py-1 hover:text-rose">{{ item.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

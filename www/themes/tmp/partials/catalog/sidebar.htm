@@ -1,0 +1,18 @@
+[viewBag]
+==
+<?php
+use Saybme\Sk\Classes\Catalog\CatalogClass;
+
+function onStart(){
+    $this['menu'] = CatalogClass::getTopCategories();
+}
+?>
+==
+
+<div class="px-8 pt-[30px] pb-[34px]">
+
+    <ul class="sidebarMenu">
+        {% partial 'menu/categories' menu=menu %}   
+    </ul>
+
+</div>

@@ -1,0 +1,12 @@
+name: Payments
+form: $/saybme/sk/models/payment/fields.yaml
+modelClass: Saybme\Sk\Models\Payment
+defaultRedirect: saybme/sk/payments
+design:
+    displayMode: popup
+create:
+    redirect: 'saybme/sk/payments/update/:id'
+    redirectClose: saybme/sk/payments
+update:
+    redirect: saybme/sk/payments
+    redirectClose: saybme/sk/payments

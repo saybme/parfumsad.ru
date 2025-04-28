@@ -1,0 +1,126 @@
+uuid: fbec6dba-044f-48b1-914f-7c29831e104d
+handle: SkSettings
+type: global
+name: Основные
+
+primaryNavigation:
+    label: Магазин настройки
+    icon: icon-magic
+    order: 150
+
+navigation:
+    parent: SkSettings
+    icon: icon-magic
+    order: 10
+
+fields:
+    logo:
+        label: Логотип
+        span: auto
+        tab: Сакура
+        type: fileupload
+        mode: image
+        maxFiles: 1
+    favicon:
+        label: Favicon 
+        span: auto
+        tab: Сакура
+        type: fileupload
+        mode: image
+        maxFiles: 1
+
+    phone:
+        label: Телефон
+        span: auto
+        type: text
+        tab: Сакура
+
+    email:
+        label: E-mail
+        span: auto
+        type: text
+        tab: Сакура
+
+    timework:
+        label: Время работы 
+        span: full
+        tab: Сакура
+
+    _networks:
+        label: Социальные сети
+        span: full
+        type: section
+        tab: Сакура
+
+    networks:
+        span: full
+        tab: Сакура
+        type: repeater
+        form:
+            fields:
+                title:
+                    label: Заголовок
+                    span: auto
+                    type: text
+                code:
+                    label: API код 
+                    span: auto
+                    type: text
+                value:
+                   label: Значение
+                   span: auto
+                   type: text 
+                link:
+                    label: Сылка
+                    span: auto
+                    type: text
+                icon:
+                    label: Иконка
+                    span: full
+                    type: mediafinder
+                    mode: file
+                    maxItems: 1
+
+    about_text:
+        label: О компании
+        span: full
+        tab: Компания
+        type: richeditor
+        size: giant
+
+    advantages:
+        label: Преимущества
+        span: full
+        tab: Компания
+        type: repeater
+        form:
+            fields:
+                title:
+                    label: Заголовок
+                    span: auto
+                    type: textarea
+                    size: small
+                icon:
+                    label: Иконка
+                    span: auto
+                    type: mediafinder
+                    mode: image
+                    maxItems: 1
+                    imageWidth: 60
+                    imageHeight: 60
+
+    shop_emails:
+        label: Почта для уведомлений
+        span: full
+        tab: Магазин
+        type: taglist
+        mode: array
+
+    shop_file:
+        label: Файл магазина
+        comment: Поле для тестов
+        tab: Магазин 
+        type: fileupload
+        mode: file
+        maxFiles: 1 
+        fileTypes: json

@@ -1,0 +1,57 @@
+plugin:
+    name: 'saybme.sk::lang.plugin.name'
+    description: 'saybme.sk::lang.plugin.description'
+    author: SaybMe
+    icon: oc-icon-barcode
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Каталог
+        url: /
+        icon: icon-barcode
+        sideMenu:
+            side-menu-item4:
+                label: Категории
+                url: saybme/sk/categories
+                icon: icon-sitemap
+            side-menu-item3:
+                label: Товары
+                url: saybme/sk/products
+                icon: icon-list
+            side-menu-item:
+                label: Баннеры
+                url: saybme/sk/banners
+                icon: icon-image
+            side-menu-item2:
+                label: Блог
+                url: saybme/sk/posts
+                icon: icon-list-alt
+            side-menu-item5:
+                label: Производители
+                url: saybme/sk/vendors
+                icon: icon-shekel
+    main-menu-item2:
+        label: Магазин
+        url: /
+        icon: icon-archive
+        sideMenu:
+            side-menu-item:
+                label: Оплата
+                url: saybme/sk/payments
+                icon: icon-money
+            side-menu-item3:
+                label: Доставка
+                url: saybme/sk/deliveries
+                icon: icon-map-marker
+            side-menu-item2:
+                label: Заказы
+                url: saybme/sk/orders
+                icon: icon-barcode
+            side-menu-item4:
+                label: Опции
+                url: saybme/sk/options
+                icon: icon-share-alt
+            side-menu-item5:
+                label: Страницы
+                url: saybme/sk/pages
+                icon: icon-sitemap

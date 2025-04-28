@@ -1,0 +1,63 @@
+fields:
+    num@update:
+        label: Номер заказа
+        span: full
+        type: text   
+        disabled: 1  
+    num@create:
+        label: Номер заказа
+        span: full
+        type: text  
+        disabled: 1
+    payment:
+        label: Оплата
+        span: auto
+        type: relation
+    delivery:
+        label: Доставка
+        span: auto
+        type: relation
+    comment:
+        label: Описание
+        span: full
+        size: small
+        type: textarea
+tabs:
+    fields:
+        products:
+            type: partial
+            tab: Товары
+        hash:
+            label: HASH
+            span: full
+            type: text
+            disabled: 1
+            tab: Дополнительно
+        created_at:
+            label: Создан
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Дополнительно
+        updated_at:
+            label: Обновлен
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Дополнительно
+secondaryTabs:
+    fields:
+        profile[username]:
+            label: Имя
+            type: text
+            span: full
+        phone:
+            label: Телефон
+            span: full
+            type: text
+        email:
+            label: E-mail
+            span: full
+            type: text

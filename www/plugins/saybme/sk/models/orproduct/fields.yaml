@@ -1,0 +1,13 @@
+fields:
+    name:
+        label: Наименование
+        span: full
+        type: text
+    amount:
+        label: Кол-во
+        span: auto
+        type: number
+    price:
+        label: Цена
+        span: auto
+        type: number

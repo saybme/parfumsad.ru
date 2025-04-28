@@ -1,0 +1,12 @@
+name: Доставка
+form: $/saybme/sk/models/delivery/fields.yaml
+modelClass: Saybme\Sk\Models\Delivery
+defaultRedirect: saybme/sk/deliveries
+design:
+    displayMode: popup
+create:
+    redirect: 'saybme/sk/deliveries/update/:id'
+    redirectClose: saybme/sk/deliveries
+update:
+    redirect: saybme/sk/deliveries
+    redirectClose: saybme/sk/deliveries

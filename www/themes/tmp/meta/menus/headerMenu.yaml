@@ -1,0 +1,50 @@
+items:
+    -
+        title: Главная
+        nesting: null
+        type: url
+        url: /
+        code: ''
+        reference: null
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Каталог
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: catalog/katalog
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'О парфюме'
+        nesting: 0
+        type: sk-page
+        url: null
+        code: ''
+        reference: '3'
+        cmsPage: null
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Новости
+        type: cms-page
+        code: ''
+        reference: news/novosti
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+name: 'Меню в шапке'

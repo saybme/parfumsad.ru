@@ -1,0 +1,31 @@
+fields:
+    is_active:
+        label: Опубликован
+        span: full
+        default: 1
+        type: checkbox
+    option:
+        label: Опция
+        type: relation
+        span: auto
+    value:
+        label: Значение
+        span: auto
+        type: text
+    preview:
+        label: Фото 
+        span: full 
+        type: fileupload
+        mode: image
+    _price:
+        label: Цена товара
+        span: full
+        type: section
+    price:
+        label: Цена
+        span: auto
+        type: number
+    old_price:
+        label: 'Старая цена'
+        span: auto
+        type: number

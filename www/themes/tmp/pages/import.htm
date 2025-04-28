@@ -1,0 +1,20 @@
+url = "/import"
+layout = "default"
+title = "Импорт"
+==
+<?php
+use Saybme\Sk\Models\Category;
+
+function onStart(){
+
+    // https://sakuradv.online/categories.json
+    $path = file_get_contents('https://sakuradv.online/categories.json');
+    $data = json_decode($path, true);
+
+    
+
+    return $data;
+
+}
+?>
+==

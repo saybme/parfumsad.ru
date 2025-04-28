@@ -1,0 +1,12 @@
+title: Products
+modelClass: Saybme\Sk\Models\Product
+list: $/saybme/sk/models/product/columns.yaml
+recordUrl: 'saybme/sk/products/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

@@ -1,0 +1,11 @@
+url = "/blog/:slug"
+layout = "default"
+title = "Пост"
+
+[skblog]
+slug = "{{ :slug }}"
+type = "getPage"
+==
+<div class="container">
+    {% component 'skblog' %}
+</div>

@@ -1,0 +1,19 @@
+title: Posts
+modelClass: Saybme\Sk\Models\Post
+list: $/saybme/sk/models/post/columns.yaml
+recordUrl: 'saybme/sk/posts/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+structure:
+    maxDepth: 0
+    showTree: false
+    treeExpanded: false
+defaultSort:
+    column: id
+    direction: desc
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

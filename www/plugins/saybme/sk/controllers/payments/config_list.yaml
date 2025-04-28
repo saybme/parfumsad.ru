@@ -1,0 +1,13 @@
+list: $/saybme/sk/models/payment/columns.yaml
+modelClass: Saybme\Sk\Models\Payment
+title: Payments
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+recordOnClick: popup
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'saybme/sk/payments/update/:id'

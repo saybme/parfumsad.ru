@@ -1,0 +1,56 @@
+<div class="py-3">
+    {% partial 'gl/breadcrumbs' items=breadcrumbs %}    
+</div> 
+
+<div class="container px-2 pb-14">
+
+    <h1 class="title-h1">Ваша корзина</h1>
+
+    <div class="">
+        {% partial 'cart/products' products=cart.products %}
+    </div>
+
+    <div class="mt-[60px]">        
+
+        <div class="">                          
+            <form action="" data-request="onCreateOrder" id="orderForm" data-request-validate>        
+
+                <div class="flex gap-x-[100px] mb-14">
+                    <div class="">
+                        <h3 class="text-4xl font-medium mb-6">Способы оплаты:</h3>                       
+                        <div class="flex flex-wrap gap-x-6">
+                            {% for key, item in cart.payments %}
+                                <label class="label cursor-pointer justify-start gap-x-2 items-center py-1">                                
+                                    <input type="radio" name="payment" value="{{ item.id }}" class="radio radio-sm checked:bg-red-500" {{ key == 0 ? 'checked' : '' }} />
+                                    <span class="">{{ item.name }}</span> 
+                                </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="">
+                        <h3 class="text-4xl font-medium mb-6">Варианты доставки:</h3>                        
+                        <div class="flex flex-wrap gap-x-6">
+                            {% for key, item in cart.deliveries %}
+                                <label class="label cursor-pointer justify-start gap-x-2 items-center py-1">                                
+                                    <input type="radio" name="delivery" value="{{ item.id }}" data-request="onCartAddress" class="radio radio-sm checked:bg-red-500" {{ key == 0 ? 'checked' : '' }} />
+                                    <span class="">{{ item.name }}</span> 
+                                </label>
+                            {% endfor %}
+                        </div>
+                    </div>                    
+                </div> 
+
+                <div id="address-result">
+                    {% partial 'cart/form-contact' cart=cart delivery=cart.deliveries | first . id %}
+                </div>
+
+                                        
+            </form>  
+        </div>            
+
+        
+
+    </div>
+  
+
+</div>

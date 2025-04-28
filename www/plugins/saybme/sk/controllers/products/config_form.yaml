@@ -1,0 +1,12 @@
+name: Products
+form: $/saybme/sk/models/product/fields.yaml
+modelClass: Saybme\Sk\Models\Product
+defaultRedirect: saybme/sk/products
+design:
+    displayMode: sidebar 
+create:
+    redirect: 'saybme/sk/products/update/:id'
+    redirectClose: saybme/sk/products
+update:
+    redirect: saybme/sk/products
+    redirectClose: saybme/sk/products

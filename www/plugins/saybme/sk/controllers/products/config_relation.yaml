@@ -1,0 +1,8 @@
+offers:
+    label: Торговые предложения
+    view:
+        list: $/saybme/sk/models/offer/columns.yaml
+        toolbarButtons: create|delete
+        recordsPerPage: 10
+    manage:
+        form: $/saybme/sk/models/offer/fields.yaml

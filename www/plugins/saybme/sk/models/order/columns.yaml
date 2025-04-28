@@ -1,0 +1,18 @@
+columns:
+    num:
+        label: 'Номер заказа'
+        type: text
+        searchable: true
+    phone:
+        label: Телефон
+        type: text
+        searchable: true    
+    sum:
+        label: Сумма
+        type: number
+    created_at:
+        label: Создан
+        type: datetime
+    id:
+        label: ID
+        type: text

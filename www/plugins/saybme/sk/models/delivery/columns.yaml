@@ -1,0 +1,11 @@
+columns:
+    name:
+        label: Доставка
+        type: text
+        searchable: true
+    is_active:
+        label: Опубликован
+        type: switch
+    id:
+        label: ID
+        type: text

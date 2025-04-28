@@ -1,0 +1,11 @@
+{% for key, item in items %}
+    <div class="border-b border-gray-200 flex items-start leading-none py-2 cursor-pointer">
+        <input type="checkbox" name="products[]" value="{{ item.id }}" id="product_{{ key }}" class="me-2 size-5">
+        <label for="product_{{ key }}" class="block">
+            <div class="">{{ item.name }}</div>
+            {% if item.category %}
+                <div class="text-xs text-gray-400 mt-[2px]">Категория: {{ item.category.name }}</div>
+            {% endif %}
+        </label>
+    </div>
+{% endfor %}

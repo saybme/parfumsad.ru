@@ -1,0 +1,9 @@
+url = "/cart/order/:hash"
+layout = "default"
+title = "Заказ создан"
+
+[skcart]
+type = "order"
+hash = "{{ :hash }}"
+==
+{% component 'skcart' %}

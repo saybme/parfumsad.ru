@@ -1,0 +1,89 @@
+fields:    
+    title:
+        label: Страница
+        span: full
+        type: text    
+    introtext:
+        label: 'Краткое описание'
+        size: small
+        span: full
+        type: textarea
+tabs:
+    fields:
+        content:
+            label: 'Подробное описание'
+            size: giant
+            span: full
+            type: richeditor
+            tab: Описание
+        _options:
+            label: Дополнительные параметры
+            span: full 
+            tab: Описание
+            type: section
+        params: 
+            label: Параметры
+            tab: Описание
+            type: repeater
+            groups: $/saybme/sk/config/fields_repeater.yaml
+        photos:
+            label: Фотография 
+            tab: Галерея
+            span: full
+            type: fileupload
+            mode: image
+        seo[title]:
+            label: SEO Заголовок
+            span: full
+            type: text
+            tab: SEO
+        seo[description]:
+            label: SEO Описание
+            span: full
+            type: textarea
+            size: small
+            tab: SEO
+        seo[keywords]:
+            label: Ключевые слова
+            span: full
+            type: taglist
+            mode: array
+            tab: SEO
+        uri:
+            label: 'Полный путь'
+            span: full
+            disabled: 1
+            type: text
+            tab: Информация
+        created_at:
+            label: Создан
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Информация
+        updated_at:
+            label: Обновлен
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Информация
+secondaryTabs:
+    fields:
+        is_active:
+            label: Опубликован
+            span: full
+            default: 1
+            type: checkbox
+        slug:
+            label: SLUG
+            span: full
+            preset:
+                field: title
+                type: slug
+            type: text
+        tpl:
+            label: Кастомные шаблон 
+            span: full
+            type: text

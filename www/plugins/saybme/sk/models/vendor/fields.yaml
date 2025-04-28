@@ -1,0 +1,43 @@
+tabs:
+    fields:
+        description:
+            label: Описание
+            size: huge
+            span: auto
+            type: richeditor
+            tab: Описание
+        logo:
+            label: Логотип
+            type: fileupload
+            mode: image
+            span: auto
+            tab: Описание
+        created_at:
+            label: Создан
+            span: auto
+            type: datepicker
+            tab: Информация
+            disabled: 1
+        updated_at:
+            label: Обновлен
+            span: auto
+            type: datepicker
+            tab: Информация
+            disabled: 1
+fields:
+    is_active:
+        label: Опубликован
+        span: full
+        default: 1
+        type: checkbox
+    name:
+        label: Производитель
+        span: auto
+        type: text
+    slug:
+        label: SLUG
+        span: auto
+        preset:
+            field: name
+            type: slug
+        type: text

@@ -1,0 +1,68 @@
+url = "/"
+layout = "default"
+title = "Главная"
+meta_title = "Корейская косметика Интернет магазин sakuradv.online"
+
+[skbanner]
+type = "getMainBanners"
+
+[skblog]
+slug = "{{ :slug }}"
+tpl = "posts/scroll"
+type = "getAll"
+
+[skpage skabout]
+slug = "{{ :slug }}"
+page = 1
+type = "getPageId"
+
+[skvendor]
+slug = "{{ :slug }}"
+type = "getAll"
+==
+{% component 'skbanner' %}
+
+<div class="container">
+    {% partial 'main/main-catalog' %}
+</div>
+
+<div class="container pt-[119px] pb-[62px]">
+    {% set skabout = skabout.skpage %}  
+    <div class="flex items-center gap-x-6">
+        <div class="text flex-1">
+            {{ skabout.content | raw }}
+        </div>  
+        <div class="flex-none">
+            <img src="{{ skabout.photos.first.path }}" alt="" class="block">
+        </div>  
+    </div>  
+</div>
+
+<div class="">
+    {% partial 'vendors/wrap' vendors=skvendor.skvendor %}    
+</div>
+
+<div class="container pt-[72px]">
+    {% component 'skblog' %}
+</div>
+
+<div class="container pb-[80px] pt-[57px]">
+    <h3 class="text-3xl/none font-semibold">Как заказать</h3>
+    <div class="mt-[35px] flex overflow-auto">
+        {% for key, item in skabout.options.steps.items %}
+            <div class="flex-none w-1/4 pr-4">
+                <div class="flex items-center gap-x-4">
+                    <h3 class="text-40px font-semibold text-purple-3">{{ key + 1 }}</h3>
+                    <div class="flex-1">
+                        <svg class="w-full" height="8" viewBox="0 0 318 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M317.354 4.35355C317.549 4.15829 317.549 3.84171 317.354 3.64645L314.172 0.464466C313.976 0.269204 313.66 0.269204 313.464 0.464466C313.269 0.659728 313.269 0.976311 313.464 1.17157L316.293 4L313.464 6.82843C313.269 7.02369 313.269 7.34027 313.464 7.53553C313.66 7.7308 313.976 7.7308 314.172 7.53553L317.354 4.35355ZM0 4.5H317V3.5H0V4.5Z" fill="#C199FC"/>
+                        </svg>                            
+                    </div>
+                </div>
+                <div class="text-sm mt-2 text-gray max-w-[316px]">
+                    {{ item.description | raw }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,286 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {    
+
+    html, body {
+        @apply font-montserrat text-gray
+    }
+
+    body {
+        @apply flex flex-col min-h-screen
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+        -webkit-appearance: textfield;
+        appearance: textfield;
+    }
+     
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        display: none;
+    }
+
+    footer {
+        @apply mt-auto
+    }
+}
+
+@layer components {    
+
+    #productPhotos .f-carousel__slide {
+        @apply border border-gray-300 rounded-xl overflow-hidden
+    }
+
+    #productPhotos {
+        @apply mb-1
+    }
+
+    .f-thumbs__slide {
+        @apply border border-gray-300 rounded-xl overflow-hidden    
+    }
+
+    #products {
+        @apply grid grid-cols-3 gap-x-16 gap-y-12
+    }
+
+    .cart-table td {
+        @apply py-1
+    }
+
+    .error {
+        @apply mt-1 text-xs text-red-700 ml-1
+    }
+
+    .text > p, .text > h1, .text > h2, .text > h3, .text > h4, .text > h5 {
+        @apply leading-normal
+    }
+
+    .text > h1, .text > h2, .text > h3, .text > h4, .text > h5 {
+        @apply font-semibold
+    }
+
+    .text > ul, .text > ol {
+        @apply ml-5
+    }
+
+    .text a {
+        @apply underline hover:no-underline text-purple-10
+    }
+
+    .text > h1 {
+        @apply text-3xl
+    }
+
+    .text > h2 {
+        @apply text-2xl
+    }
+
+    .text > h3 {
+        @apply text-xl
+    }
+
+    .text > h4 {
+        @apply text-lg
+    }   
+
+    .text > table {
+        @apply w-full mb-4 border
+    }
+
+    .text > table td, .text > table th {
+        @apply border p-2
+    }
+
+    .icon-sheet {
+        @apply w-[70px] h-[48px] bg-sheet bg-no-repeat bg-center flex-none bg-contain
+    }
+
+    .header-menu {
+        @apply flex gap-x-8 gap-y-2 text-base font-normal overflow-auto
+    }
+
+    .header-menu li {
+        @apply flex-none
+    }
+
+    .header-menu a {
+        @apply hover:underline text-gray-1 hover:text-purple-10
+    }    
+
+    #mobileMenuWrap {
+        @apply fixed left-0 top-0 w-full h-dvh bg-black/40 z-[9999]
+    }
+
+    #modalProduct {
+        @apply w-full max-w-[750px] py-[71px] px-[40px] rounded-[20px]
+    }
+
+    .catalog-menu {
+        @apply flex text-white text-base justify-between
+    }
+
+    .catalog-menu > li {
+        @apply flex-1 text-center
+    }
+
+    .catalog-menu > li a, .catalog-menu > li span {
+        @apply block py-2 px-3 hover:bg-rose-900 text-nowrap
+    }
+
+    .catalog-menu li.active a {
+        @apply bg-rose-600
+    }
+
+    .f-carousel__dots {
+        @apply absolute left-0 bottom-3
+    }
+
+    .f-carousel__dot {
+        @apply bg-white shadow-sm
+    }
+
+    .title {
+        @apply text-3xl font-medium
+    }
+
+    .text > h1 {
+        @apply text-40px
+    }
+
+    .text > p, .text > h1, .text > h2, .text > h3, .text > h4, .text > h5 {
+        @apply mb-3
+    }
+
+    .p-carousel {
+        @apply [--f-carousel-slide-width:calc((100%/4)-53px)] [--f-carousel-spacing:70px] 
+    }
+
+    .text {
+        @apply text-lg/loose text-gray
+    }
+
+    .text > ul {
+        @apply list-disc
+    }
+
+    .text > ol {
+        @apply list-decimal
+    }
+
+    .text > ul, .text > ol {
+        @apply ml-4 mb-3
+    }
+
+    .text img.fr-dii.fr-fir {
+        @apply float-right ml-3 mb-3 rounded-md
+    }
+
+    .text img.fr-dii.fr-fil {
+        @apply float-left mr-3 mb-3 rounded-md
+    }
+
+    #posts .f-carousel__nav button {
+        @apply text-white disabled:hidden
+    }
+
+    .footer-menu {
+        @apply text-sm mt-2 columns-2
+    }
+
+    .footer-menu a {
+        @apply hover:underline
+    }
+
+    .footer-menu li.active a {
+        @apply underline
+    }
+
+    .breadcrumbs {
+        @apply text-sm/none flex flex-wrap gap-x-2 gap-y-1 text-gray-400
+    }
+
+    .breadcrumbs li {
+        @apply flex items-center before:content-['/'] first:before:content-[''] before:mr-2
+    }
+
+    .breadcrumbs li a {
+        @apply hover:text-rose hover:underline
+    }
+
+    .title-h1 {
+        @apply text-3xl leading-tight font-medium
+    }         
+
+    .sidebarMenu {
+        @apply text-sm uppercase font-extrabold text-gray space-y-3
+    }
+
+    .sidebarMenu a {
+        @apply hover:text-purple-3
+    }
+
+    .sidebarMenu li.active > a {
+        @apply text-purple-3
+    }
+
+    .sidebarMenu ul {
+        @apply text-sm normal-case font-normal text-gray ml-5 space-y-2 mt-2
+    }
+
+    .sidebarMenu ul a {
+        @apply hover:underline hover:text-purple-3
+    }
+
+    .pagination ul {
+        @apply flex flex-wrap gap-x-2
+    }
+
+    .pagination ul a, .pagination ul span {
+        @apply block bg-gray-50 border border-purple-3 rounded-md px-3 text-base py-1 text-purple-10
+    }
+
+    .pagination ul li.active span {
+        @apply bg-purple-10 text-white border-purple-10
+    }
+
+    .pagination ul li.disabled span {
+        @apply bg-white
+    }
+
+    #posts {
+        @apply [--f-carousel-slide-width:calc((100%/4)-30px)] [--f-carousel-spacing:40px]
+    }
+
+    #mainCarousel {
+        @apply [--f-carousel-slide-width:100%] [--f-carousel-spacing:40px]
+    }        
+
+    #mainCarousel .f-carousel__nav {
+        @apply absolute right-6 bottom-6 flex gap-x-3 flex-row-reverse
+    }
+
+    #mainCarousel .f-button {
+        @apply hover:[--f-button-bg:#fff] rounded-md static translate-y-0
+    }
+
+    #mainCarousel .f-carousel__slide.is-selected {
+        @apply blur-0
+    }
+
+    .category-wrap {
+        @apply flex gap-x-9 gap-y-7 items-start flex-row
+    }
+
+    .sidebar-category {
+        @apply block bg-gray-100 border border-gray-200 rounded-md flex-none sticky top-0 w-[360px]
+    }
+
+    .content-category {
+        @apply flex-1
+    }
+
+}
+

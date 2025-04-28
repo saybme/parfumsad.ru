@@ -1,0 +1,20 @@
+columns:
+    option:
+        label: Опция
+        type: text
+        select: name
+        relation: option
+    value:
+        label: Значение
+        type: text
+    is_active:
+        label: Опубликован
+        type: switch
+    price:
+        label: Цена
+        type: number
+    old_price:
+        label: 'Старая цена'
+        type: number
+    
+    

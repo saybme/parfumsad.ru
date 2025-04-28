@@ -1,0 +1,125 @@
+tabs:
+    fields:
+        introtext:
+            label: 'Вводный текст'
+            span: full
+            size: small
+            type: textarea
+            tab: Описание
+        content:
+            label: 'Подробный текст'
+            size: giant
+            span: full
+            type: richeditor
+            tab: Описание
+        photos:
+            label: Галерея
+            type: fileupload
+            mode: image
+            span: full
+            tab: Галерея
+        offers:
+            span: full
+            tab: Торговые предложения
+            type: partial
+        is_new:
+            label: Новинка
+            span: full            
+            type: checkbox
+            tab: Дополнительно
+        is_popular:
+            label: Популярный
+            span: full            
+            type: checkbox
+            tab: Дополнительно
+        is_recomended:
+            label: Рекомендуем
+            span: full            
+            type: checkbox
+            tab: Дополнительно
+        categories:
+            label: Категории
+            tab: Дополнительно
+            type: relation
+        uri:
+            label: Полный путь
+            span: full
+            tab: Информация
+            disabled: 1
+        created_at:
+            label: Создан
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Информация
+        updated_at:
+            label: Обновлен
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Информация
+fields:    
+    name:
+        label: Товар
+        span: auto
+        type: text
+    slug:
+        label: SLUG
+        span: auto
+        preset:
+            field: name
+            type: slug
+        type: text
+    _prices:
+        label: Цены 
+        span: full 
+        type: section
+    price:
+        label: Цена, руб.
+        span: row
+        type: number
+        spanClass: col-4
+    price_usd:
+        label: Цена, $.
+        span: row
+        type: number
+        spanClass: col-4
+        default: 0
+    price_eur:
+        label: Цена, €.
+        span: row
+        type: number
+        spanClass: col-4
+        default: 0
+secondaryTabs:
+    fields:
+        is_active:
+            label: Опубликован
+            span: full
+            default: 1
+            type: checkbox        
+        preview:
+            label: Превью
+            type: fileupload
+            mode: image
+        vendor:
+            label: Бренд
+            span: full
+            type: relation
+        category:
+            label: Категория
+            span: full
+            type: relation
+            placeholder: -- Выбрать --      
+        
+        article:
+            label: Артикул
+            span: full
+            type: text
+        available:
+            label: Наличие
+            span: full
+            type: dropdown
+            placeholder: -- Выбрать --

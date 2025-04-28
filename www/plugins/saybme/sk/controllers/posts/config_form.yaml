@@ -1,0 +1,10 @@
+name: Posts
+form: $/saybme/sk/models/post/fields.yaml
+modelClass: Saybme\Sk\Models\Post
+defaultRedirect: saybme/sk/posts
+create:
+    redirect: 'saybme/sk/posts/update/:id'
+    redirectClose: saybme/sk/posts
+update:
+    redirect: saybme/sk/posts
+    redirectClose: saybme/sk/posts

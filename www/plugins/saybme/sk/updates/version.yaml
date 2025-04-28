@@ -1,0 +1,140 @@
+v1.0.1:
+    - 'Initialize plugin'
+v1.0.2:
+    - 'Created table saybme_sk_banners'
+    - builder_table_create_saybme_sk_banners.php
+v1.0.3:
+    - 'Created table saybme_sk_posts'
+    - builder_table_create_saybme_sk_posts.php
+v1.0.4:
+    - 'Created table saybme_sk_products'
+    - builder_table_create_saybme_sk_products.php
+v1.0.5:
+    - 'Updated table saybme_sk_products'
+    - builder_table_update_saybme_sk_products.php
+v1.0.6:
+    - 'Created table saybme_sk_categories'
+    - builder_table_create_saybme_sk_categories.php
+v1.0.7:
+    - 'Created table saybme_sk_vendor'
+    - builder_table_create_saybme_sk_vendor.php
+v1.0.8:
+    - 'Updated table saybme_sk_products'
+    - builder_table_update_saybme_sk_products_2.php
+v1.0.9:
+    - 'Updated table saybme_sk_categories'
+    - builder_table_update_saybme_sk_categories.php
+v1.0.10:
+    - 'Updated table saybme_sk_products'
+    - builder_table_update_saybme_sk_products_3.php
+v1.0.11:
+    - 'Updated table saybme_sk_vendor'
+    - builder_table_update_saybme_sk_vendor.php
+v1.0.12:
+    - 'Created table saybme_sk_orders'
+    - builder_table_create_saybme_sk_orders.php
+v1.0.13:
+    - 'Created table saybme_sk_payments'
+    - builder_table_create_saybme_sk_payments.php
+v1.0.14:
+    - 'Updated table saybme_sk_payments'
+    - builder_table_update_saybme_sk_payments.php
+v1.0.15:
+    - 'Updated table saybme_sk_orders'
+    - builder_table_update_saybme_sk_orders.php
+v1.0.16:
+    - 'Created table saybme_sk_deliveries'
+    - builder_table_create_saybme_sk_deliveries.php
+v1.0.17:
+    - 'Updated table saybme_sk_deliveries'
+    - builder_table_update_saybme_sk_deliveries.php
+v1.0.18:
+    - 'Updated table saybme_sk_orders'
+    - builder_table_update_saybme_sk_orders_2.php
+v1.0.19:
+    - 'Created table saybme_sk_pr_products'
+    - builder_table_create_saybme_sk_pr_products.php
+v1.0.20:
+    - 'Updated table saybme_sk_pr_products'
+    - builder_table_update_saybme_sk_or_products.php
+v1.0.21:
+    - 'Updated table saybme_sk_or_products'
+    - builder_table_update_saybme_sk_or_products_2.php
+v1.0.22:
+    - 'Updated table saybme_sk_products'
+    - builder_table_update_saybme_sk_products_4.php
+v1.0.23:
+    - 'Updated table saybme_sk_products'
+    - builder_table_update_saybme_sk_products_5.php
+v1.0.24:
+    - 'Created table saybme_sk_category_product'
+    - builder_table_create_saybme_sk_category_product.php
+v1.0.25:
+    - 'Updated table saybme_sk_orders'
+    - builder_table_update_saybme_sk_orders_3.php
+v1.0.26:
+    - 'Updated table saybme_sk_orders'
+    - builder_table_update_saybme_sk_orders_4.php
+v1.0.27:
+    - 'Updated table saybme_sk_orders'
+    - builder_table_update_saybme_sk_orders_5.php
+v1.0.28:
+    - 'Updated table saybme_sk_orders'
+    - builder_table_update_saybme_sk_orders_6.php
+v1.0.29:
+    - 'Updated table saybme_sk_products'
+    - builder_table_update_saybme_sk_products_6.php
+v1.0.30:
+    - 'Created table saybme_sk_options'
+    - builder_table_create_saybme_sk_options.php
+v1.0.31:
+    - 'Created table saybme_sk_offers'
+    - builder_table_create_saybme_sk_offers.php
+v1.0.32:
+    - 'Updated table saybme_sk_offers'
+    - builder_table_update_saybme_sk_offers.php
+v1.0.33:
+    - 'Updated table saybme_sk_offers'
+    - builder_table_update_saybme_sk_offers_2.php
+v1.0.34:
+    - 'Updated table saybme_sk_offers'
+    - builder_table_update_saybme_sk_offers_3.php
+v1.0.35:
+    - 'Updated table saybme_sk_offers'
+    - builder_table_update_saybme_sk_offers_4.php
+v1.0.36:
+    - 'Updated table saybme_sk_offers'
+    - builder_table_update_saybme_sk_offers_5.php
+v1.0.37:
+    - 'Updated table saybme_sk_categories'
+    - builder_table_update_saybme_sk_categories_2.php
+v1.0.38:
+    - 'Updated table saybme_sk_categories'
+    - builder_table_update_saybme_sk_categories_3.php
+v1.0.39:
+    - 'Updated table saybme_sk_products'
+    - builder_table_update_saybme_sk_products_7.php
+v1.0.40:
+    - 'Updated table saybme_sk_orders'
+    - builder_table_update_saybme_sk_orders_7.php
+v1.0.41:
+    - 'Updated table saybme_sk_options'
+    - builder_table_update_saybme_sk_options.php
+v1.0.42:
+    - 'Created table saybme_sk_pages'
+    - builder_table_create_saybme_sk_pages.php
+v1.0.43:
+    - 'Created table saybme_sk_page_params'
+    - builder_table_create_saybme_sk_page_params.php
+v1.0.44:
+    - 'Updated table saybme_sk_products'
+    - builder_table_update_saybme_sk_products_8.php
+v1.0.45:
+    - 'Updated table saybme_sk_products'
+    - builder_table_update_saybme_sk_products_9.php
+v1.0.46:
+    - 'Updated table saybme_sk_products'
+    - builder_table_update_saybme_sk_products_10.php
+v1.0.47:
+    - 'Updated table saybme_sk_pages'
+    - builder_table_update_saybme_sk_pages.php

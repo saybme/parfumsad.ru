@@ -1,0 +1,7 @@
+products:
+    label: Товары заказа
+    view:
+        list: $/saybme/sk/models/orproduct/columns.yaml     
+        recordsPerPage: 10
+    manage:
+        form: $/saybme/sk/models/orproduct/fields.yaml

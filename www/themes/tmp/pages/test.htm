@@ -1,0 +1,18 @@
+url = "/test"
+title = "Тест"
+==
+<?php
+use Saybme\Sk\Models\Category;
+use Saybme\Sk\Models\Product;
+
+function onStart(){
+
+    $products = Session::get('cart.products');
+
+ 
+
+    return $products;
+
+}
+?>
+==

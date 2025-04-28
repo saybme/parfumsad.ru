@@ -1,0 +1,7 @@
+<div class="mb-6" id="products">
+    {% partial 'catalog/products' products=products %}    
+</div> 
+
+<div class="pagination mt-4">
+    {{ pager(products) }}
+</div>

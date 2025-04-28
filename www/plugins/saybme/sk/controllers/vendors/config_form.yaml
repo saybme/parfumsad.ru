@@ -1,0 +1,10 @@
+name: Vendors
+form: $/saybme/sk/models/vendor/fields.yaml
+modelClass: Saybme\Sk\Models\Vendor
+defaultRedirect: saybme/sk/vendors
+create:
+    redirect: 'saybme/sk/vendors/update/:id'
+    redirectClose: saybme/sk/vendors
+update:
+    redirect: saybme/sk/vendors
+    redirectClose: saybme/sk/vendors

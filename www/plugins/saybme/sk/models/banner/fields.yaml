@@ -1,0 +1,51 @@
+tabs:
+    fields:
+        created_at:
+            label: Создан
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Информация
+        updated_at:
+            label: Обновлен
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Информация
+fields:    
+    name:
+        label: Баннер
+        span: auto
+        type: text
+    link:
+        label: Ссылка
+        span: auto
+        type: recordfinder
+    description:
+        label: Описание
+        span: full
+        size: small
+        type: textarea
+    image_pc:
+        label: Баннер для ПК
+        span: auto
+        type: fileupload
+        mode: image
+        comment: Размер баннера 1130x420px
+    image_mb:
+        label: Баннер для мобильных
+        span: auto
+        type: fileupload
+        mode: image
+        comment: Размер баннера 420x420px
+        
+secondaryTabs:
+    fields:
+        is_active:
+            label: Опубликован
+            span: full
+            default: 1
+            type: checkbox
+

@@ -1,0 +1,10 @@
+name: Offers
+form: $/saybme/sk/models/offer/fields.yaml
+modelClass: Saybme\Sk\Models\Offer
+defaultRedirect: saybme/sk/offers
+create:
+    redirect: 'saybme/sk/offers/update/:id'
+    redirectClose: saybme/sk/offers
+update:
+    redirect: saybme/sk/offers
+    redirectClose: saybme/sk/offers

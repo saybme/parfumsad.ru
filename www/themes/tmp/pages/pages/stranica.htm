@@ -1,0 +1,9 @@
+url = "/:slug*"
+layout = "default"
+title = "Страница"
+
+[skpage]
+slug = "{{ :slug }}"
+type = "getPage"
+==
+{% component 'skpage' %}

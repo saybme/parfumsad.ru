@@ -1,0 +1,28 @@
+columns:
+    pname:
+        label: Наименование
+        type: partial
+    name:
+        label: Товар
+        type: text
+        searchable: true
+        invisible: true
+    article:
+        label: Артикул
+        type: text
+        searchable: true
+    is_active:
+        label: Опубликован
+        type: switch
+    price:
+        label: Цена
+        type: number
+    old_price:
+        label: 'Старая цена'
+        type: number    
+    preview:
+        label: Фото
+        type: image
+    uid:
+        label: UID
+        type: text

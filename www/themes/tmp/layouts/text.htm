@@ -1,0 +1,34 @@
+description = "Текстовый шаблон"
+
+[staticPage]
+useContent = 1
+default = 0
+
+[global]
+handle = "SkSettings"
+
+[skapp]
+==
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% partial 'site/head' %}    
+</head>
+<body>
+
+    <header>
+        {% partial 'site/header' %}
+    </header>
+    
+    <div class="container text pt-8">
+        {% page %}
+    </div>
+
+    <footer>
+        {% partial 'site/footer' %}
+    </footer>
+
+    {% partial 'meta/scripts' %}    
+    
+</body>
+</html>

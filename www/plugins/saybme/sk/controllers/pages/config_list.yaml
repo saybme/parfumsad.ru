@@ -1,0 +1,14 @@
+title: Pages
+modelClass: Saybme\Sk\Models\Page
+list: $/saybme/sk/models/page/columns.yaml
+recordUrl: 'saybme/sk/pages/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+structure:
+    maxDepth: 10
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

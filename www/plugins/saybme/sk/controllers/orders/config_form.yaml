@@ -1,0 +1,12 @@
+name: Заказы
+form: $/saybme/sk/models/order/fields.yaml
+modelClass: Saybme\Sk\Models\Order
+defaultRedirect: saybme/sk/orders
+design:
+    displayMode: sidebar
+create:
+    redirect: 'saybme/sk/orders/update/:id'
+    redirectClose: saybme/sk/orders
+update:
+    redirect: saybme/sk/orders
+    redirectClose: saybme/sk/orders

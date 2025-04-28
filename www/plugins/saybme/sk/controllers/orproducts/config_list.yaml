@@ -1,0 +1,12 @@
+list: $/saybme/sk/models/orproduct/columns.yaml
+modelClass: Saybme\Sk\Models\Orproduct
+title: Orproducts
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'saybme/sk/orproducts/update/:id'

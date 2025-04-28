@@ -1,0 +1,17 @@
+columns:
+    name:
+        label: Пост
+        type: text
+        searchable: true
+    is_active:
+        label: Опубликован
+        type: switch
+    created_at:
+        label: Создан
+        type: datetime
+    preview:
+        label: Фото
+        type: image
+    id:
+        label: ID
+        type: text

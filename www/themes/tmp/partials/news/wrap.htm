@@ -1,0 +1,35 @@
+[viewBag]
+==
+<?php
+function onStart(){
+
+    $items[0]['name'] = $this->title;
+    $items[0]['active'] = true;    
+
+    $this['breadcrumbs'] = $items;
+}
+?>
+==
+<div class="py-3">
+    {% partial 'gl/breadcrumbs' items=breadcrumbs %}    
+</div>
+
+<div class="container pb-16">    
+
+    <h3 class="text-3xl font-semibold mb-6">{{ this.page.title }}</h3>
+
+    <div class="grid grid-cols-4 gap-x-6 gap-y-8">
+        {% for item in items %}
+            <div class="">
+                <a href="{{ item.link }}" class="block relative overflow-hidden  hover:opacity-80">
+                    <img src="{{ item.preview.thumb(360,280,{mode:'crop'}) }}" alt="{{ item.name }}" class="block w-full h-auto rounded-2xl">
+                    <div class="relative pt-3 space-y-1">                    
+                        <span class="block text-xs text-purple-1">{{ item.created_at | date('d.m.Y год.') }}</span>
+                        <h3 class="text-lg font-bold leading-tight">{{ item.name }}</h3>
+                    </div>
+                </a> 
+            </div>
+        {% endfor %}
+    </div>
+
+</div>

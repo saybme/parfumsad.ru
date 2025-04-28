@@ -1,0 +1,18 @@
+columns:
+    name:
+        label: Категория
+        type: text
+        searchable: true
+    is_active:
+        label: Опубликован
+        type: switch
+    created_at:
+        label: Создан
+        type: datetime
+    uid:
+        label: UID
+        type: text
+        searchable: true
+    id:
+        label: ID
+        type: text

@@ -1,0 +1,30 @@
+description = "Основной шаблон сайта"
+
+[global]
+handle = "SkSettings"
+
+[skapp]
+==
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% partial 'site/head' %}    
+</head>
+<body>
+
+    <header>
+        {% partial 'site/header' %}
+    </header>
+    
+    <div class="">
+        {% page %}
+    </div>
+
+    <footer>
+        {% partial 'site/footer' %}
+    </footer>
+
+    {% partial 'meta/scripts' %}    
+    
+</body>
+</html>

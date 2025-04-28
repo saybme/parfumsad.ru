@@ -1,0 +1,10 @@
+name: Banners
+form: $/saybme/sk/models/banner/fields.yaml
+modelClass: Saybme\Sk\Models\Banner
+defaultRedirect: saybme/sk/banners
+create:
+    redirect: 'saybme/sk/banners/update/:id'
+    redirectClose: saybme/sk/banners
+update:
+    redirect: saybme/sk/banners
+    redirectClose: saybme/sk/banners

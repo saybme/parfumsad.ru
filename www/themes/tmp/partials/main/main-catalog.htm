@@ -1,0 +1,34 @@
+[viewBag]
+==
+<?php
+
+use Saybme\Sk\Models\Product;
+
+function onStart(){
+
+    $rows[] = array('title' => 'Новинка','code' => 'is_new');
+    $rows[] = array('title' => 'Популярные','code' => 'is_popular');
+    $rows[] = array('title' => 'Рекомендуемые','code' => 'is_recomended');
+    $this['types'] = $rows;
+
+    $this['skproducts'] = Product::active()->where('is_new', true)->inRandomOrder()->get()->take(20);
+
+}
+
+?>
+==
+
+<div class="flex gap-x-4 gap-y-1">    
+    {% for key, item in types %}
+        <label for="{{ item.code }}" class="block">
+            <input type="radio" name="type" value="{{ item.code }}" id="{{ item.code }}" class="hidden peer" data-request="onGetMainProducts" data-request-success="mainCarousel()" {{ key == 0 ? 'checked' : '' }}>
+            <span class="block text-center text-gray-10 bg-gray-2 text-2xl/none font-semibold px-5 py-3 hover:bg-gray-100 hover:cursor-pointer rounded-md peer-checked:bg-purple-2 peer-checked:text-purple-10">{{ item.title }}</span>
+        </label>
+    {% endfor %}
+</div>
+
+<div class="f-carousel mt-[40px] p-carousel" id="result-products">
+    {% partial 'main/main-catalog-products' products=skproducts %}   
+</div> 
+
+

@@ -1,0 +1,16 @@
+title: Banners
+modelClass: Saybme\Sk\Models\Banner
+list: $/saybme/sk/models/banner/columns.yaml
+recordUrl: 'saybme/sk/banners/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+structure:
+    maxDepth: 0
+    showTree: false
+    treeExpanded: false
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

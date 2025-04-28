@@ -1,0 +1,17 @@
+columns:
+    name:
+        label: Баннер
+        type: text
+        searchable: true
+    is_active:
+        label: Опубликован
+        type: switch
+    link:
+        label: Ссылка
+        type: text
+    created_at:
+        label: Создан
+        type: datetime
+    id:
+        label: ID
+        type: switch

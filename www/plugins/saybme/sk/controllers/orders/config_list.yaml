@@ -1,0 +1,15 @@
+title: Orders
+modelClass: Saybme\Sk\Models\Order
+list: $/saybme/sk/models/order/columns.yaml
+recordUrl: 'saybme/sk/orders/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+defaultSort:
+    column: id
+    direction: desc
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

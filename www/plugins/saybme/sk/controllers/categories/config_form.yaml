@@ -1,0 +1,12 @@
+name: Categories
+form: $/saybme/sk/models/category/fields.yaml
+modelClass: Saybme\Sk\Models\Category
+defaultRedirect: saybme/sk/categories
+design:
+    displayMode: sidebar
+create:
+    redirect: 'saybme/sk/categories/update/:id'
+    redirectClose: saybme/sk/categories
+update:
+    redirect: saybme/sk/categories
+    redirectClose: saybme/sk/categories

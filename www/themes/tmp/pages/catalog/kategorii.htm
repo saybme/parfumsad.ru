@@ -1,0 +1,9 @@
+url = "/directory/:slug*"
+layout = "default"
+title = "Категории"
+
+[skcatalog]
+slug = "{{ :slug }}"
+type = "category"
+==
+{% component 'skcatalog' %}

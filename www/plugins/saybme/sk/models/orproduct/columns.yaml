@@ -1,0 +1,13 @@
+columns:
+    name:
+        label: Наименование
+        type: text
+    amount:
+        label: Кол-во
+        type: number
+    price:
+        label: Цена
+        type: number
+    sum:
+        label: Сумма
+        type: number

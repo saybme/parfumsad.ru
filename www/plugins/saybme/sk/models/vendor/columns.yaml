@@ -1,0 +1,20 @@
+columns:
+    name:
+        label: Производитель
+        type: text
+        searchable: true
+    is_active:
+        label: Опубликован
+        type: switch
+    created_at:
+        label: Создан
+        type: datetime
+    logo:
+        label: Лого
+        type: image
+    uid:
+        label: UID
+        type: text
+    id:
+        label: ID
+        type: text

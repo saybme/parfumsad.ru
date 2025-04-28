@@ -1,0 +1,17 @@
+columns:
+    name:
+        label: Опция
+        type: text
+        searchable: true
+    measure:
+        label: Единицы
+        type: text
+    is_active:
+        label: Опубликован
+        type: switch
+    type:
+        label: Тип
+        type: text
+    code:
+        label: Код
+        type: text

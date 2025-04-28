@@ -1,0 +1,15 @@
+fields:
+    is_active:
+        label: Опубликован
+        span: full
+        default: 1
+        type: checkbox
+    name:
+        label: Оплата
+        span: full
+        type: text
+    description:
+        label: Описание
+        size: small
+        span: full
+        type: textarea

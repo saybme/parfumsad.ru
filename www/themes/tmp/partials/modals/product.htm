@@ -1,0 +1,46 @@
+<div class="" id="modalProduct">
+
+    <div class="flex  gap-x-[30px]">
+
+        <div class="size-[320px] flex-none bg-black/10 rounded-[10px] overflow-hidden border border-gray-1">
+            <img src="{{ product.preview.thumb(320,320) }}" alt="{{ product.name }}" class="block size-full object-contain">
+        </div>
+
+        <div class="">
+            <form action="" class="w-full" data-request="onAdd" data-request-validate>
+                <h1 class="text-lg text-pretty">{{ product.name }}</h1>
+
+                <div class="pt-[18px] flex items-end flex-wrap gap-y-1 flex-1 mb-4">                 
+                    <div class="leading-none text-26px font-bold flex items-center me-3 text-gray">
+                        <span class="me-1">{{ product.price }}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-5 lpl:size-5 inline-block align-top relative top-[1px]" fill="currentColor" viewBox="0 0 256 256"><path d="M148,156a64,64,0,0,0,0-128H88A12,12,0,0,0,76,40v92H56a12,12,0,0,0,0,24H76v16H56a12,12,0,0,0,0,24H76v20a12,12,0,0,0,24,0V196h44a12,12,0,0,0,0-24H100V156ZM100,52h48a40,40,0,0,1,0,80H100Z"></path></svg>
+                    </div>    
+                    <div class="text-gray-1 text-lg">
+                        {{ product.prices | join('/') }}        
+                    </div>
+                </div>
+
+                {% if product.available == 1 %}      
+
+                    <input type="hidden" name="id" value="{{ product.id }}">
+                    <input type="hidden" name="amount" value="1" class="text-center">
+
+                    <button class="btn btn-secondary btn-outline w-full h-[48px] text-lg" data-attach-loading>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor" viewBox="0 0 256 256"><path d="M100,216a20,20,0,1,1-20-20A20,20,0,0,1,100,216Zm84-20a20,20,0,1,0,20,20A20,20,0,0,0,184,196ZM235.47,75.53l-27.29,88.7A27.87,27.87,0,0,1,181.41,184H82.93A28.13,28.13,0,0,1,56,163.69L21.81,44H12a12,12,0,0,1,0-24H24.82A20.08,20.08,0,0,1,44.05,34.51L51.34,60H224a12,12,0,0,1,11.47,15.53ZM207.75,84H58.19l20.89,73.1a4,4,0,0,0,3.85,2.9h98.48a4,4,0,0,0,3.83-2.82Z"></path></svg>
+                        В корзину
+                    </button>      
+                                  
+                {% endif %}
+
+            </form>
+        </div>
+
+    </div>
+
+    {% if product.content %}
+        <div class="text mt-7">
+            {{ product.content | raw }}
+        </div>
+    {% endif %}
+
+</div>

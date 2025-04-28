@@ -1,0 +1,13 @@
+name: Pages
+form: $/saybme/sk/models/page/fields.yaml
+modelClass: Saybme\Sk\Models\Page
+defaultRedirect: saybme/sk/pages
+design:
+    displayMode: sidebar
+    sidebarSize: 450
+create:
+    redirect: 'saybme/sk/pages/update/:id'
+    redirectClose: saybme/sk/pages
+update:
+    redirect: saybme/sk/pages
+    redirectClose: saybme/sk/pages

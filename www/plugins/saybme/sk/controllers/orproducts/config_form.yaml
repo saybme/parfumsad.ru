@@ -1,0 +1,10 @@
+name: Orproducts
+form: $/saybme/sk/models/orproduct/fields.yaml
+modelClass: Saybme\Sk\Models\Orproduct
+defaultRedirect: saybme/sk/orproducts
+create:
+    redirect: 'saybme/sk/orproducts/update/:id'
+    redirectClose: saybme/sk/orproducts
+update:
+    redirect: saybme/sk/orproducts
+    redirectClose: saybme/sk/orproducts

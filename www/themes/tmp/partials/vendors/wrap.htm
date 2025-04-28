@@ -1,0 +1,15 @@
+<div class="w-full overflow-hidden" id="logos">
+    <div class="flex  items-center gap-x-5">
+        {% for item in vendors %}
+            <div class="flex-none">
+                <img src="{{ item.logo.thumb(100,100) }}" alt="{{ item.name }}">
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% put scripts %}
+    <script>
+        marqueeLogos()
+    </script>
+{% endput %}

@@ -1,0 +1,14 @@
+url = "/news"
+layout = "default"
+title = "Новости"
+
+[skblog]
+slug = "{{ :slug }}"
+type = "getAll"
+==
+{% set skblog = skblog.skblog %}
+
+<div class="">
+    {% partial 'news/wrap' items=skblog %}
+</div>
+

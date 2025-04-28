@@ -1,0 +1,9 @@
+products:
+    label: Товары категории
+    view:
+        list: $/saybme/sk/models/product/small-columns.yaml
+        toolbarButtons: create|delete
+        recordsPerPage: 10
+        recordUrl: 'saybme/sk/products/update/:id'
+    manage:
+        form: $/saybme/sk/models/product/fields.yaml

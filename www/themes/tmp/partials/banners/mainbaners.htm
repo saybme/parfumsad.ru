@@ -1,0 +1,27 @@
+<div class="pt-[30px] pb-[99px]">
+    <div class="container px-2">    
+        <div class="f-carousel" id="mainCarousel">
+            {% for item in banners %}
+                <div class="f-carousel__slide">
+                    {% if link %}
+                        <a href="" class="block aspect-w-16 aspect-h-5">
+                            <img src="{{ item.image_pc.thumb(1130,420,{mode: 'crop'}) }}" alt="" class="block size-full object-cover rounded-xl">
+                        </a>
+                    {% else %}
+                        <div class="aspect-w-16 aspect-h-5">
+                            <img src="{{ item.image_pc.thumb(1130,420,{mode: 'crop'}) }}" alt="" class="block size-full object-cover rounded-xl">
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% put scripts %}
+    <script>
+        mainCarousel();
+    </script>
+{% endput %}
+
+
