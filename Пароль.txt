@@ -2,6 +2,11 @@
 Имя: parfumsad
 Пароль: Z4yK1)PUNL.mv2(B
 
+FTP
+Сервер: parfumsad.beget.tech
+Имя: parfumsad_sftp
+Пароль: FSIJJAp3or&a
+
 База данных
 Имя: parfumsad_nbd
 Пароль: e7hcyjYUWqe&
