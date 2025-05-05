@@ -103,7 +103,7 @@ class Plugin extends PluginBase
     // Получаем контент по сылке
     public function getContent($url = null){
         if(!$url) return;
-
+        return $url;
         $file = file_get_contents($url);
 
         return $file;

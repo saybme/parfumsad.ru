@@ -8,35 +8,13 @@ class CatalogClass {
 
     // Категории верхнего порядка
     static public function getTopCategories(){
-        return Category::active()->where('nest_depth', 0)->get();
+        $catalog = Category::active()->find(371);
+        return $catalog->children()->active()->get();
     }
 
     // Дерево категорий
     static public function getTreeCategories(){
-
-        return Category::active()->select('id','parent_id','name','slug','nest_depth')->with('children')->getNested();
-
-        // $iterator = function($categories) use (&$iterator) {
-        //     $result = [];
-
-        //     foreach ($categories as $category) {
-        //         if (!$category->children) {
-        //             $result[$category->id] = $category->name;
-        //         }
-        //         else {
-        //             $result[$category->id] = [
-        //                 'name' => $category->name,
-        //                 'url' => $category->slug,
-        //                 'isActive' => true,
-        //                 'children' => $iterator($category->children)
-        //             ];
-        //         }
-        //     }
-
-        //     return $result;
-        // };
-
-        // return $iterator($category);
+        return Category::active()->select('id','parent_id','name','slug','nest_depth')->with('children')->getNested();       
     }
 
     // Товары категории

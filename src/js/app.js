@@ -219,7 +219,7 @@ window.marqueeLogos = function(){
 
 
 // Окно товара
-window.openProduct = function(data){
+window.openProduct = function(data){    
 
     let params = [];
     params['id'] = data.getAttribute('data-id');
@@ -232,7 +232,7 @@ window.openProduct = function(data){
                     {
                       src: data.modal,
                       type: "html",
-                      showClass: 'productFancyBox',
+                      showClass: 'productFancyBox f-zoomInUp',
                       mainClass: 'productFancyBoxMain'
                     },
                   ]);  

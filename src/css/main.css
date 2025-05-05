@@ -23,12 +23,20 @@
         display: none;
     }
 
+    header {
+        @apply relative
+    }
+
     footer {
         @apply mt-auto
     }
 }
 
 @layer components {    
+
+    .fancybox__backdrop {
+        @apply bg-black/40
+    }
 
     #productPhotos .f-carousel__slide {
         @apply border border-gray-300 rounded-xl overflow-hidden
@@ -99,7 +107,7 @@
     }
 
     .header-menu {
-        @apply flex gap-x-8 gap-y-2 text-base font-normal overflow-auto
+        @apply hidden md:flex gap-x-8 gap-y-2 text-sm xl:text-base font-normal overflow-auto
     }
 
     .header-menu li {
@@ -155,11 +163,11 @@
     }
 
     .p-carousel {
-        @apply [--f-carousel-slide-width:calc((100%/4)-53px)] [--f-carousel-spacing:70px] 
+        @apply [--f-carousel-slide-width:calc(100%/2)] lg:[--f-carousel-slide-width:calc((100%/3)-53px)] xl:[--f-carousel-slide-width:calc((100%/4)-53px)] [--f-carousel-spacing:70px] 
     }
 
     .text {
-        @apply text-lg/loose text-gray
+        @apply text-sm/loose md:text-lg/loose text-gray
     }
 
     .text > ul {
@@ -187,7 +195,7 @@
     }
 
     .footer-menu {
-        @apply text-sm mt-2 columns-2
+        @apply text-xs sm:text-sm mt-2 sm:columns-2 md:columns-4
     }
 
     .footer-menu a {
@@ -216,6 +224,26 @@
 
     .sidebarMenu {
         @apply text-sm uppercase font-extrabold text-gray space-y-3
+    }
+
+    .sidebarMenu li a {
+        @apply before:block before:size-[14px] before:bg-plus relative before:flex-none flex items-start before:me-2 before:relative before:top-[2px] before:bg-no-repeat before:bg-center
+    }
+
+    .sidebarMenu li.active a {
+        @apply before:bg-minus
+    }
+
+    .sidebarMenu li li a {
+        @apply before:hidden
+    }
+
+    .sidebarMenu li li {
+        @apply list-disc ml-5
+    }
+
+    .sidebarMenu li li li {
+        @apply text-xs ml-0
     }
 
     .sidebarMenu a {
@@ -251,7 +279,7 @@
     }
 
     #posts {
-        @apply [--f-carousel-slide-width:calc((100%/4)-30px)] [--f-carousel-spacing:40px]
+        @apply [--f-carousel-slide-width:calc(100%/2)] lg:[--f-carousel-slide-width:calc((100%/3)-30px)] xl:[--f-carousel-slide-width:calc((100%/4)-30px)] [--f-carousel-spacing:40px]
     }
 
     #mainCarousel {

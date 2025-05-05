@@ -21,7 +21,7 @@ module.exports = {
     container: {
       center: true,
       padding: {
-        DEFAULT: '0',
+        DEFAULT: '0.625rem',
         tb: '1rem'
       },
     },
@@ -53,6 +53,8 @@ module.exports = {
       },
       backgroundImage: {
         'sheet': "url('../images/icons/sheet.png')",
+        'plus': "url('../images/icons/plus.svg')",
+        'minus': "url('../images/icons/minus.svg')",
       }
     },
   },

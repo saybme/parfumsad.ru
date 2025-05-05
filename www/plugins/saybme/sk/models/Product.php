@@ -18,6 +18,8 @@ class Product extends Model
         'vendor',
         'is_active',
         'price',
+        'price_usd',
+        'price_eur',
         'old_price',
         'article',
         'available',

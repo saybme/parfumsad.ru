@@ -59,7 +59,7 @@ class Skcatalog extends \Cms\Classes\ComponentBase
         $options['filters'] = $this->getFilterCategory();  
 
         $currentURL = url()->current();
-        //dd($currentURL);
+        //dd($options);
 
         return $this->renderPartial('catalog/category', $options);
     }

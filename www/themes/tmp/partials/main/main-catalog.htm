@@ -22,12 +22,12 @@ function onStart(){
     {% for key, item in types %}
         <label for="{{ item.code }}" class="block">
             <input type="radio" name="type" value="{{ item.code }}" id="{{ item.code }}" class="hidden peer" data-request="onGetMainProducts" data-request-success="mainCarousel()" {{ key == 0 ? 'checked' : '' }}>
-            <span class="block text-center text-gray-10 bg-gray-2 text-2xl/none font-semibold px-5 py-3 hover:bg-gray-100 hover:cursor-pointer rounded-md peer-checked:bg-purple-2 peer-checked:text-purple-10">{{ item.title }}</span>
+            <span class="block text-center text-gray-10 bg-gray-2 text-base/none md:text-xl/none xl:text-2xl/none font-semibold px-3 md:px-5 py-2 md:py-3 hover:bg-gray-100 hover:cursor-pointer rounded-md peer-checked:bg-purple-2 peer-checked:text-purple-10">{{ item.title }}</span>
         </label>
     {% endfor %}
 </div>
 
-<div class="f-carousel mt-[40px] p-carousel" id="result-products">
+<div class="f-carousel mt-3 md:mt-[40px] p-carousel" id="result-products">
     {% partial 'main/main-catalog-products' products=skproducts %}   
 </div> 
 

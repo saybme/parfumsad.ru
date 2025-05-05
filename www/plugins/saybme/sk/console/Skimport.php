@@ -64,11 +64,12 @@ class Skimport extends Command
         
         foreach($data as $item){
             if($item['type'] == 'table'){
-                $this->msProducts($item);     
-            }                        
+                //$this->catalog($item); 
+                $this->msProducts($item);
+            }                      
         }
         
-    }
+    }   
 
     // Перебо таблицы товары
     private function msProducts($item){
@@ -80,10 +81,16 @@ class Skimport extends Command
             $obj = Product::where('uid', $id)->first();
 
             if($obj){  
-                $obj->price = $item['price']; 
-                $obj->price_usd = $item['price_usd'];       
-                $obj->price_eur = $item['price_eur'];  
-                $obj->save();      
+                $preview = 'https://parfumsad.ru' . $item['image']; 
+
+                if(!$obj->preview){
+                    $obj->price = $item['price']; 
+                    $obj->price_usd = $item['price_usd'];       
+                    $obj->price_eur = $item['price_eur'];      
+                    $obj->preview = (new File)->fromUrl($preview);            
+                    $obj->save(); 
+                }
+                     
             }
             
             //Log::error($item);    
@@ -112,7 +119,7 @@ class Skimport extends Command
     }    
 
     // Создаем и обновляем категории
-    private function changeCategory($data = array()){
+    private function changeCategory($data = array()){        
 
         $id = $data['id'];
         $name = $data['pagetitle'];
@@ -155,6 +162,8 @@ class Skimport extends Command
     // Создяем или обновляем товар
     private function changeProduct($data = array()){
 
+        Log::error($data);
+
         $id = $data['id'];
         $name = $data['pagetitle'];
 
@@ -163,6 +172,8 @@ class Skimport extends Command
         $arr['name'] = $data['pagetitle'];    
         $arr['is_active'] = $data['publishedby'];
         $arr['available'] = 1;
+        $arr['price_usd'] = 0;
+        $arr['price_eur'] = 0;
 
         $parent = Category::where('uid', $data['parent'])->first();
         if($parent){
