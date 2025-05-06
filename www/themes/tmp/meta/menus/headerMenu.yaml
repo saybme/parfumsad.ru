@@ -40,9 +40,11 @@ items:
             isExternal: '0'
     -
         title: Новости
-        type: cms-page
+        nesting: 0
+        type: sk-page
         code: ''
-        reference: news/novosti
+        reference: '4'
+        replace: 0
         viewBag:
             isHidden: '0'
             cssClass: ''

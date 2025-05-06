@@ -1,17 +1,13 @@
-url = "/test"
 title = "Тест"
+url = "/test"
+is_hidden = 1
 ==
 <?php
-use Saybme\Sk\Models\Category;
-use Saybme\Sk\Models\Product;
-
 function onStart(){
 
-    $products = Session::get('cart.products');
+    $cart = Session::get('cart');
 
- 
-
-    return $products;
+    return $cart;
 
 }
 ?>

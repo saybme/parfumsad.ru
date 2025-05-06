@@ -1,14 +1,14 @@
 
 
-<div class="flex gap-x-6">   
+<div class="flex gap-x-6 flex-col lg:flex-row">   
 
     {% if delivery == 2 %}
-        <div class="w-1/2">
+        <div class="w-full lg:w-1/2">
             {% partial 'cart/address' %}          
         </div>
     {% endif %}
 
-    <div class="w-1/2">
+    <div class="w-full lg:w-1/2">
         <h3 class="text-xl font-medium mb-3">Данные получателя:</h3>
         <hr class="mb-4">    
         <div class="">
@@ -45,11 +45,11 @@
                         </tr>
                         <tr>
                             <td>Итого:</td>
-                            <td align="right"><b>{{ cart.total.cost | number_format(0, '.', ' ') }}</b> руб.</td>
+                            <td align="right"><b class="total-sum">{{ cart.total.cost | number_format(2, ',', ' ') }}</b> руб.</td>
                         </tr>
                         <tr>
                             <td>Итого с доставкой:</td>
-                            <td align="right"><b>{{ cart.total.total_cost | number_format(0, '.', ' ') }}</b> руб.</td>
+                            <td align="right"><b class="total-cost">{{ cart.total.total_cost | number_format(2, ',', ' ') }}</b> руб.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -57,7 +57,7 @@
 
             <hr class="my-3">            
 
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-center flex-wrap gap-x-3 gap-y-3">
                 <div class="">
                     <div class="flex items-center">
                         <input type="checkbox" name="politic" id="politic" class="checkbox checkbox-primary checkbox-sm flex-none rounded-md me-2">

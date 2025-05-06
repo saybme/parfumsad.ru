@@ -160,7 +160,7 @@ class Category extends Model
                     foreach ($categories as $category) {
 
                         $branchItem = [];
-                        $branchItem['url'] = self::getCategoryPageUrl($item->cmsPage, $category, $theme);
+                        $branchItem['url'] = $category->link;
                         $branchItem['isActive'] = $branchItem['url'] == $url;
                         $branchItem['title'] = $category->name;
                         $branchItem['mtime'] = $category->updated_at;

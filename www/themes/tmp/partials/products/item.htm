@@ -6,7 +6,7 @@
         <img src="{{ 'assets/images/350x350.jpg' | theme }}" alt="">
     {% endif %}
 
-    <div class="absolute left-3 top-4 z-10 text-xs space-x-1">
+    <div class="absolute left-3 top-4 z-10 text-[.5rem] sm:text-xs flex gap-1 sm:gap-2 flex-wrap flex-col sm:flex-row justify-start items-start">
         {% if item.is_new %}
             <span class="bg-green-600 text-white rounded-md px-2 py-1">NEW</span>
         {% endif %}
@@ -20,18 +20,18 @@
 
 </div>
 
-<div class="flex-1 pt-[30px]">
-    <h2 class="text-lg/normal leading-tight line-clamp-2 ">
+<div class="flex-1 pt-3 sm:pt-[30px]">
+    <h2 class="text-sm/none sm:text-lg/normal leading-tight line-clamp-2 ">
         {{ item.name }}
     </h2>  
 </div>
 
 <div class="pt-[18px] flex items-end flex-wrap gap-y-1 flex-1">                 
-    <div class="leading-none text-26px font-bold flex items-center me-3 text-gray">
+    <div class="leading-none text-lg sm:text-26px font-bold flex items-center me-3 text-gray">
         <span class="me-1">{{ item.price }}</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="size-5 lpl:size-5 inline-block align-top relative top-[1px]" fill="currentColor" viewBox="0 0 256 256"><path d="M148,156a64,64,0,0,0,0-128H88A12,12,0,0,0,76,40v92H56a12,12,0,0,0,0,24H76v16H56a12,12,0,0,0,0,24H76v20a12,12,0,0,0,24,0V196h44a12,12,0,0,0,0-24H100V156ZM100,52h48a40,40,0,0,1,0,80H100Z"></path></svg>
     </div>    
-    <div class="text-gray-1 text-lg">
+    <div class="text-gray-1 text-xs sm:text-lg">
         {{ item.prices | join('/') }}        
     </div>
 </div>

@@ -3,6 +3,7 @@
 use Saybme\Sk\Classes\Catalog\CatalogClass;
 use Saybme\Sk\Models\Category;
 use Saybme\Sk\Models\Product;
+use Saybme\Sk\Models\Page;
 use Saybme\Sk\Models\Vendor;
 use Input;
 
@@ -33,8 +34,13 @@ class Skcatalog extends \Cms\Classes\ComponentBase
                 'default' => 'category',
                 'options' => [
                     'category' => 'Товар или товары категории',
-                    'all' => 'Все товары'
+                    'all' => 'Все товары',
+                    'search' => 'Результаты поиска'
                 ]
+            ],
+            'tmp' => [
+                'title' => 'Шаблон',
+                'description' => 'Шаблон вывода'
             ]
         ];
     }
@@ -55,13 +61,23 @@ class Skcatalog extends \Cms\Classes\ComponentBase
 
     // Все товары
     private function all(){
+        $tmp = $this->property('tmp') ?: 'catalog/category';
+
+        $options['page'] = Page::active()->find(2);
         $options['products'] = CatalogClass::getCategoryProducts();
         $options['filters'] = $this->getFilterCategory();  
 
         $currentURL = url()->current();
         //dd($options);
 
-        return $this->renderPartial('catalog/category', $options);
+        return $this->renderPartial($tmp, $options);
+    }
+
+    // Результаты поиска
+    private function search(){
+        $tmp = $this->property('tmp') ?: 'catalog/search';
+        $options['products'] = CatalogClass::getCategoryProducts();
+        return $this->renderPartial($tmp, $options);
     }
 
     // Товар или товары категории
@@ -73,7 +89,7 @@ class Skcatalog extends \Cms\Classes\ComponentBase
         $page = Category::active()->where('uri', $slug)->first();
         if($page){
             $this->getPageInfo($page);            
-            $options['category'] = $page;
+            $options['page'] = $page;
             $options['breadcrumbs'] = $this->categoryBreadcrumbs($page);
             $options['products'] = CatalogClass::getCategoryProducts($page);
             $options['filters'] = $this->getFilterCategory();  

@@ -51,7 +51,11 @@
     }
 
     #products {
-        @apply grid grid-cols-3 gap-x-16 gap-y-12
+        @apply grid grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-x-16 gap-y-12
+    }
+
+    #products-col-4 #products {
+        @apply grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
     }
 
     .cart-table td {
@@ -60,6 +64,10 @@
 
     .error {
         @apply mt-1 text-xs text-red-700 ml-1
+    }
+
+    .text {
+        @apply text-xs sm:text-base
     }
 
     .text > p, .text > h1, .text > h2, .text > h3, .text > h4, .text > h5 {
@@ -163,7 +171,7 @@
     }
 
     .p-carousel {
-        @apply [--f-carousel-slide-width:calc(100%/2)] lg:[--f-carousel-slide-width:calc((100%/3)-53px)] xl:[--f-carousel-slide-width:calc((100%/4)-53px)] [--f-carousel-spacing:70px] 
+        @apply [--f-carousel-slide-width:calc(100%/2)] lg:[--f-carousel-slide-width:calc((100%/3)-53px)] xl:[--f-carousel-slide-width:calc((100%/4)-53px)] [--f-carousel-spacing:20px]  sm:[--f-carousel-spacing:70px] 
     }
 
     .text {
@@ -207,7 +215,7 @@
     }
 
     .breadcrumbs {
-        @apply text-sm/none flex flex-wrap gap-x-2 gap-y-1 text-gray-400
+        @apply text-[.5rem] leading-none sm:text-sm/none flex flex-wrap gap-x-2 gap-y-1 text-gray-400
     }
 
     .breadcrumbs li {
@@ -219,15 +227,15 @@
     }
 
     .title-h1 {
-        @apply text-3xl leading-tight font-medium
+        @apply text-lg sm:text-3xl leading-tight font-medium
     }         
 
     .sidebarMenu {
-        @apply text-sm uppercase font-extrabold text-gray space-y-3
+        @apply text-xs sm:text-sm uppercase font-extrabold text-gray space-y-3
     }
 
     .sidebarMenu li a {
-        @apply before:block before:size-[14px] before:bg-plus relative before:flex-none flex items-start before:me-2 before:relative before:top-[2px] before:bg-no-repeat before:bg-center
+        @apply before:block before:size-[10px] sm:before:size-[14px] before:bg-plus relative before:flex-none flex items-start before:me-2 before:relative before:top-[2px] before:bg-no-repeat before:bg-center
     }
 
     .sidebarMenu li.active a {
@@ -263,11 +271,11 @@
     }
 
     .pagination ul {
-        @apply flex flex-wrap gap-x-2
+        @apply flex flex-wrap gap-x-1 sm:gap-x-2
     }
 
     .pagination ul a, .pagination ul span {
-        @apply block bg-gray-50 border border-purple-3 rounded-md px-3 text-base py-1 text-purple-10
+        @apply block bg-gray-50 border border-purple-3 rounded-md px-1 sm:px-3 text-[.6rem] sm:text-base sm:py-1 text-purple-10
     }
 
     .pagination ul li.active span {
@@ -299,11 +307,11 @@
     }
 
     .category-wrap {
-        @apply flex gap-x-9 gap-y-7 items-start flex-row
+        @apply flex gap-x-9 gap-y-7 items-start flex-col lg:flex-row
     }
 
     .sidebar-category {
-        @apply block bg-gray-100 border border-gray-200 rounded-md flex-none sticky top-0 w-[360px]
+        @apply block bg-gray-100 border border-gray-200 rounded-md flex-none lg:sticky top-0 w-full lg:w-[360px]
     }
 
     .content-category {

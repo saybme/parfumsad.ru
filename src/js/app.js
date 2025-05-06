@@ -75,7 +75,26 @@ addEventListener('ajax:done', function(event) {
         pupularScroll();    
     }
 
+    // Меняем количество в корзине
+    if(handler == 'onCount'){
+        changeCartCount(event.detail.data.cart);
+    }
+
 });
+
+// Меняем количество в корзине
+window.changeCartCount = function(data){
+
+    // Перебор товаров
+    for(let el in data.products){
+        let product = data.products[el];
+        let row = document.querySelector('[product-id="'+el+'"]');
+        row.querySelector('.product-sum').innerHTML = sumFormat(product.sum);       
+    }
+
+    totalCart(data.total);
+    
+}
 
 // Форма присвоения категории
 window.categoryForm = function(data = null){
@@ -104,9 +123,23 @@ window.productDelete = function(id){
 
 // Итоги корзины
 window.totalCart = function(data){
+
     document.querySelectorAll('.cart-count').forEach(el => {
         el.innerText = data.count;    
     });  
+
+    document.querySelectorAll('.total-cost').forEach(el => {
+        el.innerText = sumFormat(data.total_cost);    
+    }); 
+
+    console.log(data);
+
+}
+
+// Формат суммы
+window.sumFormat = function(number){
+    number = new Intl.NumberFormat().format(number)
+    return number;
 }
 
 // Уведомление

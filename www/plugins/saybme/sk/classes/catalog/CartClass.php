@@ -97,6 +97,23 @@ class CartClass {
         return $result;
     }
 
+    // Меняем количество в корзине
+    public function changeCount(){
+
+        $id = Input::get('id');
+        $amount = intval(Input::get('count'));
+
+        if($amount == 0){
+            $amount = 1;    
+        }
+
+        // Новое количество
+        $product = Session::put('cart.products.' . $id . '.amount', $amount);        
+
+        $result['cart'] = $this->cart();
+        return $result;
+    }
+
     // Валидация на добавление товара
     private function addValid($id = null){
         if(!$id) return;
@@ -200,7 +217,11 @@ class CartClass {
         if(Session::has('cart.products')){
             $products = array();
             foreach(Session::get('cart.products') as $key => $item){
-                $obj = Product::with('category','preview')->find($item['id']);
+                $productId = null;
+                if(key_exists('id', $item)){
+                    $productId = $item['id'];
+                }
+                $obj = Product::with('category','preview')->find($productId);
                 if($obj){
                     $item['name'] = $obj->name;
 
@@ -221,7 +242,9 @@ class CartClass {
                     $item['params'] = $params;
                     $item['price'] = $price;
                     $item['category'] = $obj->category == null ? '' : $obj->category->getParentsAndSelf()->pluck('name');
-                    $item['sum'] = $price * $item['amount'];
+
+                    $productSum = $price * $item['amount'];
+                    $item['sum'] = $productSum;
                     $products[$key] = $item; 
                 }                   
             }

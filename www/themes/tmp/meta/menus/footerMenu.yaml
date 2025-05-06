@@ -5,7 +5,7 @@ items:
         type: sk-category
         code: ''
         reference: '371'
-        cmsPage: catalog/katalog
+        cmsPage: catalog/kategorii
         replace: 0
         viewBag:
             isHidden: '0'

@@ -53,6 +53,12 @@ class Skapp extends \Cms\Classes\ComponentBase
         return $result;
     }
 
+    // Меняем количество в корзине
+    public function onCount(){
+        $q = new CartClass;
+        return $q->changeCount(); 
+    }
+
     // Подарок в корзине
     public function onGift(){     
         $options['gift'] = Input::get('is_present');
