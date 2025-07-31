@@ -1,9 +1,12 @@
 <?php namespace Saybme\Sk\Components;
 
 use Saybme\Sk\Classes\Catalog\CartClass;
+use Saybme\Sk\Classes\Users\UserClass;
 use Saybme\Sk\Models\Product;
+use Request;
 use Redirect;
 use Input;
+use Lang;
 use Log;
 
 class Skapp extends \Cms\Classes\ComponentBase
@@ -85,6 +88,71 @@ class Skapp extends \Cms\Classes\ComponentBase
         // Редирект
         $url = '/cart/order/' . $order->hash;
         return Redirect::to($url);
+    }
+
+
+    // Модальное окно
+    function onModal(){
+
+        $tmp = '';
+        $type = Input::get('type');
+
+        if($type == 'authorization'){
+            $result['modal'] = $this->renderPartial('modal/authorization');
+            return $result;
+        }
+
+        return $id;
+    }
+
+    // Тип авторизации
+    function onSelectAuthorization(){
+        $options['id'] = Input::get('mode');
+        $result['#authorization-type'] = $this->renderPartial('modal/authorization-type', $options);
+        return $result;
+    }
+
+    // Авторизация
+    function onAuthorization(){
+        
+        $tpl = '';
+        $type = Input::get('type');
+        $data = Input::get();
+
+        $rules['type'] = 'required';
+
+        // Регистрация
+        if($type == 'registration'){            
+            $rules['username'] = 'required';
+            $rules['email'] = 'required|email';
+            $rules['phone'] = 'required|phone';
+            $rules['inn'] = 'required|size:10';
+        }
+
+        // Вход
+        if($type == 'enter'){            
+            $rules['phone'] = 'required|phone|user';
+            $rules['password'] = 'required|psw';
+        }
+
+        // Валидация
+        Request::validate($rules, Lang::get('saybme.sk::validation'));
+
+        $q = new UserClass;
+
+        // Регистрация
+        if($type == 'registration'){            
+            $q->create();      
+            $tpl = 'modal/authorization-success';          
+        }
+
+        // Вход
+        if($type == 'enter'){            
+            return $q->enter();              
+        }
+
+        $result['#authorization-modal'] = $this->renderPartial($tpl);
+        return $result;
     }
     
 

@@ -25,14 +25,42 @@
 
     header {
         @apply relative
-    }
+    }   
+
+    .os-scrollbar {
+        @apply [--os-track-bg:#fafafa]
+    } 
 
     footer {
         @apply mt-auto
     }
 }
 
-@layer components {    
+@layer components {  
+    
+    .text-error {
+        @apply text-xs text-red-700
+    }
+
+    #result-products.active {
+        @apply opacity-50
+    }
+
+    .product-photos .f-carousel__dots {
+        @apply absolute left-0 top-0 size-full flex px-2
+    }
+
+    .product-photos .f-carousel__dots li {
+        @apply flex-1 h-full after:block after:w-full after:h-[1px] after:bg-gray-1 after:absolute after:left-0 after:bottom-3 relative
+    }
+
+    .product-photos .f-carousel__dots li.is-current {
+        @apply after:bg-purple-10
+    }
+
+    .product-photos .f-carousel__dots li button {
+        @apply block size-full
+    }
 
     .fancybox__backdrop {
         @apply bg-black/40

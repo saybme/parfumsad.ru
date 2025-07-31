@@ -1,0 +1,13 @@
+name: Users
+form: $/saybme/sk/models/user/fields.yaml
+modelClass: Saybme\Sk\Models\User
+defaultRedirect: saybme/sk/users
+design:
+    displayMode: sidebar
+    sidebarSize: 500
+create:
+    redirect: 'saybme/sk/users/update/:id'
+    redirectClose: saybme/sk/users
+update:
+    redirect: saybme/sk/users
+    redirectClose: saybme/sk/users

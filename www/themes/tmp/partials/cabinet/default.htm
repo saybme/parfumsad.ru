@@ -1,0 +1,47 @@
+<div class="pt-8 pb-16">
+
+    <div class="container flex gap-6">
+
+        <div class="w-3/4">
+            <h4 class="text-2xl font-bold mb-2">Ваши заказы:</h4>
+            <div class="">
+                {% partial 'cabinet/orders' items=orders %}
+            </div>
+        </div>
+
+        <div class="w-1/4 flex-none">
+            <div class="bg-white border border-gray-100 px-6 py-8 rounded-md">
+                <form action="" class="block mb-6" data-request="onSaveProfile">
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="">
+                            <label for="">Ваше имя:</label>
+                            <input type="text" name="username" value="{{ user.username }}" class="input input-bordered w-full input-sm">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="">
+                                <label for="">Телефон:</label>
+                                <input type="tel" value="{{ user.phone }}" class="input input-bordered w-full input-sm">
+                            </div>
+                            <div class="">
+                                <label for="">E-mail:</label>
+                                <input type="email" value="{{ user.email }}" name="email" class="input input-bordered w-full input-sm">
+                            </div>
+                        </div>
+                        <div class="">
+                            <label for="">ИНН:</label>
+                            <input type="number" name="inn" value="{{ user.inn }}" class="input input-bordered w-full input-sm">
+                        </div>
+                        <div class="">
+                            <button class="btn btn-secondary w-full">Сохранить изменения</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="">
+                    <a href="/logout" class="btn btn-secondary btn-outline w-full btn-sm">Выйти с кабинета</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

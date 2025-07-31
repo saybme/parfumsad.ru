@@ -83,6 +83,16 @@ class Product extends Model
         return $query;
     }
 
+    public function getImagesAttribute(){
+
+        $rows = array();        
+
+        $items = $this->photos;
+        $items->prepend($this->preview);
+
+        return $items->unique('id');
+    }
+
     public function scopeSearchType($query, $type){
         if(!$type) return $query;
         return $query->where('name', 'like', '%'.$type.'%');

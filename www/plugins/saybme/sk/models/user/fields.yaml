@@ -1,0 +1,56 @@
+tabs:
+    fields:
+        password@create:
+            label: Создать пароль
+            span: auto
+            type: password
+            tab: Пароль
+            comment: Придумайте пароль
+        password_confirmation@create:
+            label: Подтвердить пароль
+            span: auto
+            type: password
+            tab: Пароль
+            comment: Введите повторно ваш пароль
+        created_at:
+            label: Создан
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Информация
+        updated_at:
+            label: Обновлен
+            span: auto
+            mode: datetime
+            disabled: 1
+            type: datepicker
+            tab: Информация
+fields:    
+    email:
+        label: E-mail
+        span: auto
+        type: text
+    phone:
+        label: Номер телефона
+        span: auto
+        type: text        
+secondaryTabs:
+    fields:
+        is_active:
+            label: Опубликован 
+            span: full
+            type: checkbox
+        username:
+            label: Логин
+            span: full
+            type: text
+        type:
+            label: Тип
+            span: full
+            type: number
+        inn:
+            label: ИНН
+            span: full
+            type: number
+

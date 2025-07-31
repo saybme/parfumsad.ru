@@ -49,6 +49,12 @@ tabs:
             tab: Дополнительно
 secondaryTabs:
     fields:
+        user:
+            label: Пользователь
+            span: full 
+            type: relation 
+            placeholder: -- Выбрать --
+            nameFrom: phone
         profile[username]:
             label: Имя
             type: text

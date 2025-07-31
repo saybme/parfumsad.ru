@@ -6,7 +6,7 @@ class Order extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
-    protected $fillable = ['phone','email','payment','delivery','products','profile','comment','present','is_present','address'];
+    protected $fillable = ['phone','email','payment','delivery','products','profile','comment','present','is_present','address','user'];
 
     protected $jsonable = ['address','profile','props','present'];
   
@@ -26,7 +26,8 @@ class Order extends Model
 
     public $belongsTo = [
         'payment' => \Saybme\Sk\Models\Payment::class,
-        'delivery' => \Saybme\Sk\Models\Delivery::class
+        'delivery' => \Saybme\Sk\Models\Delivery::class,
+        'user' => \Saybme\Sk\Models\User::class
     ];
 
     public $hasMany = [
@@ -54,6 +55,17 @@ class Order extends Model
             $rows[] = $item->sum;    
         }
         return array_sum($rows);
+    }
+
+    // Итого
+    public function getTotalAttribute(){
+        if(!$this->products) return;
+
+        $arr = array();
+        $arr['total_count'] = $this->products->count();
+        $arr['total_sum'] = $this->getSumAttribute();
+
+        return collect($arr);
     }
 
     // Адрес доставки

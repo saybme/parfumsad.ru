@@ -55,3 +55,7 @@ navigation:
                 label: Страницы
                 url: saybme/sk/pages
                 icon: icon-sitemap
+            side-menu-item6:
+                label: Покупатели
+                url: saybme/sk/users
+                icon: icon-users

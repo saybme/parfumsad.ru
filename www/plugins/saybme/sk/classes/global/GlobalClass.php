@@ -30,4 +30,14 @@ class GlobalClass {
         return collect($rows);
     }
 
+    // Формат телефона
+    public static function formatPhone($value = ''){
+        if(!$value) return;
+
+        $value = preg_replace("/[^0-9]/", "", $value); 
+        $value = 7 . substr($value, 1);
+
+        return $value;
+    }
+
 }

@@ -45,7 +45,8 @@ module.exports = {
         }
       },
       fontFamily: {
-        'montserrat': ['"Roboto Condensed"', ...defaultTheme.fontFamily.sans]
+        'montserrat': ['"Roboto Condensed"', ...defaultTheme.fontFamily.sans],
+        'roboto': ['"Roboto", sans-serif', ...defaultTheme.fontFamily.sans]
       },
       fontSize: {
         '26px': '1.625rem',

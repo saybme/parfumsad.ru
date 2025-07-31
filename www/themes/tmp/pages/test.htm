@@ -1,13 +1,14 @@
-title = "Тест"
 url = "/test"
+title = "Тест"
 is_hidden = 1
 ==
 <?php
 function onStart(){
 
-    $cart = Session::get('cart');
+    $url = URL::to('/');
 
-    return $cart;
+    return $url;
+    
 
 }
 ?>

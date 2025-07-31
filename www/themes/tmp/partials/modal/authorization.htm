@@ -1,0 +1,28 @@
+[viewBag]
+==
+<?php
+function onStart(){
+
+    $modal['types'][0] = 'Вход';
+    $modal['types'][1] = 'Регистрация';
+
+    $this['authorization'] = $modal;
+
+}
+?>
+==
+<div class="w-full max-w-[350px] p-0 bg-inherit">
+    <div class="bg-white rounded-md overflow-hidden" id="authorization-modal">
+        <div class="flex gap-2 p-4">
+            {% for key, item in authorization.types %}
+                <div class="flex-1 relative">
+                    <input type="radio" name="mode" id="mode_{{ key }}" value="{{ key }}" data-request="onSelectAuthorization" class="hidden peer" {{ key == 0 ? 'checked' : '' }}>
+                    <label for="mode_{{ key }}" class="relative block w-full after:w-full after:bottom-0 after:left-0 after:h-[2px] after:block peer-checked:after:bg-purple-10 after:bg-gray-300 cursor-pointer text-lg text-center">{{ item }}</label>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="" id="authorization-type">
+            {% partial 'modal/authorization-type' id=0 %}
+        </div>
+    </div>
+</div>

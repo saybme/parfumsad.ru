@@ -5,6 +5,10 @@ use Saybme\Sk\Models\Category;
 use Saybme\Sk\Models\Page;
 use Saybme\Sk\Models\Option;
 use Saybme\Sk\Classes\Global\GlobalClass;
+use Saybme\Sk\Classes\Users\UserClass;
+use Saybme\Sk\Classes\Rules\PhoneRule;
+use Saybme\Sk\Classes\Rules\UserRule;
+use Saybme\Sk\Classes\Rules\PswRule;
 use Event;
 
 /**
@@ -16,8 +20,13 @@ class Plugin extends PluginBase
      * register method, called when the plugin is first registered.
      */
     public function register(){
+
         $this->registerConsoleCommand('saybme.skimport', \Saybme\Sk\Console\Skimport::class);
         $this->registerConsoleCommand('saybme.skproducts', \Saybme\Sk\Console\Skproducts::class);
+
+        $this->registerValidationRule('phone', PhoneRule::class);
+        $this->registerValidationRule('user', UserRule::class);
+        $this->registerValidationRule('psw', PswRule::class);
     }
 
     /**
@@ -60,7 +69,9 @@ class Plugin extends PluginBase
         // Глобальные переменные
         Event::listen('cms.page.init', function($controller) {
             $controller->vars['networks'] = GlobalClass::networks();
+            $controller->vars['isUser'] = UserClass::isUser();
         });
+        
 
     }
 
@@ -77,7 +88,8 @@ class Plugin extends PluginBase
             \Saybme\Sk\Components\Skcart::class => 'skcart',
             \Saybme\Sk\Components\Skapp::class => 'skapp',
             \Saybme\Sk\Components\Skcategory::class => 'skcategory',
-            \Saybme\Sk\Components\Skpage::class => 'skpage'
+            \Saybme\Sk\Components\Skpage::class => 'skpage',
+            \Saybme\Sk\Components\Skcabinet::class => 'skcabinet'
         ];
     }
 
