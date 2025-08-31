@@ -2,9 +2,9 @@
 
     <div data-product-id="{{ item.id }}" class="relative block border rounded-2xl overflow-hidden" data-id="{{ item.id }}">   
 
-        <div class="">
+        <div class="cursor-pointer" onclick="getModalProduct(this)" data-id="{{ item.id }}">
             {% if item.images | length %}
-                <div class="f-carousel product-photos [--f-carousel-dots-height:0]">
+                <div class="f-carousel product-photos">
                     {% for photo in item.images %}
                         <div class="f-carousel__slide">
                             <div class="aspect-w-16 aspect-h-13">

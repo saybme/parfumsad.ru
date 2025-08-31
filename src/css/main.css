@@ -46,20 +46,28 @@
         @apply opacity-50
     }
 
+    .product-photos {
+        @apply [--f-carousel-dots-height:100%]
+    }
+
+    .product-photos.f-carousel.has-dots {
+        @apply m-0 
+    }
+
+    .product-photos .f-carousel__dot {
+        @apply w-auto flex-1 bg-inherit
+    }
+
+    .product-photos .f-carousel__dot:after {
+        @apply left-0 bottom-2 top-auto w-full h-[2px] bg-purple-10 translate-x-0
+    }
+
     .product-photos .f-carousel__dots {
-        @apply absolute left-0 top-0 size-full flex px-2
+        @apply left-0 top-0 bottom-0 w-full px-2 z-[9999]
     }
 
-    .product-photos .f-carousel__dots li {
-        @apply flex-1 h-full after:block after:w-full after:h-[1px] after:bg-gray-1 after:absolute after:left-0 after:bottom-3 relative
-    }
-
-    .product-photos .f-carousel__dots li.is-current {
-        @apply after:bg-purple-10
-    }
-
-    .product-photos .f-carousel__dots li button {
-        @apply block size-full
+    #mainHorizontScroll {
+        @apply [--f-carousel-slide-width:calc(100%/4)] [--f-carousel-gap:30px]
     }
 
     .fancybox__backdrop {
@@ -315,7 +323,7 @@
     }
 
     #posts {
-        @apply [--f-carousel-slide-width:calc(100%/2)] lg:[--f-carousel-slide-width:calc((100%/3)-30px)] xl:[--f-carousel-slide-width:calc((100%/4)-30px)] [--f-carousel-spacing:40px]
+        @apply [--f-carousel-slide-width:calc(100%/2)] lg:[--f-carousel-slide-width:calc((100%/3)-30px)] xl:[--f-carousel-slide-width:calc((100%/4)-30px)] [--f-carousel-gap:40px]
     }
 
     #mainCarousel {

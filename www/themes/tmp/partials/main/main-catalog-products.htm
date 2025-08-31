@@ -1,6 +1,7 @@
-{% for item in products %}
-    <div class="w-[60%] sm:w-[45%] md:w-[22%] flex-none">
-        {% partial 'products/item' item=item %}  
-    </div>
-{% endfor %}
-
+<div class="f-carousel" id="mainHorizontScroll">
+    {% for item in products %}
+        <div class="f-carousel__slide">
+            {% partial 'products/item' item=item %}  
+        </div>
+    {% endfor %}
+</div>

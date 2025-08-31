@@ -1,8 +1,10 @@
 
-import { Fancybox } from "@fancyapps/ui";
-import { Carousel } from "@fancyapps/ui/dist/carousel/carousel.esm.js";
-import { Thumbs } from "@fancyapps/ui/dist/carousel/carousel.thumbs.esm.js";
-import { Autoplay } from "@fancyapps/ui/dist/carousel/carousel.autoplay.esm.js";
+import { Fancybox } from "@fancyapps/ui/dist/fancybox/";
+import { Carousel } from "@fancyapps/ui/dist/carousel/";
+import { Dots } from "@fancyapps/ui/dist/carousel/carousel.dots.js";
+import { Thumbs } from "@fancyapps/ui/dist/carousel/carousel.thumbs.js";
+import { Autoplay } from "@fancyapps/ui/dist/carousel/carousel.autoplay.js";
+
 import marquee from 'vanilla-marquee'
 import Alpine from 'alpinejs'
 
@@ -17,15 +19,15 @@ window.Alpine = Alpine
 
 Alpine.start()
 
-document.addEventListener("DOMContentLoaded", function () {
+// document.addEventListener("DOMContentLoaded", function () {
 
-    OverlayScrollbars(document.body, {});
+//     OverlayScrollbars(document.body, {});
 
-    OverlayScrollbars(document.querySelector('#productsScroll'), {
+//     OverlayScrollbars(document.querySelector('#productsScroll'), {
 
-    });
+//     });
 
-});
+// });
 
 // Noty
 window.Noty = require('noty');
@@ -70,9 +72,9 @@ addEventListener('ajax:promise', function (event) {
     let handler = event.detail.context.handler;
 
     // Карусель главной
-    if (handler == 'onGetMainProducts') {
-        document.getElementById('result-products').classList.add('active');
-    }
+    // if (handler == 'onGetMainProducts') {
+    //     document.getElementById('result-products').classList.add('active');
+    // }
 
 });
 
@@ -97,11 +99,7 @@ addEventListener('ajax:done', function (event) {
         categoryForm(false);
     }
 
-    // Карусель популярных
-    if (handler == 'onGetMainProducts') {
-        productGallery();
-        document.getElementById('result-products').classList.remove('active');
-    }
+   
 
     // Меняем количество в корзине
     if (handler == 'onCount') {
@@ -113,15 +111,20 @@ addEventListener('ajax:done', function (event) {
         modal(event.detail.data);
     }
 
+    // Обновление карусели
+    if(handler == 'onGetMainProducts'){
+        mainHorizontScroll();
+    }
+
 });
 
 // Модельное окно
 window.modal = function (data) {
     console.log(data);
 
-    new Fancybox([
+    Fancybox.show([
         {
-            src: data.modal,
+            html: data.modal,
             type: "html",
         },
     ]);
@@ -202,46 +205,93 @@ window.sakuraNoty = function (data) {
 
 // Карусель постов
 window.scrollPOsts = function () {
+
     const container = document.getElementById('posts');
-    new Carousel(container, {
+
+    const options = {
         infinite: true,
         Dots: true,
         Autoplay: {
             timeout: 3000,
-            showProgress: false,
+            showProgressbar: false,
         },
-    }, { Autoplay });
+    };   
+
+    Carousel(container, options, { Autoplay }).init();
+
+}
+
+// Карусель товаров главной
+window.mainHorizontScroll = function(){
+
+    const container = document.getElementById("mainHorizontScroll");
+    
+    const options = {
+        Autoplay: {
+            showProgressbar: false
+        },
+        on: {
+            initSlides: (instance) => {
+                productGallery();
+            },
+        },
+    };
+
+    Carousel(container, options, { Autoplay }).init();    
+
 }
 
 // Карусель фото товаров
-window.productGallery = function () {
+window.productGallery = function () {    
 
-    document.querySelectorAll('.product-photos').forEach(el => {
-        new Carousel(el, {
-            infinite: false,
-            Navigation: false,
-            on: {
+    document.querySelectorAll('.product-photos').forEach(row => {
+
+        const ref = Carousel(row, {
+            infinite: false,    
+                on: {
                 ready: (instance) => {
-                    el.querySelectorAll('button').forEach((row, index) => {
-                        row.onmouseover = function (event) {
-                            instance.slideTo(index);
-                        };
+                    row.querySelectorAll('button').forEach(el => {
+                        el.addEventListener("mouseenter", (e) => {
+                            instance.goTo(el.getAttribute('data-carousel-go-to'));;
+                        })
                     })
-                }
-            }
-        });
+                },
+            },
+        }, { Dots }).init();
+
     })
 
 }
 
-productGallery();
+//productGallery();
 
+// Окно товара
+window.getModalProduct = function(el){
+    
+    oc.ajax('onModalProduct', {
+        data: {
+            id: el.getAttribute('data-id')
+        },
+        success: function(data) {
+            this.success(data).done(function() {
+                Fancybox.show([
+                    {
+                        html: data.modal,
+                        showClass: 'productFancyBox f-zoomInUp',
+                        mainClass: 'productFancyBoxMain'
+                    },
+                ]);
+            });
+        }
+    })
+
+}
 
 // mainCarousel
 window.mainCarousel = function () {
     const container = document.getElementById("mainCarousel");
     const options = { infinite: false };
-    new Carousel(container, options);
+    Carousel(container, options).init();
 }
 
 // Событие пагинации
@@ -315,29 +365,29 @@ window.marqueeLogos = function () {
 
 
 // Окно товара
-window.openProduct = function (data) {
+// window.openProduct = function (data) {
 
-    let params = [];
-    params['id'] = data.getAttribute('data-id');
+//     let params = [];
+//     params['id'] = data.getAttribute('data-id');
 
-    oc.ajax('onOpenProduct', {
-        data: params,
-        success: function (data) {
-            this.success(data).done(function () {
-                new Fancybox([
-                    {
-                        src: data.modal,
-                        type: "html",
-                        showClass: 'productFancyBox f-zoomInUp',
-                        mainClass: 'productFancyBoxMain'
-                    },
-                ]);
-            });
-        }
-    })
+//     oc.ajax('onOpenProduct', {
+//         data: params,
+//         success: function (data) {
+//             this.success(data).done(function () {
+//                 new Fancybox([
+//                     {
+//                         src: data.modal,
+//                         type: "html",
+//                         showClass: 'productFancyBox f-zoomInUp',
+//                         mainClass: 'productFancyBoxMain'
+//                     },
+//                 ]);
+//             });
+//         }
+//     })
 
 
-}
+// }
 
 
 // Открыть пароль

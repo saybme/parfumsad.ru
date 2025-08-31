@@ -154,6 +154,21 @@ class Skapp extends \Cms\Classes\ComponentBase
         $result['#authorization-modal'] = $this->renderPartial($tpl);
         return $result;
     }
+
+    // Модальное окно товара
+    public function onModalProduct(){
+        
+        $id = Input::get('id');
+
+        $obj = Product::active()->find($id);
+        if(!$obj){
+            return;
+        }
+
+        $options['product'] = $obj;
+        $result['modal'] = $this->renderPartial('modals/product', $options);
+        return $result;
+    }
     
 
 }

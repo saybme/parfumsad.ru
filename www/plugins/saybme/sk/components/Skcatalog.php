@@ -149,20 +149,18 @@ class Skcatalog extends \Cms\Classes\ComponentBase
     }
 
     // Окно товара
-    function onOpenProduct(){
-        $id = Input::get('id');
+    // function onOpenProduct(){
+    //     $id = Input::get('id');
 
-        $obj = Product::active()->find($id);
-        if(!$obj){
-            return;
-        }
+    //     $obj = Product::active()->find($id);
+    //     if(!$obj){
+    //         return;
+    //     }
 
-        $options['product'] = $obj;
-        $result['modal'] = $this->renderPartial('modals/product', $options);
-        return $result;
-    }
+    //     $options['product'] = $obj;
+    //     $result['modal'] = $this->renderPartial('modals/product', $options);
+    //     return $result;
+    // }
 
     public $skcatalog;
-
-
 }
