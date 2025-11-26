@@ -1,5 +1,6 @@
 <?php namespace Saybme\Sk\Models;
 
+use Tailor\Models\GlobalRecord;
 use Model;
 use Input;
 use Log;
@@ -81,6 +82,20 @@ class Product extends Model
             return $query->where('vendor_id', Input::get('vendor'));
         }
         return $query;
+    }
+
+    public function getProductPriceAttribute(){
+        $currency = GlobalRecord::findForGlobalUuid('fbec6dba-044f-48b1-914f-7c29831e104d');
+
+        if($currency->dollar && $currency->dollar != '1'){
+            return number_format($this->price_usd * $currency->dollar, 2, '.', ' ');
+        }
+
+        if($currency->euro && $currency->euro != '1'){
+            return number_format($this->price_eur * $currency->euro, 2, '.', ' ');
+        }
+
+        return $this->price;
     }
 
     public function getImagesAttribute(){

@@ -74,7 +74,11 @@ module.exports = {
     themes: [{
       "light": {
         "secondary": "#7220B5",
-        "secondary-content": "#ffffff"
+        "secondary-content": "#ffffff",
+        "primary": "#863EE6",
+        "primary-content": "#ffffff",
+        "neutral": "#374957",
+        "neutral-content": "#ffffff"
       }
     }],
   },

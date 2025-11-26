@@ -1,0 +1,7 @@
+scopes:
+
+    category:
+        label: Категория
+        modelClass: Saybme\Sk\Models\Category
+        conditions: category_id in (:value)
+        nameFrom: name

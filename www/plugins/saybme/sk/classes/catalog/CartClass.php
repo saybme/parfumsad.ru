@@ -30,6 +30,18 @@ class CartClass {
         // Товары корзины
         $products = $this->getProducts();
 
+        $gl = GlobalRecord::findForGlobalUuid('fbec6dba-044f-48b1-914f-7c29831e104d');
+
+        // Итого
+        $total = $this->total($products);
+        
+        if($gl->min_sum && $gl->min_sum > 0){
+            if($total['total_cost'] < $gl->min_sum){
+                // Минимальная сумма заказа 10 000 руб.
+                throw new ValidationException(['min-order' => 'Минимальная сумма заказа ' . number_format($gl->min_sum, 0, ',', ' ') . ' руб., в вашей корзине ' . number_format($total['total_cost'], 2, ',', ' ') . ' руб.']);
+            }        
+        }
+
         // Валидация товаров
         $this->validCartProducts($products);
 
@@ -49,6 +61,9 @@ class CartClass {
 
         // Отправялем уведомление на почту
         $this->sendEmailOrder($order->id);
+
+        // Очищаем корзину
+        Session::forget('cart');
 
         return $order;
     }
@@ -284,30 +299,32 @@ class CartClass {
             }    
         }
 
-        return $obj->price;
+        return $obj->product_price;
     }
 
     // Уведомление на почту
     public function sendEmailOrder($id = null){
         if(!$id) return;
 
-        $order = Order::find($id);
-        if(!$order) return;
+        try {
+            $order = Order::find($id);
+            if(!$order) return;
 
-        $gl = GlobalRecord::findForGlobalUuid('fbec6dba-044f-48b1-914f-7c29831e104d');
-        $emails = $gl->shop_emails;
+            $gl = GlobalRecord::findForGlobalUuid('fbec6dba-044f-48b1-914f-7c29831e104d');
+            $emails = $gl->shop_emails;
 
-        if(!$emails) return;        
+            if(!$emails) return;        
 
-        // Уведомление
-        $vars['order'] = $order;
+            // Уведомление
+            $vars['order'] = $order;
 
-        Mail::send('order.new', $vars, function($message) use ($emails) {
-            $message->to($emails, 'Admin Person');
-            $message->subject('Создан новый заказ на сайте www.sakuradv.online');
-        });
-
-
+            Mail::send('order.new', $vars, function($message) use ($emails) {
+                $message->to($emails, 'Admin Person');
+                $message->subject('Создан новый заказ на сайте www.parfumsad.ru');
+            });
+        } catch (\Exception $e) {
+            Log::error('Ошибка отправки email уведомления о заказе: ' . $e->getMessage());
+        }
     }
 
 }

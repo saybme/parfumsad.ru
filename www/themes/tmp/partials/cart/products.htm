@@ -8,9 +8,8 @@
                 <div class="flex-1">
                     <h3 class="text-sm lg:text-base xl:text-lg font-normal mb-2">{{ item.name }}</h3>    
                     <div class="flex">
-                        <div class="text-lg lg:text-26px flex items-center leading-none me-3">
-                            <span class="font-semibold">{{ item.price | number_format(2, ',', ' ') }}</span>
-                            <span class="icon-before icon-chevron-right"></span>
+                        <div class="text-lg lg:text-26px flex items-center leading-none ">
+                            <span class="font-semibold font-roboto">{{ item.price }} ₽</span>
                         </div>
                     </div>
                 </div>                   
@@ -25,8 +24,7 @@
                     </form>
                 </div>
                 <div class="flex items-center">                          
-                    <span class="text-xl/none lg:text-3xl/none font-bold product-sum">{{ item.sum | number_format(2, ',', ' ') }}</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5 lg:size-7 block translate-y-[1px] relative" fill="currentColor" viewBox="0 0 256 256"><path d="M148,156a64,64,0,0,0,0-128H88A12,12,0,0,0,76,40v92H56a12,12,0,0,0,0,24H76v16H56a12,12,0,0,0,0,24H76v20a12,12,0,0,0,24,0V196h44a12,12,0,0,0,0-24H100V156ZM100,52h48a40,40,0,0,1,0,80H100Z"></path></svg>
+                    <span class="text-xl/none lg:text-3xl/none font-bold font-roboto"><b class="product-sum">{{ item.sum }}</b> ₽</span>
                 </div>
                 <div class="lg:w-[124px] flex-none flex justify-end pl-2">
                     <form action="" data-request="onDelete">

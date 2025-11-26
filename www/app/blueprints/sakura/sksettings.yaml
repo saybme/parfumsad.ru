@@ -17,14 +17,14 @@ fields:
     logo:
         label: Логотип
         span: auto
-        tab: Сакура
+        tab: Общие
         type: fileupload
         mode: image
         maxFiles: 1
     favicon:
         label: Favicon 
         span: auto
-        tab: Сакура
+        tab: Общие
         type: fileupload
         mode: image
         maxFiles: 1
@@ -33,28 +33,28 @@ fields:
         label: Телефон
         span: auto
         type: text
-        tab: Сакура
+        tab: Общие
 
     email:
         label: E-mail
         span: auto
         type: text
-        tab: Сакура
+        tab: Общие
 
     timework:
         label: Время работы 
         span: full
-        tab: Сакура
+        tab: Общие
 
     _networks:
         label: Социальные сети
         span: full
         type: section
-        tab: Сакура
+        tab: Общие
 
     networks:
         span: full
-        tab: Сакура
+        tab: Общие
         type: repeater
         form:
             fields:
@@ -79,35 +79,26 @@ fields:
                     span: full
                     type: mediafinder
                     mode: file
-                    maxItems: 1
+                    maxItems: 1    
 
-    about_text:
-        label: О компании
-        span: full
-        tab: Компания
-        type: richeditor
-        size: giant
+    dollar:
+        label: Курс доллара
+        comment: Курс для конвертации
+        span: auto
+        type: number
+        tab: Магазин
+    euro:
+        label: Курс евро
+        comment: Курс для конвертации
+        span: auto
+        type: number
+        tab: Магазин
 
-    advantages:
-        label: Преимущества
-        span: full
-        tab: Компания
-        type: repeater
-        form:
-            fields:
-                title:
-                    label: Заголовок
-                    span: auto
-                    type: textarea
-                    size: small
-                icon:
-                    label: Иконка
-                    span: auto
-                    type: mediafinder
-                    mode: image
-                    maxItems: 1
-                    imageWidth: 60
-                    imageHeight: 60
+    min_sum:
+        label: Минимальная сумма заказа
+        comment: Укажите минимальную сумма заказа
+        type: number
+        tab: Магазин
 
     shop_emails:
         label: Почта для уведомлений
