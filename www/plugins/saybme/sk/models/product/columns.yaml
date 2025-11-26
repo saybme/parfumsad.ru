@@ -14,9 +14,10 @@ columns:
     is_active:
         label: Опубликован
         type: switch
-    price:
+    pprice:
         label: Цена
-        type: number
+        type: partial
+        clickable: false
     old_price:
         label: 'Старая цена'
         type: number    

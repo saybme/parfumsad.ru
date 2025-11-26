@@ -22,4 +22,18 @@ class Products extends Controller
         BackendMenu::setContext('Saybme.Sk', 'main-menu-item', 'side-menu-item3');
     }
 
+    public function onModalProductPrice()
+    {     
+        $this->asExtension('FormController')->update(post('record_id'));
+        $this->vars['recordId'] = post('record_id');
+        return $this->makePartial('update_form');
+    }
+
+    public function onUpdate()
+    {
+        $this->asExtension('FormController')->update_onSave(post('record_id'));
+        return $this->listRefresh();
+    }
+
+
 }
