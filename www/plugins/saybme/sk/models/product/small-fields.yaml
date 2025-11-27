@@ -1,0 +1,15 @@
+fields: 
+    price:
+        label: Цена, руб.
+        span: full
+        type: number
+    price_usd:
+        label: Цена, $.
+        span: full
+        type: number
+        default: 0
+    price_eur:
+        label: Цена, €.
+        span: full
+        type: number
+        default: 0

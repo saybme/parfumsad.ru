@@ -3,6 +3,7 @@
 use Backend;
 use BackendMenu;
 use Backend\Classes\Controller;
+use Saybme\Sk\Models\Product;
 
 class Categories extends Controller
 {
@@ -20,20 +21,7 @@ class Categories extends Controller
     {
         parent::__construct();
         BackendMenu::setContext('Saybme.Sk', 'main-menu-item', 'side-menu-item4');
-    }
-
-    public function onModalProductPrice()
-    {     
-        $this->asExtension('FormController')->update(post('record_id'));
-        $this->vars['recordId'] = post('record_id');
-        return $this->makePartial('update_form');
-    }
-
-    public function onUpdate()
-    {
-        $this->asExtension('FormController')->update_onSave(post('record_id'));
-        return $this->listRefresh();
-    }
+    }    
 
 
 }

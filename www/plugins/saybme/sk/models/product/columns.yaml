@@ -2,11 +2,7 @@ columns:
     pname:
         label: Наименование
         type: partial
-    name:
-        label: Товар
-        type: text
-        searchable: true
-        invisible: true
+        select: name
     article:
         label: Артикул
         type: text
@@ -18,6 +14,7 @@ columns:
         label: Цена
         type: partial
         clickable: false
+        select: price
     old_price:
         label: 'Старая цена'
         type: number    

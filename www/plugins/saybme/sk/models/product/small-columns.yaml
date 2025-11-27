@@ -6,11 +6,11 @@ columns:
     is_active:
         label: Опубликован
         type: switch
-    pprice:
+    price:
         label: Цена
+        type: number 
+    link:
+        label: Подробнее
         type: partial
+        path: $/saybme/sk/controllers/products/_link.htm
         clickable: false
-        path: $/saybme/sk/controllers/products/_pprice.htm   
-    id:
-        label: ID
-        type: text
