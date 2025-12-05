@@ -81,6 +81,17 @@ fields:
                     mode: file
                     maxItems: 1    
 
+    well:
+        label: Менять курс вручную
+        comment: Если чекбокс отмечен, то курс автоматически обновляться не будет
+        type: checkbox
+        tab: Магазин
+    well_percent:
+        label: Добавить процент
+        comment: Добавить процент к курсу валюты
+        type: number
+        tab: Магазин
+
     dollar:
         label: Курс доллара
         comment: Курс для конвертации

@@ -26,7 +26,17 @@ class Currency extends Command
      */
     public function handle()
     {        
+
+        $currency = GlobalRecord::findForGlobalUuid('fbec6dba-044f-48b1-914f-7c29831e104d');
+
+        
+        if($currency->well) {
+            $this->info('Автоматический курс отключен!');
+            return;
+        };
+
         $this->info('Получение курсов валют с ЦБ РФ...');
+        
 
         try {
             $rates = $this->getCurrencyRates();
@@ -78,17 +88,35 @@ class Currency extends Command
 
     // Сохраняем курсы валют
     private function saveCurrencyRates($rates)
-    {
-        foreach ($rates as $code => $rate) {
-            $currency = GlobalRecord::findForGlobalUuid('fbec6dba-044f-48b1-914f-7c29831e104d');
+    {             
+        $currency = GlobalRecord::findForGlobalUuid('fbec6dba-044f-48b1-914f-7c29831e104d');
+        
+        if (!$currency) {
+            return;
+        }
 
+        $percent = 1; // По умолчанию 100% (без изменений)
+        
+        if($currency->well_percent && is_numeric($currency->well_percent)){
+            // Преобразуем процент в множитель (например, 5% = 1.05)
+            $percent = 1 + ($currency->well_percent / 100);    
+        }
+
+        $updated = false;
+
+        foreach ($rates as $code => $rate) {            
             if($code == 'USD'){
-                $currency->dollar = $rate['Value'];
+                $currency->dollar = $rate['Value'] * $percent;
+                $updated = true;
             } elseif($code == 'EUR'){
-                $currency->euro = $rate['Value'];
+                $currency->euro = $rate['Value'] * $percent;
+                $updated = true;
             }
+        }
 
-            $currency->save();        
+        // Сохраняем один раз после обработки всех валют
+        if($updated){
+            $currency->save();
         }
     }
 
