@@ -126,7 +126,7 @@ class Skapp extends \Cms\Classes\ComponentBase
             $rules['username'] = 'required';
             $rules['email'] = 'required|email';
             $rules['phone'] = 'required|phone';
-            $rules['inn'] = 'required|size:10';
+            $rules['inn'] = 'required|digits_between:10,12';
         }
 
         // Вход

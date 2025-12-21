@@ -31,7 +31,7 @@ class UserClass {
         $user->fill($data);
         $user->save();
 
-        $data['current'] = URL::to('/') . '/useractive/' . $hash;
+        $data['current'] = url('/') . '/useractive/' . $hash;
 
         // Отправляем письмо с подтверждением
         Mail::send('saybme.sk:profile', $data, function($message) use ($data) {
