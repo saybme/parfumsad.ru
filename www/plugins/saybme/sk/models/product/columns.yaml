@@ -3,6 +3,7 @@ columns:
         label: Наименование
         type: partial
         select: name
+        searchable: true
     article:
         label: Артикул
         type: text
