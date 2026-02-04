@@ -104,6 +104,7 @@ addEventListener('ajax:done', function (event) {
     // Меняем количество в корзине
     if (handler == 'onCount') {
         changeCartCount(event.detail.data.cart);
+        totalCart(event.detail.data.cart.total);
     }
 
     // Модальное окно
@@ -178,6 +179,10 @@ window.totalCart = function (data) {
     });
 
     document.querySelectorAll('.total-cost').forEach(el => {
+        el.innerText = sumFormat(data.total_cost);
+    });
+
+    document.querySelectorAll('.total-sum').forEach(el => {
         el.innerText = sumFormat(data.total_cost);
     });
 
