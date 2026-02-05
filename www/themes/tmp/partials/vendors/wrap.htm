@@ -2,7 +2,9 @@
     <div class="flex  items-center gap-x-5">
         {% for item in vendors %}
             <div class="flex-none">
-                <img src="{{ item.logo.thumb(100,100) }}" alt="{{ item.name }}">
+                <a href="/directory?vendor={{ item.id }}" title="{{ item.title }}">
+                    <img src="{{ item.logo.thumb(100,100) }}" alt="{{ item.name }}">
+                </a>
             </div>
         {% endfor %}
     </div>

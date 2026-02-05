@@ -2,12 +2,14 @@
 
 <div class="mt-8 f-carousel" id="posts">
     {% for item in posts %}
-        <div class="f-carousel__slide">
-            <a href="{{ item.link }}" class="block relative overflow-hidden  hover:opacity-80">
-                <img src="{{ item.preview.thumb(360,280,{mode:'crop'}) }}" alt="{{ item.name }}" class="block w-full h-auto rounded-2xl">
+        <div class="f-carousel__slide" itemscope itemtype="https://schema.org/BlogPosting">
+            <a href="{{ item.link }}" class="block relative overflow-hidden hover:opacity-80" itemprop="url">
+                <img src="{{ item.preview.thumb(360,280,{mode:'crop'}) }}" alt="{{ item.name }}" class="block w-full h-auto rounded-2xl" itemprop="image">
                 <div class="relative pt-3 space-y-1">                    
-                    <span class="block text-xs text-purple-1">{{ item.created_at | date('d.m.Y год.') }}</span>
-                    <h3 class="text-lg font-bold leading-tight">{{ item.name }}</h3>
+                    <span class="block text-xs text-purple-1" itemprop="datePublished" content="{{ item.created_at | date('Y-m-d') }}">{{ item.created_at | date('d.m.Y год.') }}</span>
+                    <h3 class="text-lg font-bold leading-tight" itemprop="headline">{{ item.name }}</h3>
+                    <meta itemprop="author" content="Цветочный Сад">
+                    <meta itemprop="publisher" content="Цветочный Сад">
                 </div>
             </a>                
         </div>

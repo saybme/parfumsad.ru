@@ -18,3 +18,5 @@ Route::get('/useractive/{hash}', function ($hash) {
 Route::get('/logout', function () {  
     return redirect('/')->withCookie(Cookie::forget('userid'));
 });
+
+// 

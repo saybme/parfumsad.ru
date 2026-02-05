@@ -45,7 +45,7 @@ class Skvendor extends \Cms\Classes\ComponentBase
     }
 
     private function getAll(){
-        $items = Vendor::active()->get();
+        $items = Vendor::active()->has('logo')->get();
         return $items;
     }
 

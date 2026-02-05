@@ -56,7 +56,13 @@ class Skcatalog extends \Cms\Classes\ComponentBase
 
     private function getPageInfo($page){
         if(!$page) return;
+
         $this->page->title = $page->name;
+        $this->page->url = $page->link;
+        $this->page->meta_title = $page->meta_title ?: $page->name;
+        $this->page->meta_description = $page->meta_description;
+        $this->page->meta_keywords = $page->meta_keywords;
+
     }
 
     // Все товары

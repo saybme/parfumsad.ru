@@ -52,7 +52,7 @@ class Skblog extends \Cms\Classes\ComponentBase
     private function getAll(){
         $tpl = $this->property('tpl');
 
-        $posts = Post::select('id','name','slug')->active()->get();  
+        $posts = Post::select('id','name','slug','created_at')->active()->get();  
         if(!$tpl) return $posts;
 
         $options['posts'] = $posts;        
@@ -61,14 +61,22 @@ class Skblog extends \Cms\Classes\ComponentBase
 
     private function getPage(){
         $slug = $this->property('slug');
-        $page = Post::select('id','name','slug','content')->active()->where('slug', $slug)->first();  
+        $page = Post::select('id','name','slug','content','created_at')->active()->where('slug', $slug)->first();  
 
         if(!$page) return $this->controller->run('404');
 
         $this->page->title = $page->name;
+        $this->page->url = $page->link;
 
         $options['page'] = $page;
+        $options['breadcrumbs'] = $this->breadcrumbs($page);
         return $this->renderPartial('posts/page', $options);
+    }
+
+    private function breadcrumbs($page){
+        $arr[] = ['name' => 'Блог', 'url' => '/posts'];
+        $arr[] = ['name' => $page->name, 'url' => $page->link ,'active' => true];
+        return $arr;
     }
 
     public $skblog;

@@ -6,6 +6,24 @@ tabs:
             span: full
             type: richeditor
             tab: Описание
+        props[seo_title]:
+            label: SEO Заголовок
+            span: full
+            type: text
+            tab: SEO
+            comment: SEO заголовок страницы (title)
+        props[seo_description]:
+            label: SEO Описание
+            span: full
+            type: textarea
+            tab: SEO
+            comment: SEO описание страницы (meta description)
+        props[seo_keywords]:
+            label: SEO Ключевые слова
+            span: full
+            type: text
+            tab: SEO
+            comment: SEO ключевые слова страницы (meta keywords)
         created_at:
             label: Создан
             mode: datetime

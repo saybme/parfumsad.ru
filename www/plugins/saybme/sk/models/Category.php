@@ -52,7 +52,7 @@ class Category extends Model
         $arr[] = $this->uri;
         $url = implode('/', $arr);
        
-        return $url;
+        return url($url);
     }
 
     // Создаем URI

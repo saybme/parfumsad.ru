@@ -14,13 +14,9 @@ items:
             isExternal: '0'
     -
         title: Каталог
-        nesting: null
-        type: cms-page
-        url: null
+        type: url
+        url: /directory
         code: ''
-        reference: catalog/katalog
-        cmsPage: null
-        replace: null
         viewBag:
             isHidden: '0'
             cssClass: ''
@@ -42,8 +38,10 @@ items:
         title: Новости
         nesting: 0
         type: sk-page
+        url: null
         code: ''
         reference: '4'
+        cmsPage: null
         replace: 0
         viewBag:
             isHidden: '0'
