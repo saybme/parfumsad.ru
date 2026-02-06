@@ -1,29 +1,88 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="language" content="ru">
+<meta name="geo.region" content="RU">
+<meta name="format-detection" content="telephone=no">
+
 <title>{{ this.page.meta_title ?: this.page.title ~ ' | Интернет магазин Цветочный Сад' }}</title>
 
 <meta name="description" content="{{ this.page.meta_description }}">
 <meta name="keywords" content="{{ this.page.meta_keywords }}">
 <meta name="author" content="Цветочный Сад">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="{{ this.page.meta_title ?: this.page.title }}">
-<meta property="og:description" content="{{ this.page.meta_description }}">
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+<!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ this.page.url }}">
+<meta property="og:title" content="{{ this.page.meta_title ?: this.page.title }}">
+<meta property="og:description" content="{{ this.page.meta_description }}">
 <meta property="og:image" content="{{ this.page.meta_image ?: global.favicon.path }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Цветочный Сад">
+
+<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="{{ this.page.url }}">
 <meta name="twitter:title" content="{{ this.page.meta_title ?: this.page.title }}">
 <meta name="twitter:description" content="{{ this.page.meta_description }}">
 <meta name="twitter:image" content="{{ this.page.meta_image ?: global.favicon.path }}">
 
 <link rel="canonical" href="{{ this.page.url }}">
 <link rel="icon" href="{{ global.favicon.path }}" type="{{ global.favicon.content_type }}">
+
+<!-- JSON-LD Schema.org разметка -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Цветочный Сад",
+  "url": "{{ 'home'|page }}",
+  "logo": "{{ global.favicon.path }}",
+  "description": "Интернет магазин Цветочный Сад - продажа парфюмерии и косметики",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "RU"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Цветочный Сад",
+  "url": "{{ 'home'|page }}",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{{ 'home'|page }}?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
 <link rel="stylesheet" href="{{ ['assets/css/app.css','assets/css/main.css'] | theme }}">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+<!-- Preload критических ресурсов -->
+<link rel="preload" href="{{ 'assets/css/main.css' | theme }}" as="style">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" as="style">
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 {% styles %}
+
+{{ global.head_scripts | raw }}

@@ -8,7 +8,12 @@ handle = "SkSettings"
 <!DOCTYPE html>
 <html lang="ru" data-overlayscrollbars-initialize>
 <head>
-    {% partial 'site/head' %}    
+    {% partial 'site/head' %}
+    {% partial 'meta/breadcrumb-schema' %}
+    {% partial 'meta/product-schema' %}
+    {% partial 'meta/article-schema' %}
+    {% partial 'meta/faq-schema' %}
+    
 </head>
 <body data-overlayscrollbars-initialize>
 
@@ -25,6 +30,7 @@ handle = "SkSettings"
     </footer>
 
     {% partial 'meta/scripts' %}    
+    {{ global.body_scripts | raw }}
     
 </body>
 </html>

@@ -126,3 +126,33 @@ fields:
         mode: file
         maxFiles: 1 
         fileTypes: json
+
+    robots:
+        label: robots.txt
+        comment: Редактирование файла robots.txt
+        tab: SEO
+        type: codeeditor
+        mode: text
+        size: large
+
+    _scripts:
+        label: Скрипты
+        span: full
+        type: section
+        tab: SEO
+    
+    head_scripts:
+        label: Скрипты в head
+        comment: Скрипты, которые будут добавлены в секцию head
+        tab: SEO
+        type: codeeditor
+        mode: html
+        size: large
+
+    body_scripts:
+        label: Скрипты в body
+        comment: Скрипты, которые будут добавлены перед закрывающим тегом body
+        tab: SEO
+        type: codeeditor
+        mode: html
+        size: large

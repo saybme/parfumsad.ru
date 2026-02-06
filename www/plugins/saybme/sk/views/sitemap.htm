@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+        
+    <url>
+        <loc>https://parfumsad.ru/</loc>
+        <lastmod>2026-02-06</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>       
+    
+    {% for product in products %}
+        <url>
+            <loc>{{ product.link }}</loc>
+            <lastmod>{{ product.created_at | date("Y-m-d") }}</lastmod>
+            <changefreq>weekly</changefreq>
+            <priority>0.7</priority>
+            <image:image>
+                <image:loc>{{ product.preview.path }}</image:loc>
+                <image:title>{{ product.name }}</image:title>
+                <image:caption>{{ product.introtext ?: product.name }}</image:caption>
+            </image:image>
+        </url>    
+    {% endfor %}
+    
+</urlset>

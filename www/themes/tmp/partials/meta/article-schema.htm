@@ -1,0 +1,30 @@
+{% if article is defined %}
+<!-- JSON-LD Article разметка -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ article.title }}",
+  "description": "{{ article.description | striptags }}",
+  "image": "{{ article.image }}",
+  "datePublished": "{{ article.published_at | date('c') }}",
+  "dateModified": "{{ article.updated_at | date('c') }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ article.author ?: 'Цветочный Сад' }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Цветочный Сад",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ global.favicon.path }}"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ this.page.url }}"
+  }
+}
+</script>
+{% endif %}
