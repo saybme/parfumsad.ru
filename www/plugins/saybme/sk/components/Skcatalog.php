@@ -51,6 +51,7 @@ class Skcatalog extends \Cms\Classes\ComponentBase
 
     private function getContent(){
         $type = $this->property('type');
+        //var_dump($type);
         return $this->$type();        
     }
 
