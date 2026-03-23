@@ -258,7 +258,7 @@ class CartClass {
                     $item['price'] = $price;
                     $item['category'] = $obj->category == null ? '' : $obj->category->getParentsAndSelf()->pluck('name');
 
-                    $productSum = $price * $item['amount'];
+                    $productSum = (float)$price * (int)$item['amount'];
                     $item['sum'] = $productSum;
                     $products[$key] = $item; 
                 }                   
@@ -289,7 +289,7 @@ class CartClass {
 
     // Стоимость товара в корзине
     private function getProductPrice($arr = array(), $obj = null){
-        if(!$obj) return;
+        if(!$obj) return 0;
 
         if(key_exists('options', $arr)){
             if(key_exists('obieem', $arr['options'])){
