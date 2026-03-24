@@ -18,6 +18,18 @@ class Orproduct extends Model
         'name' => 'required'
     ];
 
+    public function beforeSave(){
+        if(is_numeric($this->price)){
+            $this->price = round((float) $this->price, 2);
+            return;
+        }
+
+        $price = str_replace(' ', '', (string) $this->price);
+        $price = str_replace(',', '.', $price);
+
+        $this->price = round((float) $price, 2);
+    }
+
     public function getSumAttribute(){
         $sum = $this->price * $this->amount;
         return $sum;

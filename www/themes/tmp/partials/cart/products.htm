@@ -9,7 +9,7 @@
                     <h3 class="text-sm lg:text-base xl:text-lg font-normal mb-2">{{ item.name }}</h3>    
                     <div class="flex">
                         <div class="text-lg lg:text-26px flex items-center leading-none ">
-                            <span class="font-semibold font-roboto">{{ item.price }} ₽</span>
+                            <span class="font-semibold font-roboto">{{ item.price | number_format(2, ',', ' ') }} ₽</span>
                         </div>
                     </div>
                 </div>                   
@@ -24,7 +24,7 @@
                     </form>
                 </div>
                 <div class="flex items-center">                          
-                    <span class="text-xl/none lg:text-3xl/none font-bold font-roboto"><b class="product-sum">{{ item.sum }}</b> ₽</span>
+                    <span class="text-xl/none lg:text-3xl/none font-bold font-roboto"><b class="product-sum">{{ item.sum | number_format(2, ',', ' ') }}</b> ₽</span>
                 </div>
                 <div class="lg:w-[124px] flex-none flex justify-end pl-2">
                     <form action="" data-request="onDelete">

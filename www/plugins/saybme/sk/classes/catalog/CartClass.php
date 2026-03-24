@@ -240,7 +240,7 @@ class CartClass {
                 if($obj){
                     $item['name'] = $obj->name;
 
-                    $price = $this->getProductPrice($item, $obj);
+                    $price = $this->normalizePrice($this->getProductPrice($item, $obj));
 
                     if($obj->preview){
                         $item['image'] = $obj->preview->path;
@@ -258,7 +258,7 @@ class CartClass {
                     $item['price'] = $price;
                     $item['category'] = $obj->category == null ? '' : $obj->category->getParentsAndSelf()->pluck('name');
 
-                    $productSum = (float)$price * (int)$item['amount'];
+                    $productSum = $price * (int)$item['amount'];
                     $item['sum'] = $productSum;
                     $products[$key] = $item; 
                 }                   
@@ -300,6 +300,17 @@ class CartClass {
         }
 
         return $obj->product_price;
+    }
+
+    private function normalizePrice($price = 0){
+        if(is_numeric($price)){
+            return round((float) $price, 2);
+        }
+
+        $price = str_replace(' ', '', (string) $price);
+        $price = str_replace(',', '.', $price);
+
+        return round((float) $price, 2);
     }
 
     // Уведомление на почту
