@@ -34,13 +34,26 @@ class Skcatalog extends \Cms\Classes\ComponentBase
                 'default' => 'category',
                 'options' => [
                     'category' => 'Товар или товары категории',
-                    'all' => 'Все товары',
+                    'all' => 'Все каталог',
+                    'products' => 'Товары',
                     'search' => 'Результаты поиска'
                 ]
             ],
             'tmp' => [
                 'title' => 'Шаблон',
                 'description' => 'Шаблон вывода'
+            ],
+            'is_new' => [
+                'title' => 'Новинки',
+                'description' => 'Выводить только новинки',
+                'type' => 'checkbox',
+                'default' => false
+            ],
+            'is_random' => [
+                'title' => 'Случайные',
+                'description' => 'Выводить в случайном порядке',
+                'type' => 'checkbox',
+                'default' => false
             ]
         ];
     }
@@ -67,15 +80,32 @@ class Skcatalog extends \Cms\Classes\ComponentBase
     }
 
     // Все товары
+    private function products(){
+
+        $params['is_new'] = $this->property('is_new');      
+        $params['paginate'] = 30;
+        $params['is_random'] = $this->property('is_random') ? true : false;
+        $tmp = $this->property('tmp') ?: 'catalog/products';
+
+        $products = CatalogClass::getAllProducts($params);             
+        
+
+        return $this->renderPartial($tmp, ['products' => $products]);
+    }
+
+    // Страница каталога
     private function all(){
+
+        $isNew = $this->property('is_new');
         $tmp = $this->property('tmp') ?: 'catalog/category';
 
-        $options['page'] = Page::active()->find(2);
-        $options['products'] = CatalogClass::getCategoryProducts();
-        $options['filters'] = $this->getFilterCategory();  
+        $products = CatalogClass::getCategoryProducts(null, $isNew);
 
-        $currentURL = url()->current();
-        //dd($options);
+        $options['page'] = Page::active()->find(2);
+        $options['products'] = $products;
+        $options['filters'] = $this->getFilterCategory();         
+
+        $currentURL = url()->current();        
 
         return $this->renderPartial($tmp, $options);
     }
@@ -83,7 +113,8 @@ class Skcatalog extends \Cms\Classes\ComponentBase
     // Результаты поиска
     private function search(){
         $tmp = $this->property('tmp') ?: 'catalog/search';
-        $options['products'] = CatalogClass::getCategoryProducts();
+        $isNew = $this->property('is_new');
+        $options['products'] = CatalogClass::getCategoryProducts(null, $isNew);
         return $this->renderPartial($tmp, $options);
     }
 
@@ -98,7 +129,8 @@ class Skcatalog extends \Cms\Classes\ComponentBase
             $this->getPageInfo($page);            
             $options['page'] = $page;
             $options['breadcrumbs'] = $this->categoryBreadcrumbs($page);
-            $options['products'] = CatalogClass::getCategoryProducts($page);
+            $isNew = $this->property('is_new');
+            $options['products'] = CatalogClass::getCategoryProducts($page, $isNew);
             $options['filters'] = $this->getFilterCategory();  
             return $this->renderPartial('catalog/category', $options);
         };
@@ -108,7 +140,8 @@ class Skcatalog extends \Cms\Classes\ComponentBase
         if($page){
             $this->getPageInfo($page);            
             $options['product'] = $page;
-            $options['products'] = CatalogClass::getSimilarProducts($page);
+            $isNew = $this->property('is_new');
+            $options['products'] = CatalogClass::getSimilarProducts($page, $isNew);
             $options['breadcrumbs'] = $this->productBreadcrumbs($page);
             return $this->renderPartial('catalog/product', $options);
         };

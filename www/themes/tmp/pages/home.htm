@@ -19,11 +19,18 @@ type = "getPageId"
 [skvendor]
 slug = "{{ :slug }}"
 type = "getAll"
+
+[skcatalog skcatalog_new]
+slug = "{{ :slug }}"
+type = "products"
+tmp = "catalog/new"
+is_new = 1
+is_random = 1
 ==
 {% component 'skbanner' %}
 
 <div class="container">
-    {% partial 'main/main-catalog' %}
+    {% component 'skcatalog_new' %}
 </div>
 
 <div class="container pt-[45px] md:pt-[69px] xl:pt-[119px] pb-[62px]">

@@ -77,6 +77,13 @@ class Product extends Model
         return $query;
     }
 
+    public function scopeIsNewType($query, $isNew) {             
+        if($isNew){
+            return $query->where('is_new', true);
+        }        
+        return $query;
+    }
+
     public function scopeIsvendor($query) {   
         if(Input::get('vendor')){
             return $query->where('vendor_id', Input::get('vendor'));

@@ -12,32 +12,45 @@ class CatalogClass {
         return $catalog->children()->active()->get();
     }
 
+    // Все товары
+    static public function getAllProducts($params = array()){
+        $isNew = isset($params['is_new']) ? $params['is_new'] : false;
+        $paginate = isset($params['paginate']) ? $params['paginate'] : 30;
+        $isRandom = isset($params['is_random']) ? $params['is_random'] : false;
+        
+        $query = Product::active()->isNewType($isNew);
+        if ($isRandom) {
+            $query->inRandomOrder();
+        }
+        return $query->paginate($paginate);
+    }
+
     // Дерево категорий
     static public function getTreeCategories(){
         return Category::active()->select('id','parent_id','name','slug','nest_depth')->with('children')->getNested();       
     }
 
     // Товары категории
-    static public function getCategoryProducts($category = null){
+    static public function getCategoryProducts($category = null, $isNew = false){
         
         $data['q'] = Input::get('q');
         $data['vendor'] = Input::get('vendor');
         
         if(!$category){            
-            return Product::active()->isvendor()->searchType($data['q'])->paginate(30)->appends($data);
+            return Product::active()->isvendor()->searchType($data['q'])->isNewType($isNew)->paginate(30)->appends($data);
         };       
 
         $idx = $category->getAllChildrenAndSelf()->pluck('id');
-        $products = Product::active()->whereIn('category_id', $idx)->orderBy('available', 'ASC')->iscategoriesType($category->id)->paginate(30);      
+        $products = Product::active()->whereIn('category_id', $idx)->orderBy('available', 'ASC')->iscategoriesType($category->id)->isNewType($isNew)->paginate(30);      
 
         return $products;
     }
 
     // Похожие товары
-    static public function getSimilarProducts($product = null){
+    static public function getSimilarProducts($product = null, $isNew = false){
         if(!$product || !$product->category) return;
 
-        $products = Product::active()->where('category_id', $product->category->id)->orderBy('available', 'ASC')->get();
+        $products = Product::active()->where('category_id', $product->category->id)->orderBy('available', 'ASC')->isNewType($isNew)->get();
 
         return $products->take(12);
     }

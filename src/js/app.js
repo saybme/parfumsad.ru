@@ -268,7 +268,7 @@ window.productGallery = function () {
 
 }
 
-//productGallery();
+productGallery();
 
 // Окно товара
 window.getModalProduct = function(el){
@@ -295,8 +295,15 @@ window.getModalProduct = function(el){
 // mainCarousel
 window.mainCarousel = function () {
     const container = document.getElementById("mainCarousel");
-    const options = { infinite: false };
-    Carousel(container, options).init();
+    const options = { 
+        infinite: true, 
+        Dots: false, 
+        Autoplay: { 
+            timeout: 3000, 
+            showProgressbar: true 
+        } 
+    };
+    Carousel(container, options, { Autoplay, Dots }).init();
 }
 
 // Событие пагинации
@@ -413,4 +420,30 @@ window.showOrder = function(el){
     let id = el.getAttribute('data-id');
     let wrap = document.querySelector('[data-order-id="'+id+'"]');
     wrap.classList.toggle('active');
+}
+
+// counter
+window.counter = function(el, type){
+    const target = el && el.target ? el.target : el;
+
+    if (el && typeof el.preventDefault === 'function') {
+        el.preventDefault();
+    }
+
+    let form = target.closest('form');
+    let input = form.querySelector('input[name="amount"]');
+    let value = parseInt(input.value);
+    let span = form.querySelector('span');
+    
+
+    if (type === 'minus') {
+        value = Math.max(1, value - 1);
+    } else if (type === 'plus') {
+        value = value + 1;
+    }
+
+    input.value = value;
+    span.innerText = value;
+
+    return false;
 }
