@@ -24,7 +24,7 @@
     }
 
     header {
-        @apply relative
+        @apply relative z-[9999]
     }   
 
     .os-scrollbar {

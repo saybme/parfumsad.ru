@@ -18,7 +18,15 @@ class CartClass {
 
     // Создаем ключ
     private function getKey($data = null){
-        if(!$data) return;        
+        if(!$data) return;       
+        // Удаляе amount из данных для генерации ключа, так как при изменении количества товара в корзине, ключ должен оставаться неизменным
+        $dataArray = json_decode($data, true);
+        if (isset($dataArray['amount'])) {
+            unset($dataArray['amount']);
+        }
+        $data = json_encode($dataArray);
+
+        Log::info('Generating product key with data: ' . $data); 
         return md5($data);
     }
 
@@ -89,6 +97,13 @@ class CartClass {
         $data['amount'] = null;
         $data['options'] = array();
 
+        // Если amount 0 то выводим ошибку
+        $amount = Input::get('amount');
+        if($amount == 0){
+            throw new ValidationException(['error' => 'Количество товара не может быть 0.']);
+        }
+
+
         $data = array_merge($data, Input::get());
 
         //Валидация
@@ -112,22 +127,45 @@ class CartClass {
         return $result;
     }
 
-    // Меняем количество в корзине
-    public function changeCount(){
+    // Увеличиваем или уменьшаем количество товара
+    public function changeCount($type = 'plus'){
 
-        $id = Input::get('id');
-        $amount = intval(Input::get('count'));
+        $data['id'] = null;
+        $data['amount'] = null;
+        $data['options'] = null;                  
 
-        if($amount == 0){
+        $data = array_merge($data, Input::get());        
+
+        $noty = [];
+        $noty['type'] = 'success';
+        $noty['text'] = 'Товар добавлен в корзину';
+
+        $prodyctKey = $this->getKey(json_encode($data, true));
+
+        if($data['amount'] == 0){
             $amount = 1;    
         }
 
         // Новое количество
-        $product = Session::put('cart.products.' . $id . '.amount', $amount);        
+        if(Session::has('cart.products.' . $prodyctKey)){
+            if($type == 'plus'){
+                $this->plus($data, $prodyctKey);
+                $noty['text'] = 'Товар добавлен в корзину';
+            } else {
+                $this->minus($data, $prodyctKey);
+                $noty['text'] = 'Количество товара уменьшено';
+            }
+        } else {
+            $this->plus($data, $prodyctKey);
+            $noty['text'] = 'Товар добавлен в корзину';    
+        }        
+
+        $result['noty'] = $noty;
 
         $result['cart'] = $this->cart();
+        $result['product'] = Session::get('cart.products.' . $prodyctKey);
         return $result;
-    }
+    }    
 
     // Валидация на добавление товара
     private function addValid($id = null){
@@ -155,6 +193,16 @@ class CartClass {
     private function plus($data = array(), $prodyctKey = null){
         if(!$data || !$prodyctKey) return;         
         $data['amount'] =  intval(Session::get('cart.products.' . $prodyctKey . '.amount')) + 1;
+        Session::put('cart.products.' . $prodyctKey, $data);
+        return;
+    }
+
+    // Минус
+    private function minus($data = array(), $prodyctKey = null){
+        if(!$data || !$prodyctKey) return;         
+        $currentAmount = intval(Session::get('cart.products.' . $prodyctKey . '.amount'));
+        $newAmount = max($currentAmount - 1, 0);
+        $data['amount'] = $newAmount;
         Session::put('cart.products.' . $prodyctKey, $data);
         return;
     }
@@ -233,7 +281,7 @@ class CartClass {
             $products = array();
             foreach(Session::get('cart.products') as $key => $item){
                 $productId = null;
-                if(key_exists('id', $item)){
+                if(is_array($item) && key_exists('id', $item)){
                     $productId = $item['id'];
                 }
                 $obj = Product::with('category','preview')->find($productId);
@@ -271,8 +319,8 @@ class CartClass {
 
     // Параметры в корзине
     private function carpProductParams($item = null){
-        if(!$item) return;
-        if(!key_exists('options', $item)) return;
+        if(!$item || !is_array($item)) return;
+        if(!key_exists('options', $item) || !is_array($item['options'])) return;
 
         $items = array();
 
@@ -291,8 +339,8 @@ class CartClass {
     private function getProductPrice($arr = array(), $obj = null){
         if(!$obj) return 0;
 
-        if(key_exists('options', $arr)){
-            if(key_exists('obieem', $arr['options'])){
+        if(is_array($arr) && key_exists('options', $arr)){
+            if(is_array($arr['options']) && key_exists('obieem', $arr['options'])){
                 $id = $arr['options']['obieem'];
                 $offer = Offer::find($id);
                 return $offer->price;

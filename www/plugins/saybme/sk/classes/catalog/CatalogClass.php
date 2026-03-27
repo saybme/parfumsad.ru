@@ -2,6 +2,7 @@
 
 use Saybme\Sk\Models\Category;
 use Saybme\Sk\Models\Product;
+use Session;
 use Input;
 
 class CatalogClass {
@@ -36,14 +37,39 @@ class CatalogClass {
         $data['q'] = Input::get('q');
         $data['vendor'] = Input::get('vendor');
         
-        if(!$category){            
-            return Product::active()->isvendor()->searchType($data['q'])->isNewType($isNew)->paginate(30)->appends($data);
+        if(!$category){     
+            $products = Product::active()->isvendor()->searchType($data['q'])->isNewType($isNew)->paginate(30)->appends($data);  
+            // проверяем есть ли товар в корзине
+            foreach($products as $product){
+                $product->in_cart = CatalogClass::checkInCart($product->id);
+            }     
+            return $products;
         };       
 
         $idx = $category->getAllChildrenAndSelf()->pluck('id');
-        $products = Product::active()->whereIn('category_id', $idx)->orderBy('available', 'ASC')->iscategoriesType($category->id)->isNewType($isNew)->paginate(30);      
+        $products = Product::active()->whereIn('category_id', $idx)->orderBy('available', 'ASC')->iscategoriesType($category->id)->isNewType($isNew)->paginate(30);  
+        // проверяем есть ли товар в корзине
+        foreach($products as $product){
+            $product->in_cart = CatalogClass::checkInCart($product->id);
+        }    
 
         return $products;
+    }
+
+    // Проверка наличия товара в корзине
+    static public function checkInCart($productId){
+        $cart = Session::has('cart.products') ? Session::get('cart.products') : null;
+        if(!$cart) return false;      
+        
+        dd($cart);
+
+        foreach($cart as $item){
+            if (($item['id'] ?? null) == $productId) {
+                return (int)($item['amount'] ?? 0) > 0;
+            }
+        }
+
+        return false;
     }
 
     // Похожие товары

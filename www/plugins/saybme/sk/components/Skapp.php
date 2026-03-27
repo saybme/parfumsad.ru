@@ -42,7 +42,19 @@ class Skapp extends \Cms\Classes\ComponentBase
     // Добавляем товар
     public function onAdd(){        
         $q = new CartClass;
-        return $q->change();        
+        return $q->changeCount('plus');        
+    }
+
+    // Увеличиваем количество товара
+    public function onPlus(){
+        $q = new CartClass;
+        return $q->changeCount('plus'); 
+    }
+
+    // Уменьшаем количество товара
+    public function onMinus(){
+        $q = new CartClass;
+        return $q->changeCount('minus'); 
     }
 
     // Удаляем товар из корзины

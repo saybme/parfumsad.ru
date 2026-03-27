@@ -1,6 +1,6 @@
-<div class="flex flex-col min-h-full" itemscope itemtype="https://schema.org/Product">
+<div data-product-id="{{ item.id }}" class="flex flex-col min-h-full" itemscope itemtype="https://schema.org/Product">
 
-    <div data-product-id="{{ item.id }}" class="relative block border rounded-2xl overflow-hidden" data-id="{{ item.id }}">   
+    <div  class="relative block border rounded-2xl overflow-hidden" data-id="{{ item.id }}">   
 
         <div class="cursor-pointer" onclick="getModalProduct(this)" data-id="{{ item.id }}">
             {% if item.images | length %}
@@ -53,7 +53,7 @@
     </div>
 
     <div class="flex flex-wrap py-2 pt-4 bg-white items-center gap-y-2 mt-auto">
-        {% partial 'products/available-item' available=item.available %} 
+        {% partial 'products/available-item' in_cart=item.in_cart available=item.available %} 
     </div>
 
 </div>
