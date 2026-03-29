@@ -87,7 +87,7 @@ class Skcatalog extends \Cms\Classes\ComponentBase
         $params['is_random'] = $this->property('is_random') ? true : false;
         $tmp = $this->property('tmp') ?: 'catalog/products';
 
-        $products = CatalogClass::getAllProducts($params);             
+        $products = CatalogClass::getAllProducts($params);           
         
 
         return $this->renderPartial($tmp, ['products' => $products]);
@@ -99,7 +99,7 @@ class Skcatalog extends \Cms\Classes\ComponentBase
         $isNew = $this->property('is_new');
         $tmp = $this->property('tmp') ?: 'catalog/category';
 
-        $products = CatalogClass::getCategoryProducts(null, $isNew);
+        $products = CatalogClass::getCategoryProducts(null, $isNew);        
 
         $options['page'] = Page::active()->find(2);
         $options['products'] = $products;

@@ -51,21 +51,25 @@ class CatalogClass {
         // проверяем есть ли товар в корзине
         foreach($products as $product){
             $product->in_cart = CatalogClass::checkInCart($product->id);
-        }    
+        }         
 
         return $products;
     }
 
     // Проверка наличия товара в корзине
     static public function checkInCart($productId){
-        $cart = Session::has('cart.products') ? Session::get('cart.products') : null;
-        if(!$cart) return false;      
-        
-        dd($cart);
+        $cart = Session::get('cart.products', []);
+        if (!is_array($cart) || empty($cart)) {
+            return false;
+        }
 
-        foreach($cart as $item){
+        foreach ($cart as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
             if (($item['id'] ?? null) == $productId) {
-                return (int)($item['amount'] ?? 0) > 0;
+                return $item['amount'] ?? false;
             }
         }
 

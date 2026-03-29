@@ -3528,9 +3528,6 @@ details.collapse summary::-webkit-details-marker {
 .z-10 {
   z-index: 10;
 }
-.z-\[999\] {
-  z-index: 999;
-}
 .float-right {
   float: right;
 }
@@ -3727,9 +3724,6 @@ details.collapse summary::-webkit-details-marker {
 .h-full {
   height: 100%;
 }
-.h-\[28px\] {
-  height: 28px;
-}
 .min-h-0 {
   min-height: 0px;
 }
@@ -3796,9 +3790,6 @@ details.collapse summary::-webkit-details-marker {
 .max-w-screen-md {
   max-width: 768px;
 }
-.max-w-\[120px\] {
-  max-width: 120px;
-}
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -3842,9 +3833,6 @@ details.collapse summary::-webkit-details-marker {
 }
 .flex-col {
   flex-direction: column;
-}
-.flex-col-reverse {
-  flex-direction: column-reverse;
 }
 .flex-wrap {
   flex-wrap: wrap;
@@ -4031,6 +4019,10 @@ details.collapse summary::-webkit-details-marker {
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
+}
+.border-purple {
+  --tw-border-opacity: 1;
+  border-color: rgb(134 62 230 / var(--tw-border-opacity, 1));
 }
 .bg-black\/10 {
   background-color: rgb(0 0 0 / 0.1);
@@ -4399,11 +4391,6 @@ details.collapse summary::-webkit-details-marker {
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
-.shadow-lg {
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
 .shadow-2xl {
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
@@ -4472,6 +4459,9 @@ details.collapse summary::-webkit-details-marker {
 }
 .group.active .group-\[\.active\]\:block {
   display: block;
+}
+.group.in-cart .group-\[\.in-cart\]\:flex {
+  display: flex;
 }
 .group.active .group-\[\.active\]\:hidden {
   display: none;
@@ -4696,10 +4686,6 @@ details.collapse summary::-webkit-details-marker {
     margin-inline-end: 30px;
   }
 
-  .lg\:block {
-    display: block;
-  }
-
   .lg\:size-6 {
     width: 1.5rem;
     height: 1.5rem;
@@ -4732,10 +4718,6 @@ details.collapse summary::-webkit-details-marker {
     height: 60px;
   }
 
-  .lg\:h-\[38px\] {
-    height: 38px;
-  }
-
   .lg\:w-1\/2 {
     width: 50%;
   }
@@ -4758,10 +4740,6 @@ details.collapse summary::-webkit-details-marker {
 
   .lg\:max-w-\[250px\] {
     max-width: 250px;
-  }
-
-  .lg\:max-w-\[150px\] {
-    max-width: 150px;
   }
 
   .lg\:grid-cols-4 {
@@ -4823,10 +4801,6 @@ details.collapse summary::-webkit-details-marker {
 
   .xl\:w-\[230px\] {
     width: 230px;
-  }
-
-  .xl\:max-w-\[200px\] {
-    max-width: 200px;
   }
 
   .xl\:max-w-\[387px\] {

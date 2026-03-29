@@ -130,40 +130,56 @@ class CartClass {
     // Увеличиваем или уменьшаем количество товара
     public function changeCount($type = 'plus'){
 
-        $data['id'] = null;
-        $data['amount'] = null;
-        $data['options'] = null;                  
+        $input = Input::get();
 
-        $data = array_merge($data, Input::get());        
+        $data = [];
+        $data['id'] = $input['id'] ?? null;
+        $data['amount'] = 1;
+        $data['options'] = (isset($input['options']) && is_array($input['options'])) ? $input['options'] : [];
+
+        if(!$data['id']){
+            throw new ValidationException(['error' => 'Товар не найден.']);
+        }
+
+        $this->addValid($data['id']);
+
+        $type = $type === 'minus' ? 'minus' : 'plus';
 
         $noty = [];
         $noty['type'] = 'success';
         $noty['text'] = 'Товар добавлен в корзину';
 
         $prodyctKey = $this->getKey(json_encode($data, true));
+        $isProduct = Session::get('cart.products.' . $prodyctKey);
 
-        if($data['amount'] == 0){
-            $amount = 1;    
-        }
-
-        // Новое количество
-        if(Session::has('cart.products.' . $prodyctKey)){
-            if($type == 'plus'){
-                $this->plus($data, $prodyctKey);
-                $noty['text'] = 'Товар добавлен в корзину';
-            } else {
+        if($type === 'plus'){
+            $this->plus($data, $prodyctKey);
+            $noty['text'] = 'Товар добавлен в корзину';
+        } else {
+            if($isProduct){
                 $this->minus($data, $prodyctKey);
                 $noty['text'] = 'Количество товара уменьшено';
+            } else {
+                $noty['text'] = 'Товар отсутствует в корзине';
             }
-        } else {
-            $this->plus($data, $prodyctKey);
-            $noty['text'] = 'Товар добавлен в корзину';    
-        }        
+        }
 
         $result['noty'] = $noty;
 
+        $isProduct = Session::get('cart.products.' . $prodyctKey);
+
+        if(!$isProduct){
+            $isProduct['id'] = $data['id'];
+            $isProduct['amount'] = 0;
+            $isProduct['options'] = $data['options'];
+
+            if($type === 'minus'){
+                $result['noty']['text'] = 'Товар удален из корзины';
+            }
+        }
+
         $result['cart'] = $this->cart();
-        $result['product'] = Session::get('cart.products.' . $prodyctKey);
+        $result['product'] = $isProduct;
         return $result;
     }    
 
@@ -202,8 +218,13 @@ class CartClass {
         if(!$data || !$prodyctKey) return;         
         $currentAmount = intval(Session::get('cart.products.' . $prodyctKey . '.amount'));
         $newAmount = max($currentAmount - 1, 0);
-        $data['amount'] = $newAmount;
-        Session::put('cart.products.' . $prodyctKey, $data);
+        $data['amount'] = $newAmount;        
+        
+        if ($newAmount == 0) {
+            Session::forget('cart.products.' . $prodyctKey);
+        } else {
+            Session::put('cart.products.' . $prodyctKey, $data);
+        }
         return;
     }
 

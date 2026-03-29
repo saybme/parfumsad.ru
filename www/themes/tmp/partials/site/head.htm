@@ -19,7 +19,7 @@
 <meta property="og:url" content="{{ this.page.url }}">
 <meta property="og:title" content="{{ this.page.meta_title ?: this.page.title }}">
 <meta property="og:description" content="{{ this.page.meta_description }}">
-<meta property="og:image" content="{{ this.page.meta_image ?: global.favicon.path }}">
+<meta property="og:image" content="{{ this.page.meta_image ?: 'assets/images/favicon.svg' | theme }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
@@ -30,10 +30,13 @@
 <meta name="twitter:url" content="{{ this.page.url }}">
 <meta name="twitter:title" content="{{ this.page.meta_title ?: this.page.title }}">
 <meta name="twitter:description" content="{{ this.page.meta_description }}">
-<meta name="twitter:image" content="{{ this.page.meta_image ?: global.favicon.path }}">
+<meta name="twitter:image" content="{{ this.page.meta_image ?: 'assets/images/favicon.svg' | theme }}">
 
 <link rel="canonical" href="{{ this.page.url }}">
-<link rel="icon" href="{{ global.favicon.path }}" type="{{ global.favicon.content_type }}">
+
+<link rel="icon" href="{{ 'assets/images/favicon.svg' | theme }}" type="image/svg+xml">
+<link rel="icon" href="{{ 'assets/images/favicon.ico' | theme }}" type="image/x-icon">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ 'assets/images/favicon-32x32.png' | theme }}">
 
 <!-- JSON-LD Schema.org разметка -->
 <script type="application/ld+json">
@@ -42,7 +45,7 @@
   "@type": "Organization",
   "name": "Цветочный Сад",
   "url": "{{ 'home'|page }}",
-  "logo": "{{ global.favicon.path }}",
+  "logo": "{{ 'assets/images/favicon.svg' | theme }}",
   "description": "Интернет магазин Цветочный Сад - продажа парфюмерии и косметики",
   "address": {
     "@type": "PostalAddress",
