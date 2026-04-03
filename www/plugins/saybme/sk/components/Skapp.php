@@ -68,10 +68,16 @@ class Skapp extends \Cms\Classes\ComponentBase
         return $result;
     }
 
-    // Меняем количество в корзине
+    // Меняем количество товара
     public function onCount(){
         $q = new CartClass;
         return $q->changeCount(); 
+    }
+
+    // Количество в корзине
+    public function onCountCart(){
+        $q = new CartClass;
+        return $q->changeCountCart(); 
     }
 
     // Подарок в корзине

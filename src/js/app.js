@@ -134,12 +134,16 @@ addEventListener('ajax:done', function (event) {
     // Присваиваем категорию
     if (handler == 'onSetCategory') {
         categoryForm(false);
+    }   
+
+    // Меняем количество товара
+    if (handler == 'onCount') {
+        changeCartCount(event.detail.data.cart);
+        totalCart(event.detail.data.cart.total);
     }
 
-   
-
-    // Меняем количество в корзине
-    if (handler == 'onCount') {
+    // Меняем количество товара в корзине
+    if (handler == 'onCountCart') {
         changeCartCount(event.detail.data.cart);
         totalCart(event.detail.data.cart.total);
     }

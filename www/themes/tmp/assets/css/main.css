@@ -4008,6 +4008,10 @@ details.collapse summary::-webkit-details-marker {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity, 1));
 }
+.border-purple {
+  --tw-border-opacity: 1;
+  border-color: rgb(134 62 230 / var(--tw-border-opacity, 1));
+}
 .border-purple-1 {
   --tw-border-opacity: 1;
   border-color: rgb(193 153 252 / var(--tw-border-opacity, 1));
@@ -4019,10 +4023,6 @@ details.collapse summary::-webkit-details-marker {
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
-}
-.border-purple {
-  --tw-border-opacity: 1;
-  border-color: rgb(134 62 230 / var(--tw-border-opacity, 1));
 }
 .bg-black\/10 {
   background-color: rgb(0 0 0 / 0.1);

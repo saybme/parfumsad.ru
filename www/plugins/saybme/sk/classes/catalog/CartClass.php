@@ -130,7 +130,7 @@ class CartClass {
     // Увеличиваем или уменьшаем количество товара
     public function changeCount($type = 'plus'){
 
-        $input = Input::get();
+        $input = Input::get();       
 
         $data = [];
         $data['id'] = $input['id'] ?? null;
@@ -182,6 +182,39 @@ class CartClass {
         $result['product'] = $isProduct;
         return $result;
     }    
+
+    // Количество в корзине changeCountCart
+    public function changeCountCart(){
+
+        $input = Input::get();     
+
+        $id = $input['id'] ?? null;
+        $count = $input['count'] ?? null;        
+        
+        if(!Session::has('cart.products.' . $id)){
+            throw new ValidationException(['error' => 'Товар не найден в корзине.']);
+        }
+
+        if($count <= 0) {
+            Session::forget('cart.products.' . $id);
+            $noty['type'] = 'success';
+            $noty['text'] = 'Товар удален из корзины';
+
+            $result['noty'] = $noty;
+            $result['cart'] = $this->cart();
+            return $result;
+        }
+        
+        Session::put('cart.products.' . $id . '.amount', $count);
+
+        $noty = [];
+        $noty['type'] = 'success';
+        $noty['text'] = 'Количество товара обновлено';
+
+        $result['noty'] = $noty;
+        $result['cart'] = $this->cart();
+        return $result;
+    }
 
     // Валидация на добавление товара
     private function addValid($id = null){
