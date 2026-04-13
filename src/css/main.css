@@ -103,12 +103,10 @@
     }
 
     .text {
-        @apply text-xs sm:text-base
+        @apply text-xs sm:text-base space-y-5
     }
 
-    .text > p, .text > h1, .text > h2, .text > h3, .text > h4, .text > h5 {
-        @apply leading-normal
-    }
+    
 
     .text > h1, .text > h2, .text > h3, .text > h4, .text > h5 {
         @apply font-semibold
@@ -116,6 +114,10 @@
 
     .text > ul, .text > ol {
         @apply ml-5
+    }
+
+    .text blockquote {
+        @apply border-l-4 border-gray-300 pl-4 italic text-gray-500
     }
 
     .text a {

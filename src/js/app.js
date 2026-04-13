@@ -35,6 +35,34 @@ window.Noty = require('noty');
 // Инициализация
 Fancybox.bind("[data-fancybox]");
 
+// блок #cookie-container проверяем наличие cookie, если нет, то показываем блок
+window.addEventListener('DOMContentLoaded', function () {
+    if (!getCookie('cookie_consent')) {
+        document.getElementById('cookie-container').style.display = 'block';
+    }
+});
+
+// Получаем cookie
+function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+// Сохраняем cookie
+window.saveCookie = function (el) {
+    document.cookie = "cookie_consent=true; max-age=" + 60 * 60 * 24 * 365 + "; path=/";
+    el.parentElement.style.display = 'none';
+}
+
+// очищаем cookie
+window.clearCookie = function () {
+    document.cookie = "cookie_consent=; max-age=0; path=/";
+    // перезагружаем страницу
+    location.reload();
+}
+
 // Отслеживаем скролл, если страница ниже header, то добавляем класс для блока #fix-menu
 window.addEventListener('scroll', function() {
 

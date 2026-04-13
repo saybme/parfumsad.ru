@@ -2996,6 +2996,11 @@ details.collapse summary::-webkit-details-marker {
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity, 1));
 }
+.text > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
+}
 .text {
   font-size: 0.75rem;
   line-height: 1rem;
@@ -3007,14 +3012,20 @@ details.collapse summary::-webkit-details-marker {
     line-height: 1.5rem;
   }
 }
-.text > p, .text > h1, .text > h2, .text > h3, .text > h4, .text > h5 {
-  line-height: 1.5;
-}
 .text > h1, .text > h2, .text > h3, .text > h4, .text > h5 {
   font-weight: 600;
 }
 .text > ul, .text > ol {
   margin-left: 1.25rem;
+}
+.text blockquote {
+  border-left-width: 4px;
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity, 1));
+  padding-left: 1rem;
+  font-style: italic;
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity, 1));
 }
 .text a {
   --tw-text-opacity: 1;
@@ -3495,8 +3506,14 @@ details.collapse summary::-webkit-details-marker {
 .-top-\[1px\] {
   top: -1px;
 }
+.bottom-10 {
+  bottom: 2.5rem;
+}
 .left-0 {
   left: 0px;
+}
+.left-10 {
+  left: 2.5rem;
 }
 .left-3 {
   left: 0.75rem;
@@ -3525,8 +3542,17 @@ details.collapse summary::-webkit-details-marker {
 .top-\[2px\] {
   top: 2px;
 }
+.bottom-5 {
+  bottom: 1.25rem;
+}
+.left-1\/2 {
+  left: 50%;
+}
 .z-10 {
   z-index: 10;
+}
+.z-\[9999\] {
+  z-index: 9999;
 }
 .float-right {
   float: right;
@@ -3805,6 +3831,10 @@ details.collapse summary::-webkit-details-marker {
 }
 .translate-y-\[2px\] {
   --tw-translate-y: 2px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.-translate-x-1\/2 {
+  --tw-translate-x: -50%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .transform {
@@ -4106,6 +4136,9 @@ details.collapse summary::-webkit-details-marker {
 .p-6 {
   padding: 1.5rem;
 }
+.p-2 {
+  padding: 0.5rem;
+}
 .px-16 {
   padding-left: 4rem;
   padding-right: 4rem;
@@ -4350,6 +4383,10 @@ details.collapse summary::-webkit-details-marker {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity, 1));
 }
+.text-primary {
+  --tw-text-opacity: 1;
+  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity, 1)));
+}
 .text-purple {
   --tw-text-opacity: 1;
   color: rgb(134 62 230 / var(--tw-text-opacity, 1));
@@ -4394,6 +4431,11 @@ details.collapse summary::-webkit-details-marker {
 .shadow-2xl {
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-xl {
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .blur {
@@ -4529,6 +4571,14 @@ details.collapse summary::-webkit-details-marker {
 }
 @media (min-width: 640px) {
 
+  .sm\:left-10 {
+    left: 2.5rem;
+  }
+
+  .sm\:bottom-10 {
+    bottom: 2.5rem;
+  }
+
   .sm\:size-4 {
     width: 1rem;
     height: 1rem;
@@ -4537,6 +4587,15 @@ details.collapse summary::-webkit-details-marker {
   .sm\:size-6 {
     width: 1.5rem;
     height: 1.5rem;
+  }
+
+  .sm\:max-w-\[320px\] {
+    max-width: 320px;
+  }
+
+  .sm\:translate-x-0 {
+    --tw-translate-x: 0px;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   }
 
   .sm\:flex-row {
@@ -4549,6 +4608,10 @@ details.collapse summary::-webkit-details-marker {
 
   .sm\:gap-2 {
     gap: 0.5rem;
+  }
+
+  .sm\:p-4 {
+    padding: 1rem;
   }
 
   .sm\:px-8 {
