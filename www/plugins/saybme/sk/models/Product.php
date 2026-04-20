@@ -174,7 +174,7 @@ class Product extends Model
         return $offers->groupBy(function ($item, $key) {
             return $item->option->code;
         });
-    }
+    }   
 
     // Сохраняем URI
     public function beforeSave(){          

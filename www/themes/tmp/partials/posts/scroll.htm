@@ -1,19 +1,31 @@
 <h3 class="text-3xl font-semibold">Свежее в блоге</h3>
 
 <div class="mt-8 f-carousel" id="posts">
-    {% for item in posts %}
-        <div class="f-carousel__slide" itemscope itemtype="https://schema.org/BlogPosting">
-            <a href="{{ item.link }}" class="block relative overflow-hidden hover:opacity-80" itemprop="url">
-                <img src="{{ item.preview.thumb(360,280,{mode:'crop'}) }}" alt="{{ item.name }}" class="block w-full h-auto rounded-2xl" itemprop="image">
-                <div class="relative pt-3 space-y-1">                    
-                    <span class="block text-xs text-purple-1" itemprop="datePublished" content="{{ item.created_at | date('Y-m-d') }}">{{ item.created_at | date('d.m.Y год.') }}</span>
-                    <h3 class="text-lg font-bold leading-tight" itemprop="headline">{{ item.name }}</h3>
-                    <meta itemprop="author" content="Цветочный Сад">
-                    <meta itemprop="publisher" content="Цветочный Сад">
-                </div>
-            </a>                
-        </div>
-    {% endfor %}
+    <div class="f-carousel__viewport">
+        {% for item in posts %}
+            <div class="f-carousel__slide" itemscope itemtype="https://schema.org/BlogPosting">
+                <a href="{{ item.link }}" class="block relative overflow-hidden hover:opacity-80" itemprop="url">
+                    <img src="{{ item.preview.thumb(360,280,{mode:'crop'}) }}" alt="{{ item.name }}" class="block w-full h-auto rounded-2xl" itemprop="image">
+                    <div class="relative pt-3 space-y-1">                    
+                        <span class="block text-xs text-purple-1" itemprop="datePublished" content="{{ item.created_at | date('Y-m-d') }}">{{ item.created_at | date('d.m.Y год.') }}</span>
+                        <h3 class="text-sm sm:text-lg font-bold leading-tight" itemprop="headline">{{ item.name }}</h3>
+                        <meta itemprop="author" content="Цветочный Сад">
+                        <meta itemprop="publisher" content="Цветочный Сад">
+                    </div>
+                </a>                
+            </div>
+        {% endfor %}
+    </div>
+    <button data-carousel-go-prev>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+    </button>
+    <button data-carousel-go-next>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+        </svg>
+    </button>
 </div>
 
 {% put scripts %}

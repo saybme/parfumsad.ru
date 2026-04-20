@@ -1,8 +1,8 @@
 /* 
   @package NOTY - Dependency-free notification library 
-  @version version: 3.2.0-beta 
+  @version version: 3.1.4 
   @contributors https://github.com/needim/noty/graphs/contributors 
-  @documentation Examples and Documentation - https://ned.im/noty 
+  @documentation Examples and Documentation - http://needim.github.com/noty 
   @license Licensed under the MIT licenses: http://www.opensource.org/licenses/mit-license.php 
 */
 
@@ -14,12 +14,4 @@
  * @version   4.1.1
  */
 
-/*!
- * OverlayScrollbars
- * Version: 2.11.4
- *
- * Copyright (c) Rene Haas | KingSora.
- * https://github.com/KingSora
- *
- * Released under the MIT license.
- */
+/*! License details at fancyapps.com/license */

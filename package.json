@@ -113,8 +113,9 @@
     "yaml": "^2.3.4"
   },
   "scripts": {
-    "dev": "tailwindcss build ./src/main.css -o ./www/themes/tmp/assets/css/style.css -w",
-    "product": "tailwindcss build ./src/main.css -o ./www/themes/tmp/assets/css/style.css"
+    "dev": "mix",
+    "watch": "mix watch",
+    "prod": "mix --production"
   },
   "keywords": [],
   "author": "",

@@ -8,14 +8,14 @@
                             <a href="" class="block aspect-w-16 aspect-h-14 sm:aspect-h-5">                            
                                 <picture>
                                     <source srcset="{{ item.image_pc.thumb(420,420,{mode: 'crop'}) }}" media="(max-width: 768px)">
-                                    <img src="{{ item.image_pc.thumb(1130,420,{mode: 'crop'}) }}" alt="" class="block size-full object-cover rounded-xl">
+                                    <img data-lazy-src="{{ item.image_pc.thumb(1130,420,{mode: 'crop'}) }}" alt="" class="block size-full object-cover rounded-xl">
                                 </picture>                              
                             </a>
                         {% else %}
                             <div class="aspect-w-16 aspect-h-14 sm:aspect-h-5">
                                 <picture>
                                     <source srcset="{{ item.image_pc.thumb(420,420,{mode: 'crop'}) }}" media="(max-width: 768px)">
-                                    <img src="{{ item.image_pc.thumb(1130,420,{mode: 'crop'}) }}" alt="" class="block size-full object-cover rounded-xl">
+                                    <img data-lazy-src="{{ item.image_pc.thumb(1130,420,{mode: 'crop'}) }}" alt="" class="block size-full object-cover rounded-xl">
                                 </picture> 
                             </div>
                         {% endif %}

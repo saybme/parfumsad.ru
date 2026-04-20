@@ -1,14 +1,14 @@
 <div data-product-id="{{ item.id }}" class="flex flex-col min-h-full" itemscope itemtype="https://schema.org/Product">
 
-    <div  class="relative block border rounded-2xl overflow-hidden" data-id="{{ item.id }}">   
+    <div  class="relative block border rounded-md sm:rounded-2xl overflow-hidden" data-id="{{ item.id }}">   
 
-        <div class="cursor-pointer" onclick="getModalProduct(this)" data-id="{{ item.id }}">
+        <div class="cursor-pointer bg-white" onclick="getModalProduct(this)" data-id="{{ item.id }}">
             {% if item.images | length %}
                 <div class="f-carousel product-photos">
                     {% for photo in item.images %}
                         <div class="f-carousel__slide">
                             <div class="aspect-w-16 aspect-h-13">
-                                <img src="{{ photo.thumb(320,320) }}" alt="{{ item.name }}" class="block size-full object-contain" itemprop="image">
+                                <img data-lazy-src="{{ photo.thumb(320,320) }}" alt="{{ item.name }}" class="block size-full object-contain" itemprop="image">
                             </div>
                         </div>
                     {% endfor %}
@@ -18,7 +18,7 @@
                     <img src="{{ 'assets/images/350x350.jpg' | theme }}" alt="{{ item.name }}" itemprop="image">
                 </div>
             {% endif %}
-        </div>    
+        </div>            
 
         <div class="absolute left-3 top-4 z-10 text-[.5rem] sm:text-xs flex gap-1 sm:gap-2 flex-wrap flex-col sm:flex-row justify-start items-start">
             {% if item.is_new %}
@@ -52,8 +52,13 @@
         <link itemprop="url" href="{{ item.url }}">
     </div>
 
-    <div class="flex flex-wrap py-2 pt-4 bg-white items-center gap-y-2 mt-auto">
-        {% partial 'products/available-item' in_cart=item.in_cart available=item.available %} 
+    <div class=" mt-auto">
+        <div class="flex flex-wrap py-2 pt-4 items-center gap-y-2">
+            {% partial 'products/available-item' in_cart=item.in_cart available=item.available %} 
+        </div>
+        <div class="text-center text-xs sm:text-base">
+            <a href="{{ item.link }}" class="underline hover:no-underline">Подробнее</a>
+        </div>
     </div>
 
 </div>
