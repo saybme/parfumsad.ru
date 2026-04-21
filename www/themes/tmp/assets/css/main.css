@@ -3215,8 +3215,8 @@ details.collapse summary::-webkit-details-marker {
 }
 .text > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
-  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 .text {
   font-size: 0.75rem;
@@ -3226,8 +3226,8 @@ details.collapse summary::-webkit-details-marker {
 
   .text > :not([hidden]) ~ :not([hidden]) {
     --tw-space-y-reverse: 0;
-    margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
+    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1rem * var(--tw-space-y-reverse));
   }
 
   .text {
@@ -3768,20 +3768,11 @@ details.collapse summary::-webkit-details-marker {
 .top-\[1px\] {
   top: 1px;
 }
-.top-\[2px\] {
-  top: 2px;
-}
 .z-10 {
   z-index: 10;
 }
 .z-\[9999\] {
   z-index: 9999;
-}
-.float-right {
-  float: right;
-}
-.clear-both {
-  clear: both;
 }
 .mx-auto {
   margin-left: auto;
@@ -3791,9 +3782,13 @@ details.collapse summary::-webkit-details-marker {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
 }
-.my-5 {
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
+.my-1 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .mb-1 {
   margin-bottom: 0.25rem;
@@ -3809,6 +3804,9 @@ details.collapse summary::-webkit-details-marker {
 }
 .mb-4 {
   margin-bottom: 1rem;
+}
+.mb-5 {
+  margin-bottom: 1.25rem;
 }
 .mb-6 {
   margin-bottom: 1.5rem;
@@ -3828,9 +3826,6 @@ details.collapse summary::-webkit-details-marker {
 .ml-2 {
   margin-left: 0.5rem;
 }
-.ml-3 {
-  margin-left: 0.75rem;
-}
 .ml-5 {
   margin-left: 1.25rem;
 }
@@ -3845,9 +3840,6 @@ details.collapse summary::-webkit-details-marker {
 }
 .mr-2 {
   margin-right: 0.5rem;
-}
-.mt-16 {
-  margin-top: 4rem;
 }
 .mt-2 {
   margin-top: 0.5rem;
@@ -3881,6 +3873,9 @@ details.collapse summary::-webkit-details-marker {
 }
 .mt-auto {
   margin-top: auto;
+}
+.mt-1 {
+  margin-top: 0.25rem;
 }
 .line-clamp-2 {
   overflow: hidden;
@@ -3973,6 +3968,15 @@ details.collapse summary::-webkit-details-marker {
 .h-full {
   height: 100%;
 }
+.h-12 {
+  height: 3rem;
+}
+.h-4 {
+  height: 1rem;
+}
+.h-1 {
+  height: 0.25rem;
+}
 .min-h-0 {
   min-height: 0px;
 }
@@ -4014,6 +4018,18 @@ details.collapse summary::-webkit-details-marker {
 }
 .w-full {
   width: 100%;
+}
+.w-12 {
+  width: 3rem;
+}
+.w-\[500px\] {
+  width: 500px;
+}
+.w-\[400px\] {
+  width: 400px;
+}
+.w-4 {
+  width: 1rem;
 }
 .max-w-\[180px\] {
   max-width: 180px;
@@ -4084,6 +4100,9 @@ details.collapse summary::-webkit-details-marker {
 .flex-col {
   flex-direction: column;
 }
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -4110,6 +4129,9 @@ details.collapse summary::-webkit-details-marker {
 }
 .gap-1 {
   gap: 0.25rem;
+}
+.gap-10 {
+  gap: 2.5rem;
 }
 .gap-2 {
   gap: 0.5rem;
@@ -4204,6 +4226,15 @@ details.collapse summary::-webkit-details-marker {
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
+.divide-y-\[1px\] > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-y-reverse: 0;
+  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
+}
+.divide-gray-300 > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-divide-opacity, 1));
+}
 .overflow-auto {
   overflow: auto;
 }
@@ -4212,6 +4243,9 @@ details.collapse summary::-webkit-details-marker {
 }
 .text-pretty {
   text-wrap: pretty;
+}
+.rounded {
+  border-radius: 0.25rem;
 }
 .rounded-2xl {
   border-radius: 1rem;
@@ -4233,9 +4267,6 @@ details.collapse summary::-webkit-details-marker {
 }
 .rounded-xl {
   border-radius: 0.75rem;
-}
-.rounded {
-  border-radius: 0.25rem;
 }
 .border {
   border-width: 1px;
@@ -4330,6 +4361,22 @@ details.collapse summary::-webkit-details-marker {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
+.bg-gray-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity, 1));
+}
+.bg-green-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 197 94 / var(--tw-bg-opacity, 1));
+}
+.bg-orange-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 115 22 / var(--tw-bg-opacity, 1));
+}
+.bg-yellow-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1));
+}
 .stroke-current {
   stroke: currentColor;
 }
@@ -4382,6 +4429,10 @@ details.collapse summary::-webkit-details-marker {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
 .py-16 {
   padding-top: 4rem;
   padding-bottom: 4rem;
@@ -4406,10 +4457,6 @@ details.collapse summary::-webkit-details-marker {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
-.py-10 {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
 .pb-11 {
   padding-bottom: 2.75rem;
 }
@@ -4430,9 +4477,6 @@ details.collapse summary::-webkit-details-marker {
 }
 .pb-6 {
   padding-bottom: 1.5rem;
-}
-.pb-9 {
-  padding-bottom: 2.25rem;
 }
 .pb-\[40px\] {
   padding-bottom: 40px;
@@ -4457,6 +4501,9 @@ details.collapse summary::-webkit-details-marker {
 }
 .pr-4 {
   padding-right: 1rem;
+}
+.pt-16 {
+  padding-top: 4rem;
 }
 .pt-3 {
   padding-top: 0.75rem;
@@ -4638,6 +4685,18 @@ details.collapse summary::-webkit-details-marker {
   --tw-text-opacity: 1;
   color: rgb(234 179 8 / var(--tw-text-opacity, 1));
 }
+.text-gray-700 {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity, 1));
+}
+.text-green-600 {
+  --tw-text-opacity: 1;
+  color: rgb(22 163 74 / var(--tw-text-opacity, 1));
+}
+.text-red-600 {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity, 1));
+}
 .underline {
   text-decoration-line: underline;
 }
@@ -4688,6 +4747,10 @@ details.collapse summary::-webkit-details-marker {
     --tw-aspect-h: 5;
   }
 }
+.\*\:py-1 > * {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
 .placeholder\:text-purple-1::-moz-placeholder {
   --tw-text-opacity: 1;
   color: rgb(193 153 252 / var(--tw-text-opacity, 1));
@@ -4720,6 +4783,9 @@ details.collapse summary::-webkit-details-marker {
   content: var(--tw-content);
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity, 1));
+}
+.last\:border-0:last-child {
+  border-width: 0px;
 }
 .last\:border-b-0:last-child {
   border-bottom-width: 0px;
@@ -4776,6 +4842,14 @@ details.collapse summary::-webkit-details-marker {
 .hover\:bg-purple-10:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(114 32 181 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-rose-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(225 29 72 / var(--tw-bg-opacity, 1));
+}
+.hover\:text-primary:hover {
+  --tw-text-opacity: 1;
+  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity, 1)));
 }
 .hover\:text-purple-1:hover {
   --tw-text-opacity: 1;
@@ -4861,11 +4935,6 @@ details.collapse summary::-webkit-details-marker {
 
   .sm\:p-4 {
     padding: 1rem;
-  }
-
-  .sm\:px-16 {
-    padding-left: 4rem;
-    padding-right: 4rem;
   }
 
   .sm\:px-8 {
@@ -5056,16 +5125,24 @@ details.collapse summary::-webkit-details-marker {
     width: 124px;
   }
 
-  .lg\:w-\[450px\] {
-    width: 450px;
+  .lg\:w-\[500px\] {
+    width: 500px;
   }
 
   .lg\:w-\[65px\] {
     width: 65px;
   }
 
+  .lg\:w-\[400px\] {
+    width: 400px;
+  }
+
   .lg\:max-w-\[250px\] {
     max-width: 250px;
+  }
+
+  .lg\:max-w-\[90\%\] {
+    max-width: 90%;
   }
 
   .lg\:flex-1 {
@@ -5084,8 +5161,16 @@ details.collapse summary::-webkit-details-marker {
     flex-direction: row;
   }
 
+  .lg\:items-start {
+    align-items: flex-start;
+  }
+
   .lg\:justify-center {
     justify-content: center;
+  }
+
+  .lg\:justify-between {
+    justify-content: space-between;
   }
 
   .lg\:gap-x-6 {
@@ -5109,6 +5194,11 @@ details.collapse summary::-webkit-details-marker {
 
   .lg\:text-26px {
     font-size: 1.625rem;
+  }
+
+  .lg\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .lg\:text-3xl\/none {

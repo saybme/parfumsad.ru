@@ -24,6 +24,21 @@ window.Noty = require('noty');
 // Инициализация Fancybox (можно сразу)
 Fancybox.bind("[data-fancybox]");
 
+// Если у href="#" - плавный скролл к блоку с id
+document.addEventListener('click', function (event) {
+    const target = event.target.closest('a[href^="#"]');
+    if (target) {
+        const id = target.getAttribute('href').substring(1);
+        const block = document.getElementById(id);
+        if (block) {
+            event.preventDefault();
+            block.scrollIntoView({ behavior: 'smooth' });
+            // Добавляем хеш в адресную строку без прокрутки
+            history.pushState(null, null, '#' + id);
+        }
+    }
+});
+
 // ====================== COOKIE ======================
 window.addEventListener('DOMContentLoaded', function () {
     if (!getCookie('cookie_consent')) {

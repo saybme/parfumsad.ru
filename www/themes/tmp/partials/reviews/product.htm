@@ -1,42 +1,108 @@
-<div class="container">
-    <div class="">
-        {% if reviews is not empty %}
-            <div class="">
-                <h3 class="text-xl font-medium mb-4">Отзывы ({{ reviews|length }})</h3>
-                {% for review in reviews %}
-                    <div class="border-b pb-4 mb-4">
-                        <div class="font-medium">{{ review.user.name ?? 'Покупатель' }}</div>
-                        <div class="text-yellow-500">
-                            {% for i in 1..review.rating %}★{% endfor %}
-                            {% for i in review.rating+1..5 %}☆{% endfor %}
-                        </div>
-                        <p>{{ review.content }}</p>
+<div class="container mx-auto px-4">
+    <div class="flex lg:justify-between gap-10 flex-col-reverse lg:flex-row">
+        <div class="lg:flex-1">
+            <div class="w-full lg:max-w-[90%]">
+                {% if reviews is not empty %}
+                    <div class="reviews-list">
+                        <h3 class="text-xl font-medium mb-4">Отзывы о товаре ({{ reviews|length }})</h3>
+                        
+                        {% for review in reviews %}
+                            <div class="border-b pb-4 mb-4 last:border-0">
+                                <div class="flex justify-between items-start">
+                                    <div class="font-medium">
+                                        {{ review.user.name ?? review.user.full_name ?? 'Покупатель' }}
+                                    </div>
+                                    <div class="text-sm text-gray-500">
+                                        {{ review.created_at|date('d.m.Y') }}
+                                    </div>
+                                </div>
+                                
+                                <div class="text-yellow-500 my-1">
+                                    {% for i in 1..review.rating %}★{% endfor %}
+                                    {% for i in review.rating+1..5 %}☆{% endfor %}
+                                </div>
+                                
+                                {% if review.title %}
+                                    <div class="font-semibold mt-2">{{ review.title }}</div>
+                                {% endif %}
+                                
+                                <p class="mt-1 text-gray-700">{{ review.content }}</p>
+                                
+                                {% if review.pros %}
+                                    <div class="text-sm text-green-600 mt-2">
+                                        <strong>Достоинства:</strong> {{ review.pros }}
+                                    </div>
+                                {% endif %}
+                                
+                                {% if review.cons %}
+                                    <div class="text-sm text-red-600 mt-1">
+                                        <strong>Недостатки:</strong> {{ review.cons }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <div class="mt-8">
-                <div class="text-center py-10">
-                    <h4 class="text-2xl font-medium mb-3">Пока нет отзывов</h4>
-                    <p class="text-gray-500">Будьте первым, кто оставит отзыв о этом товаре!</p>
-                    {% if user %}
-                        <div class="mt-4">
-                            <a href="#review-form" class="inline-block bg-rose text-white px-4 py-2 rounded hover:bg-rose-dark">Оставить отзыв</a>
-                        </div>
-                        <div class="mt-4">
-                            {% partial 'reviews/form' product_id=product.id %}
-                        </div>
-                    </div>
-                    {% else %}
-                        <div class="mt-4">
-                            <a href="/account/login" class="inline-block bg-rose text-white px-4 py-2 rounded hover:bg-rose-dark">Войдите, чтобы оставить отзыв</a>
-                        </div>
-                        <div class="mt-4">
-                            <p class="text-gray-500">Только зарегистрированные пользователи могут оставлять отзывы.</p>
-                        </div>
+                {% else %}
+                    <div class="text-center py-10 bg-gray-50 rounded-lg">
+                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                        </svg>
+                        
+                        <h4 class="text-2xl font-medium mb-3 mt-4">Пока нет отзывов</h4>
+                        <p class="text-gray-500">Будьте первым, кто оставит отзыв о этом товаре!</p>
+                        
+                        {% if user %}
+                            <div class="mt-6">
+                                <button onclick="document.getElementById('review-form').scrollIntoView({behavior: 'smooth'})" 
+                                        class="inline-block bg-rose text-white px-6 py-2 rounded-lg hover:bg-rose-600 transition">
+                                    Оставить отзыв
+                                </button>
+                            </div>
+                            <div id="review-form" class="mt-8">
+                                {% partial 'reviews/form' product_id=product.id %}
+                            </div>
+                        {% else %}
+                            <div class="mt-6">
+                                <a href="{{ 'account/login'|page }}" 
+                                class="inline-block bg-rose text-white px-6 py-2 rounded-lg hover:bg-rose-600 transition">
+                                    Войдите, чтобы оставить отзыв
+                                </a>
+                            </div>
+                            <div class="mt-4">
+                                <p class="text-gray-500 text-sm">
+                                    Только зарегистрированные пользователи могут оставлять отзывы.
+                                </p>
+                            </div>
                         {% endif %}
-                </div>
+                    </div>
+                {% endif %}
             </div>
-        {% endif %}
+        </div>
+        <div class="w-full lg:w-[400px]">
+            <div class="text-xl/none font-bold flex items-center justify-between">
+                <div class="flex items-center gap-1 text-yellow-500">
+                    {% for star in 1..5 %}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                            <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
+                        </svg>
+                    {% endfor %}
+                </div>
+                <div class="">4.6 * 180 отзывов</div>
+            </div>
+            <hr class="my-4">
+            <div class="text-base text-gray-500">
+                Рейтинг формируется на основе отзывов покупателей.
+            </div>
+            <div class="space-y-1 py-4 text-sm text-gray-500">
+                <div class="flex gap-2 items-center">5 звезд <span class="h-1 flex-1 bg-gray-100 rounded"></span> <span class="font-bold">146</span></div>
+                <div class="flex gap-2 items-center">4 звезды <span class="h-1 flex-1 bg-gray-100 rounded"></span> <span class="font-bold">20</span></div>
+                <div class="flex gap-2 items-center">3 звезды <span class="h-1 flex-1 bg-gray-100 rounded"></span> <span class="font-bold">10</span></div>
+                <div class="flex gap-2 items-center">2 звезды <span class="h-1 flex-1 bg-gray-100 rounded"></span> <span class="font-bold">3</span></div>
+                <div class="flex gap-2 items-center">1 звезда <span class="h-1 flex-1 bg-gray-100 rounded"></span> <span class="font-bold">1</span></div>
+            </div>
+            <div class="text-base text-gray-500">
+                Отзывы могут оставлять только покупатели, которые приобрели этот товар. Также мы проверяем все отзывы на достоверность перед публикацией.
+            </div>
+        </div>
     </div>
 </div>
