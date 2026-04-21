@@ -24,9 +24,9 @@ class CartClass {
         if (isset($dataArray['amount'])) {
             unset($dataArray['amount']);
         }
+        
         $data = json_encode($dataArray);
-
-        Log::info('Generating product key with data: ' . $data); 
+        
         return md5($data);
     }
 

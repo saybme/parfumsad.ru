@@ -6,3 +6,13 @@ offers:
         recordsPerPage: 10
     manage:
         form: $/saybme/sk/models/offer/fields.yaml
+
+reviews:
+    label: Отзывы
+    view:
+        list: $/saybme/sk/models/review/columns.yaml
+        toolbarButtons: create|delete
+        recordsPerPage: 10
+    manage:
+        form: $/saybme/sk/models/review/fields.yaml
+        

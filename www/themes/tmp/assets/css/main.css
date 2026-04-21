@@ -4234,6 +4234,9 @@ details.collapse summary::-webkit-details-marker {
 .rounded-xl {
   border-radius: 0.75rem;
 }
+.rounded {
+  border-radius: 0.25rem;
+}
 .border {
   border-width: 1px;
 }
@@ -4402,6 +4405,10 @@ details.collapse summary::-webkit-details-marker {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 .pb-11 {
   padding-bottom: 2.75rem;
@@ -4626,6 +4633,10 @@ details.collapse summary::-webkit-details-marker {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+.text-yellow-500 {
+  --tw-text-opacity: 1;
+  color: rgb(234 179 8 / var(--tw-text-opacity, 1));
 }
 .underline {
   text-decoration-line: underline;

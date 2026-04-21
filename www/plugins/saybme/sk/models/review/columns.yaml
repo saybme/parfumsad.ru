@@ -1,0 +1,7 @@
+columns:
+    product_id:
+        label: product_id
+        type: number
+    rating:
+        label: rating
+        type: text

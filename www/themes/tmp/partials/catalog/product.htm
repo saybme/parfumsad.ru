@@ -1,3 +1,7 @@
+[skreview]
+type = "product"
+product_id = "{{ product.id }}"
+==
 <div class="py-3">
     {% partial 'gl/breadcrumbs' items=breadcrumbs %}    
 </div>
@@ -102,7 +106,7 @@
 
 </div>
 
-
+{% component 'skreview' %}
 
 {% if products | length > 0 %}
 

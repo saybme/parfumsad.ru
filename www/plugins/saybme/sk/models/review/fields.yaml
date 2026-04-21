@@ -1,0 +1,64 @@
+fields:    
+    product:
+        label: Товар
+        comment: Выберите товар, который хотите оценить
+        span: full
+        type: relation
+        placeholder: Выберите товар
+        nameFrom: name        
+tabs:
+    fields:
+        content:
+            label: Текст отзыва
+            span: full
+            type: textarea
+            size: small
+            tab: Содержание
+        pros:
+            label: Достоинства
+            span: full
+            type: textarea
+            size: small
+            tab: Содержание
+        cons:
+            label: Недостатки
+            span: full
+            type: textarea
+            size: small
+            tab: Содержание
+        admin_response:
+            label: Ответ администратора
+            span: full
+            type: textarea
+            size: small
+            tab: Ответ администратора
+        admin_responded_at:
+            label: Дата ответа администратора
+            span: full
+            type: datepicker
+            mode: date
+            tab: Ответ администратора
+            disabled: true        
+secondaryTabs:
+    fields:        
+        is_verified_purchase:
+            label: Подтвержденная покупка
+            span: auto
+            type: switch
+            comment: Укажите, является ли отзыв подтвержденной покупкой
+        status:
+            label: Статус
+            span: full
+            type: dropdown
+            comment: Выберите статус отзыва
+        rating:
+            label: Рейтинг
+            span: full
+            type: dropdown
+        user:
+            label: Пользователь
+            span: full
+            type: relation
+            placeholder: Выберите пользователя
+            nameFrom: name
+    

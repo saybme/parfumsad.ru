@@ -1,0 +1,13 @@
+name: Reviews
+form: $/saybme/sk/models/review/fields.yaml
+modelClass: Saybme\Sk\Models\Review
+defaultRedirect: saybme/sk/reviews
+create:
+    redirect: 'saybme/sk/reviews/update/:id'
+    redirectClose: saybme/sk/reviews
+update:
+    redirect: saybme/sk/reviews
+    redirectClose: saybme/sk/reviews
+design:
+    displayMode: sidebar
+    sidebarSize: 550

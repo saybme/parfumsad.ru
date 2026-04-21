@@ -67,6 +67,7 @@ class Product extends Model
     
     public $hasMany = [
         'offers' => \Saybme\Sk\Models\Offer::class,
+        'reviews' => \Saybme\Sk\Models\Review::class
     ];
 
     public function scopeActive($query) {

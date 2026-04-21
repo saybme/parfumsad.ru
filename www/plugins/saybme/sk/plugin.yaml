@@ -59,3 +59,7 @@ navigation:
                 label: Покупатели
                 url: saybme/sk/users
                 icon: icon-users
+            side-menu-item7:
+                label: Отзывы
+                url: saybme/sk/reviews
+                icon: icon-comments-o

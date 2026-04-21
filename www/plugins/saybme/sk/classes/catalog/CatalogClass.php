@@ -78,11 +78,20 @@ class CatalogClass {
 
     // Похожие товары
     static public function getSimilarProducts($product = null, $isNew = false){
-        if(!$product || !$product->category) return;
+        if(!$product || !$product->category) {
+            return collect();
+        }
 
-        $products = Product::active()->where('category_id', $product->category->id)->orderBy('available', 'ASC')->isNewType($isNew)->get();
+        $products = Product::active()
+            ->where('category_id', $product->category->id)
+            ->where('id', '!=', $product->id)
+            ->orderBy('available', 'ASC')
+            ->inRandomOrder() // Добавляем рандомную сортировку
+            ->isNewType($isNew)
+            ->limit(8)
+            ->get();
 
-        return $products->take(12);
+        return $products;
     }
 
 }

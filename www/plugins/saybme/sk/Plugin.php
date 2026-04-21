@@ -90,7 +90,8 @@ class Plugin extends PluginBase
             \Saybme\Sk\Components\Skapp::class => 'skapp',
             \Saybme\Sk\Components\Skcategory::class => 'skcategory',
             \Saybme\Sk\Components\Skpage::class => 'skpage',
-            \Saybme\Sk\Components\Skcabinet::class => 'skcabinet'
+            \Saybme\Sk\Components\Skcabinet::class => 'skcabinet',
+            \Saybme\Sk\Components\Skreview::class => 'skreview'
         ];
     }
 
