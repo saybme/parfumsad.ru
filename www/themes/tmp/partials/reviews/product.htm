@@ -1,9 +1,9 @@
 <div class="container">
     <div class="">
-        {% if skreview.skreview is not empty %}
+        {% if reviews is not empty %}
             <div class="">
-                <h3 class="text-xl font-medium mb-4">Отзывы ({{ skreview.skreview|length }})</h3>
-                {% for review in skreview.skreview %}
+                <h3 class="text-xl font-medium mb-4">Отзывы ({{ reviews|length }})</h3>
+                {% for review in reviews %}
                     <div class="border-b pb-4 mb-4">
                         <div class="font-medium">{{ review.user.name ?? 'Покупатель' }}</div>
                         <div class="text-yellow-500">

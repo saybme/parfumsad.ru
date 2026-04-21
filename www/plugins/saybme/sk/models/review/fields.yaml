@@ -60,5 +60,5 @@ secondaryTabs:
             span: full
             type: relation
             placeholder: Выберите пользователя
-            nameFrom: name
+            nameFrom: email
     

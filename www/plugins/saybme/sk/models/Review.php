@@ -18,7 +18,6 @@ class Review extends Model
     protected $fillable = [
         'user_id',
         'product_id',
-        'product',
         'rating',
         'title',
         'content',
@@ -58,7 +57,7 @@ class Review extends Model
      * @var array rules for validation.
      */
     public $rules = [
-        'product' => 'required|exists:saybme_sk_products,id',
+        'product_id' => 'required|exists:saybme_sk_products,id',
         'rating' => 'required|integer|min:1|max:5',
         'content' => 'required|string|min:3',
         'status' => 'required|in:pending,approved,rejected'
@@ -66,7 +65,10 @@ class Review extends Model
 
     public $belongsTo = [
         'user' => ['Saybme\Sk\Models\User'],
-        'product' => ['Saybme\Sk\Models\Product'] 
+        'product' => [
+            'Saybme\Sk\Models\Product', 
+            'key' => 'product_id'
+        ]
     ];
 
 
