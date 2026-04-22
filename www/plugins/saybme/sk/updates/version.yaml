@@ -150,3 +150,6 @@ v1.0.50:
 v1.0.51:
     - 'Updated table saybme_sk_reviews'
     - builder_table_create_saybme_sk_reviews.php
+v1.0.52:
+    - 'Updated table saybme_sk_reviews_2'
+    - builder_table_create_saybme_sk_reviews_2.php
