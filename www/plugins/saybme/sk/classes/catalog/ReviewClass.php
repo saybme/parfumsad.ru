@@ -20,4 +20,9 @@ class ReviewClass {
          return $review;
     }
 
+    // Все отзывы
+    public static function all(){
+        return Review::all();
+    }
+
 }
