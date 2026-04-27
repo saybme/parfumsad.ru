@@ -61,7 +61,7 @@
                                     <div class="font-semibold mt-2">{{ review.title }}</div>
                                 {% endif %}
 
-                                <p class="mt-1 text-gray-700">{{ review.content }}</p>
+                                <p class="mt-1 text-gray-700">{{ review.content | md }}</p>
 
                                 {% if review.pros %}
                                     <div class="text-sm text-green-600 mt-2">
