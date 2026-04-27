@@ -33,6 +33,12 @@ Route::get('/sitemap.xml', function () {
     return Response::view('saybme.sk::sitemap', $data)->header('Content-Type', 'text/xml');
 });
 
-// Создаем отзыв по api
+// Фид прайса
+Route::get('/fid/products.xml', function () {
+    $data['update'] = date('Y-m-d H:i:s');
+    $data['products'] = Saybme\Sk\Models\Product::where('is_active', true)->get();
+    return Response::view('saybme.sk::products', $data)->header('Content-Type', 'text/xml');
+});
 
+// Создаем отзыв по api
 Route::get('/api/review', 'Saybme\Sk\Controllers\ReviewController@store');

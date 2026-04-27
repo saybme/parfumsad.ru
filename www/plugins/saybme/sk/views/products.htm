@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <yml_catalog date="{{ update }}">
     <shop>
-        <name>Интернет магазин sakuradv.online</name>
-        <company>sakuradv.online</company>
-        <url>https://sakuradv.online</url>      
-        <email>info@sakuradv.online</email>
-        <categories>           
+
+        <name>Parfumsad</name>
+        <company>ООО "Парфюмсад"</company>
+        <url>https://parfumsad.ru</url>
+
+        <currencies>
+            <currency id="RUB" rate="1"/>
+        </currencies>
+
+        <categories>
             {% for item in categories %}
                 {% if item.parent_id %}
                     <category id="{{ item.id }}" parentId="{{ item.parent_id }}">{{ item.name }}</category>
@@ -14,19 +19,24 @@
                 {% endif %}
             {% endfor %}
         </categories>
+
         <offers>
             {% for item in products %}
                 <offer id="{{ item.id }}">
-                    <name>{{ item.name|striptags }}</name>                                  
-                    <categoryId>{{ item.category_id }}</categoryId>                
-                    <picture>{{ item.preview.path }}</picture>               
+                    <name>{{ item.name|striptags }}</name>
+                    <price>{{ item.price }}</price>
+                    <currencyId>RUB</currencyId>
+                    <categoryId>{{ item.category_id }}</categoryId>
+                    <picture>{{ item.preview.path }}</picture>
+                    <url>{{ item.link }}</url>
                     <description>
-                        <![CDATA[          
+                        <![CDATA[
                             {{ item.content | raw }}
                         ]]>
-                    </description>              
+                    </description>
+                    <vendor>Dior</vendor>
                 </offer>
-            {% endfor %}            
+            {% endfor %}
         </offers>
     </shop>
 </yml_catalog>
