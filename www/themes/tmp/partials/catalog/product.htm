@@ -3,14 +3,14 @@ type = "product"
 product_id = "{{ product.id }}"
 ==
 <div class="py-3">
-    {% partial 'gl/breadcrumbs' items=breadcrumbs %}    
+    {% partial 'gl/breadcrumbs' items=breadcrumbs %}
 </div>
 
-<div class="container">   
-        
+<div class="container">
+
     <div class="flex gap-x-16 gap-y-10 flex-col lg:flex-row">
 
-        <div class="w-full lg:w-[500px]"> 
+        <div class="w-full lg:w-[500px]">
             {% if product.photos | length > 0 %}
                 <div class="f-carousel" id="productPhotos">
                     {% for photo in product.photos %}
@@ -30,10 +30,10 @@ product_id = "{{ product.id }}"
                     </a>
                 </div>
             {% endif %}
-        </div>         
+        </div>
 
-        <div class="w-full lg:flex-1">               
-            
+        <div class="w-full lg:flex-1">
+
             <div class="flex gap-10 lg:items-start flex-col lg:flex-row">
                 <div class="w-full lg:w-1/2">
                     <h1 class="font-medium text-xl mb-3">{{ this.page.title }}</h1>
@@ -43,8 +43,8 @@ product_id = "{{ product.id }}"
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
                                     <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
                                 </svg>
-                            </div>   
-                            <a href="#reviews" class="text-sm/none hover:text-primary">4.6 * 180 отзывов</a>                                                     
+                            </div>
+                            <a href="#reviews" class="text-sm/none hover:text-primary">{{ product.review_stats.average }} * ({{ product.review_stats.count }}) отзывов</a>
                         </div>
                     </div>
                     <h4 class="text-lg font-semibold mb-2">О товаре</h4>
@@ -52,30 +52,30 @@ product_id = "{{ product.id }}"
                         <p>Артикул: {{ product.article }}</p>
                         <p>Бренд: <a href="{{ product.vendor.link }}" class="text-rose hover:underline">{{ product.vendor.name }}</a></p>
                     </div>
-                </div> 
+                </div>
                 <div class="w-full lg:w-1/2 border rounded-lg shadow-2xl p-6">
                     <div class="">
-                        <div class="mb-3 space-y-1">                 
+                        <div class="mb-3 space-y-1">
                             <div class="leading-none text-3xl font-bold flex items-center me-3 text-gray">
                                 <span class="me-1">{{ product.product_price }}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5 lpl:size-5 inline-block align-top relative top-[1px]" fill="currentColor" viewBox="0 0 256 256"><path d="M148,156a64,64,0,0,0,0-128H88A12,12,0,0,0,76,40v92H56a12,12,0,0,0,0,24H76v16H56a12,12,0,0,0,0,24H76v20a12,12,0,0,0,24,0V196h44a12,12,0,0,0,0-24H100V156ZM100,52h48a40,40,0,0,1,0,80H100Z"></path></svg>
-                            </div>    
+                            </div>
                             <div class="text-gray-1 text-lg">
-                                {{ product.prices | join('/') }}        
+                                {{ product.prices | join('/') }}
                             </div>
                         </div>
                     </div>
-                    {% partial 'products/available-item' item=product in_cart=product.in_cart available=product.available %} 
+                    {% partial 'products/available-item' item=product in_cart=product.in_cart available=product.available %}
                 </div>
-            </div>              
+            </div>
 
-            
+
 
         </div>
 
-    </div>   
+    </div>
 
-    {% if product.content %}  
+    {% if product.content %}
         <div class="pt-16">
             <h3 class="text-lg font-medium">Описание товара</h3>
             <div class="text mt-3 text-sm">
@@ -87,16 +87,16 @@ product_id = "{{ product.id }}"
 </div>
 
 {% if products | length > 0 %}
-    <div class="pt-16">        
-        <div class="container  ">   
+    <div class="pt-16">
+        <div class="container  ">
             <h4 class="text-2xl lg:text-3xl font-medium mb-3 sm:mb-8">Вам также может понравиться:</h4>
-            <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-3 lg:gap-x-6 gap-y-10">        
+            <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-3 lg:gap-x-6 gap-y-10">
                 {% for item in products %}
                     <div class="flex flex-col lg:px-3">
-                        {% partial 'products/item' item=item %}   
+                        {% partial 'products/item' item=item %}
                     </div>
                 {% endfor %}
-            </div>  
+            </div>
         </div>
     </div>
 {% endif %}

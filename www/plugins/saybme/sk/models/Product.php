@@ -27,13 +27,13 @@ class Product extends Model
         'uri',
         'content'
     ];
-    
+
     protected $jsonable = ['props'];
 
     protected $slugs = ['slug' => 'name'];
-  
+
     public $table = 'saybme_sk_products';
-   
+
     public $rules = [
         'name' => 'required',
         'price' => 'required',
@@ -54,7 +54,7 @@ class Product extends Model
     public $belongsTo = [
         'category' => \Saybme\Sk\Models\Category::class,
         'vendor' => \Saybme\Sk\Models\Vendor::class
-    ];    
+    ];
 
     public $belongsToMany = [
         'categories' => [
@@ -64,7 +64,7 @@ class Product extends Model
             'otherKey' => 'category_id'
         ]
     ];
-    
+
     public $hasMany = [
         'offers' => \Saybme\Sk\Models\Offer::class,
         'reviews' => \Saybme\Sk\Models\Review::class
@@ -78,14 +78,14 @@ class Product extends Model
         return $query;
     }
 
-    public function scopeIsNewType($query, $isNew) {             
+    public function scopeIsNewType($query, $isNew) {
         if($isNew){
             return $query->where('is_new', true);
-        }        
+        }
         return $query;
     }
 
-    public function scopeIsvendor($query) {   
+    public function scopeIsvendor($query) {
         if(Input::get('vendor')){
             return $query->where('vendor_id', Input::get('vendor'));
         }
@@ -108,7 +108,7 @@ class Product extends Model
 
     public function getImagesAttribute(){
 
-        $rows = array();        
+        $rows = array();
 
         $items = $this->photos;
         $items->prepend($this->preview);
@@ -121,7 +121,7 @@ class Product extends Model
         return $query->where('name', 'like', '%'.$type.'%');
     }
 
-    public function scopeIsCategoriesType($query, $type) {        
+    public function scopeIsCategoriesType($query, $type) {
         return $query->orWhereHas('categories', function ($query) use ($type) {
             $query->where('category_id', $type);
         });
@@ -139,22 +139,22 @@ class Product extends Model
         $arr[] = 'directory';
         $arr[] = $this->uri;
         $url = implode('/', $arr);
-        
+
         return url($url);
     }
 
     // Цены
     public function getPricesAttribute(){
 
-        $arr = array();        
+        $arr = array();
 
         if($this->price_usd != '0.00'){
             $arr[] = $this->price_usd . '$';
         }
-        
+
         if($this->price_usd != '0.00'){
             $arr[] = $this->price_eur . '€';
-        }        
+        }
 
         return collect($arr);
     }
@@ -175,21 +175,21 @@ class Product extends Model
         return $offers->groupBy(function ($item, $key) {
             return $item->option->code;
         });
-    }   
+    }
 
     // Сохраняем URI
-    public function beforeSave(){          
-        $this->uri = $this->productUri();    
+    public function beforeSave(){
+        $this->uri = $this->productUri();
     }
-    
+
     // Процент скидки
-    public function getPercentAttribute(){         
+    public function getPercentAttribute(){
 
         if(trim($this->old_price)){
             if($this->old_price > $this->price){
                 $price = 100 / ($this->old_price / $this->price) . '%';
                 return $price;
-            }            
+            }
         }
 
         return;
@@ -201,11 +201,43 @@ class Product extends Model
         if($this->category){
             $arr[] = $this->category->slug;
         }
-        
+
         $arr[] = $this->slug;
         $url = implode('/', $arr);
 
         return $url;
+    }
+
+    // Количество отзывов
+    public function getReviewsCountAttribute(){
+        return $this->reviews->where('status', 'approved')->count();
+    }
+
+    public function getReviewStatsAttribute() {
+        $stats = Review::where('product_id', $this->id)
+            ->select(
+                \DB::raw('COUNT(*) as count'),
+                \DB::raw('COALESCE(ROUND(AVG(rating), 1), 0) as average'),
+                \DB::raw('SUM(CASE WHEN rating = 5 THEN 1 ELSE 0 END) as stars_5'),
+                \DB::raw('SUM(CASE WHEN rating = 4 THEN 1 ELSE 0 END) as stars_4'),
+                \DB::raw('SUM(CASE WHEN rating = 3 THEN 1 ELSE 0 END) as stars_3'),
+                \DB::raw('SUM(CASE WHEN rating = 2 THEN 1 ELSE 0 END) as stars_2'),
+                \DB::raw('SUM(CASE WHEN rating = 1 THEN 1 ELSE 0 END) as stars_1')
+            )
+            ->first();
+
+        return [
+            'count' => (int) $stats->count,
+            'average' => (float) $stats->average,
+            'stars' => [
+                5 => (int) $stats->stars_5,
+                4 => (int) $stats->stars_4,
+                3 => (int) $stats->stars_3,
+                2 => (int) $stats->stars_2,
+                1 => (int) $stats->stars_1,
+            ],
+            'percentage' => round(($stats->average / 5) * 100)
+        ];
     }
 
 }

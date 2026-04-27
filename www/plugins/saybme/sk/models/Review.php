@@ -1,6 +1,8 @@
 <?php namespace Saybme\Sk\Models;
 
 use Model;
+use Saybme\Sk\Models\Product;
+use Log;
 
 /**
  * Model
@@ -128,6 +130,13 @@ class Review extends Model
             default => '#ffc107'
         };
 
+    }
+
+    public function afterSave() {
+        $product = Product::find($this->product_id);
+        $product->avg_rating = $product->reviews()->avg('rating') ?? 0;
+        $product->reviews_count = $product->reviews()->count();
+        $product->save();
     }
 
 }

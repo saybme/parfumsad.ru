@@ -153,3 +153,6 @@ v1.0.51:
 v1.0.52:
     - 'Updated table saybme_sk_reviews_2'
     - builder_table_create_saybme_sk_reviews_2.php
+v1.0.53:
+    - 'Updated table saybme_sk_products'
+    - builder_table_update_saybme_sk_products_11.php
