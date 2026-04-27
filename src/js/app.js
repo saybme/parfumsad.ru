@@ -449,4 +449,21 @@ addEventListener('ajax:done', function (event) {
     if (handler === 'onGetMainProducts') {
         mainHorizontScroll();
     }
+
+    if (handler === 'onModalReview') {
+        modal(event.detail.data);
+    }
+
+    if (handler === 'onReviewFormSubmit') {
+        //Fancybox.close();
+    }
+});
+
+
+window.addEventListener('DOMContentLoaded', function () {
+
+    window.closeModal = function () {
+        Fancybox.close();
+    };
+
 });

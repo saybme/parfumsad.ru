@@ -60,13 +60,21 @@ class Review extends Model
         'product_id' => 'required|exists:saybme_sk_products,id',
         'rating' => 'required|integer|min:1|max:5',
         'content' => 'required|string|min:3',
-        'status' => 'required|in:pending,approved,rejected'
+        'status' => 'required|in:pending,approved,rejected',
+        'user_id' => 'required'
+    ];
+
+    // Кастомные сообщения валидации
+    public $customMessages = [
+        'rating.required' => 'Пожалуйста, выберите рейтинг отзыва.',
+        'rating.min' => 'Рейтинг должен быть от 1 до 5.',
+        'content.required' => 'Пожалуйста, напишите содержание отзыва.'
     ];
 
     public $belongsTo = [
         'user' => ['Saybme\Sk\Models\User'],
         'product' => [
-            'Saybme\Sk\Models\Product', 
+            'Saybme\Sk\Models\Product',
             'key' => 'product_id'
         ]
     ];
@@ -98,17 +106,28 @@ class Review extends Model
     {
         return $query->where('status', self::STATUS_APPROVED);
     }
-    
+
     // Scope для отзывов на модерации
     public function scopePending($query)
     {
         return $query->where('status', self::STATUS_PENDING);
     }
-    
+
     // Аксессор для получения текста статуса
     public function getStatusTextAttribute()
     {
         return self::$statuses[$this->status] ?? $this->status;
+    }
+
+    // Цвет статуса в зависимости от статуса
+    public function getStatusColorAttribute(){
+        // Код цвета под статусом
+        return match ($this->status) {
+            self::STATUS_APPROVED => '#28a745',
+            self::STATUS_REJECTED => '#dc3545',
+            default => '#ffc107'
+        };
+
     }
 
 }

@@ -10,3 +10,8 @@ toolbar:
     search:
         prompt: 'backend::lang.list.search_prompt'
 recordUrl: 'saybme/sk/reviews/update/:id'
+
+defaultSort:
+      column: id
+      direction: desc
+

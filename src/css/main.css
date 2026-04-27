@@ -36,7 +36,11 @@
     }
 }
 
-@layer components {  
+@layer components {
+
+    [data-validate-for] {
+        @apply text-sm text-red-700
+    }
 
     [data-carousel-go-prev] {
         @apply absolute left-0 border border-gray-300 hover:bg-purple-10 hover:text-white hover:border-purple-10 shadow-sm -translate-x-1/2 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-sm

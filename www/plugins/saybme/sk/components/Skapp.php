@@ -1,6 +1,7 @@
 <?php namespace Saybme\Sk\Components;
 
 use Saybme\Sk\Classes\Catalog\CartClass;
+use Saybme\Sk\Classes\Catalog\ReviewClass;
 use Saybme\Sk\Classes\Users\UserClass;
 use Saybme\Sk\Models\Product;
 use Request;
@@ -40,48 +41,48 @@ class Skapp extends \Cms\Classes\ComponentBase
 
 
     // Добавляем товар
-    public function onAdd(){        
+    public function onAdd(){
         $q = new CartClass;
-        return $q->changeCount('plus');        
+        return $q->changeCount('plus');
     }
 
     // Увеличиваем количество товара
     public function onPlus(){
         $q = new CartClass;
-        return $q->changeCount('plus'); 
+        return $q->changeCount('plus');
     }
 
     // Уменьшаем количество товара
     public function onMinus(){
         $q = new CartClass;
-        return $q->changeCount('minus'); 
+        return $q->changeCount('minus');
     }
 
     // Удаляем товар из корзины
     public function onDelete(){
         $q = new CartClass;
-        $q->delete();  
-        
+        $q->delete();
+
         $result['product_id'] = Input::get('id');
         $result['cart'] = $q->getCart();
-        
+
         return $result;
     }
 
     // Меняем количество товара
     public function onCount(){
         $q = new CartClass;
-        return $q->changeCount(); 
+        return $q->changeCount();
     }
 
     // Количество в корзине
     public function onCountCart(){
         $q = new CartClass;
-        return $q->changeCountCart(); 
+        return $q->changeCountCart();
     }
 
     // Подарок в корзине
-    public function onGift(){     
+    public function onGift(){
         $options['gift'] = Input::get('is_present');
         $result['#gift-result'] = $this->renderPartial('cart/gift', $options);
         return $result;
@@ -123,6 +124,23 @@ class Skapp extends \Cms\Classes\ComponentBase
         return $id;
     }
 
+    // Модальное окно оставить отзыв
+    function onModalReview(){
+        $options['product_id'] = Input::get('product_id');
+        $result['modal'] = $this->renderPartial('reviews/form', $options);
+        return $result;
+    }
+
+    // Создаем отзыв
+    function onReviewFormSubmit(){
+
+        $vars = Input::get();
+        ReviewClass::add($vars);
+
+        $result['#review-form'] = $this->renderPartial('reviews/success');
+        return $result;
+    }
+
     // Тип авторизации
     function onSelectAuthorization(){
         $options['id'] = Input::get('mode');
@@ -132,7 +150,7 @@ class Skapp extends \Cms\Classes\ComponentBase
 
     // Авторизация
     function onAuthorization(){
-        
+
         $tpl = '';
         $type = Input::get('type');
         $data = Input::get();
@@ -140,7 +158,7 @@ class Skapp extends \Cms\Classes\ComponentBase
         $rules['type'] = 'required';
 
         // Регистрация
-        if($type == 'registration'){            
+        if($type == 'registration'){
             $rules['username'] = 'required';
             $rules['email'] = 'required|email';
             $rules['phone'] = 'required|phone';
@@ -148,7 +166,7 @@ class Skapp extends \Cms\Classes\ComponentBase
         }
 
         // Вход
-        if($type == 'enter'){            
+        if($type == 'enter'){
             $rules['phone'] = 'required|phone|user';
             $rules['password'] = 'required|psw';
         }
@@ -159,14 +177,14 @@ class Skapp extends \Cms\Classes\ComponentBase
         $q = new UserClass;
 
         // Регистрация
-        if($type == 'registration'){            
-            $q->create();      
-            $tpl = 'modal/authorization-success';          
+        if($type == 'registration'){
+            $q->create();
+            $tpl = 'modal/authorization-success';
         }
 
         // Вход
-        if($type == 'enter'){            
-            return $q->enter();              
+        if($type == 'enter'){
+            return $q->enter();
         }
 
         $result['#authorization-modal'] = $this->renderPartial($tpl);
@@ -175,7 +193,7 @@ class Skapp extends \Cms\Classes\ComponentBase
 
     // Модальное окно товара
     public function onModalProduct(){
-        
+
         $id = Input::get('id');
 
         $obj = Product::active()->find($id);
@@ -187,6 +205,6 @@ class Skapp extends \Cms\Classes\ComponentBase
         $result['modal'] = $this->renderPartial('modals/product', $options);
         return $result;
     }
-    
+
 
 }

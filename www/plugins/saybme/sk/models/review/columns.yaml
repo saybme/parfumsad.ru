@@ -1,7 +1,23 @@
 columns:
-    product_id:
-        label: product_id
-        type: number
-    rating:
-        label: rating
+    product:
+        label: Товар
         type: text
+        relation: product
+        select: name
+    rating:
+        label: Оценка
+        type: number
+        align: right
+    user:
+        label: Пользователь
+        type: text
+        relation: user
+        select: email
+    status:
+        label: Статус
+        type: partial
+    id:
+        label: ID
+        type: number
+        align: right
+

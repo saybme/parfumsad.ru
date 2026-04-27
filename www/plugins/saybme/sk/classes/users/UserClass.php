@@ -37,17 +37,17 @@ class UserClass {
         Mail::send('saybme.sk:profile', $data, function($message) use ($data) {
             $message->to($data['email'], 'Admin Person');
         });
-        
+
     }
 
     // Авторизация пользователя
-    public function enter(){       
+    public function enter(){
 
         $phone = GlobalClass::formatPhone(Input::get('phone'));
         $data = Input::get();
         $data['phone'] = $phone;
 
-        $user = User::where('phone', $phone)->first();      
+        $user = User::where('phone', $phone)->first();
 
         // Сохраняем куки на 60 дней
         Cookie::queue('userid', $user->id, 86400);
@@ -75,16 +75,16 @@ class UserClass {
 
     // Профиль
     public static function user(){
-        $userId = Cookie::get('userid');  
+        $userId = Cookie::get('userid');
         $user = User::where('is_active', true)->find($userId);
-        return $user;  
+        return $user;
     }
 
     // Проверка авторизации
     public static function isUser(){
-        $userId = Cookie::get('userid');  
-        $user = User::select('phone')->where('is_active', true)->find($userId);
-        return $user;  
+        $userId = Cookie::get('userid');
+        $user = User::select('phone', 'id')->where('is_active', true)->find($userId);
+        return $user;
     }
 
     // Заказы покупателя
