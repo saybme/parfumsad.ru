@@ -1,0 +1,42 @@
+<div class="p-4 w-full max-w-[90%] sm:max-w-[500px]">
+    <div class="" id="review-form">
+        {{ form_ajax('onReviewFormSubmit', {'validate': true}) }}
+            <div class="">
+                <input type="hidden" name="product_id" value="{{ product_id }}">
+                <input type="hidden" name="user_id" value="{{ isUser.id }}">
+                <h4 class="text-2xl font-bold mb-4">Оставить отзыв</h4>
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="">
+                        <div class="rating">
+                            <input type="radio" value="0" name="rating" class="mask mask-star-2 bg-orange-400 hidden" aria-label="0 star" checked />
+                            <input type="radio" value="1" name="rating" class="mask mask-star-2 bg-orange-400" aria-label="1 star" />
+                            <input type="radio" value="2" name="rating" class="mask mask-star-2 bg-orange-400" aria-label="2 star" />
+                            <input type="radio" value="3" name="rating" class="mask mask-star-2 bg-orange-400" aria-label="3 star" />
+                            <input type="radio" value="4" name="rating" class="mask mask-star-2 bg-orange-400" aria-label="4 star" />
+                            <input type="radio" value="5" name="rating" class="mask mask-star-2 bg-orange-400" aria-label="5 star" />
+                        </div>
+                        <div data-validate-for="rating"></div>
+                    </div>
+                    <div class="">
+                        <label for="review_content" class="label-text">Текст отзыва</label>
+                        <textarea name="content" id="review_content" placeholder="Опишите Ваши впечатления" rows="3" class="w-full border border-gray-300 textarea textarea-bordered"></textarea>
+                        <div data-validate-for="content"></div>
+                    </div>
+                    <div class="">
+                        <label for="review_pros" class="label-text">Достоинства</label>
+                        <textarea name="pros" id="review_pros" placeholder="Что понравилось" rows="3" class="w-full border border-gray-300 textarea textarea-bordered"></textarea>
+                        <div data-validate-for="pros"></div>
+                    </div>
+                    <div class="">
+                        <label for="review_cons" class="label-text">Недостатки</label>
+                        <textarea name="cons" id="review_cons" placeholder="Что не понравилось" rows="3" class="w-full border border-gray-300 textarea textarea-bordered"></textarea>
+                        <div data-validate-for="cons"></div>
+                    </div>
+                    <div class="">
+                        <button type="submit" class="btn btn-primary" data-attach-loading>Отправить</button>
+                    </div>
+                </div>
+            </div>
+        {{ form_close() }}
+    </div>
+</div>
