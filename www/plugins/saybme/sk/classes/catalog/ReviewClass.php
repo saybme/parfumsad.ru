@@ -36,7 +36,7 @@ class ReviewClass {
     // Поиск рандомного товара
     public static function randomProduct()
     {
-        $product = Product::select('id','name','content','category_id')->inRandomOrder()->first();
+        $product = Product::select('id','name','content','category_id')->where('is_active', true)->inRandomOrder()->first();
 
         $deepArr = $product->category->getParentsAndSelf()->pluck('name')->implode(' / ');
 

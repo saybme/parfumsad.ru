@@ -26,7 +26,13 @@ class Skreview extends Command
     public function handle()
     {
         $review = ReviewClass::createRandomReview();
-        $this->output->writeln($review);
+
+        $result = json_encode([
+            'message' => 'Отзыв добавлен',
+            'review' => $review->toArray()
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
+        $this->output->writeln($result);
     }
 
 

@@ -119,6 +119,11 @@ class Review extends Model
         return $query->where('status', self::STATUS_PENDING);
     }
 
+     // Ссылка на товар
+     public function getProductLinkAttribute(){
+        return $this->product->link;
+     }
+
     // Аксессор для получения текста статуса
     public function getStatusTextAttribute()
     {

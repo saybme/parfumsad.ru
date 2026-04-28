@@ -5,24 +5,24 @@
                 {% if reviews is not empty %}
                     <div class=" py-10 bg-gray-50 rounded-lg mb-4">
                         {% if isUser %}
-                            <div class="text-center">
+                            <div class="flex justify-center">
                                 <button class="btn btn-primary" data-request-data="{ product_id: '{{ product.id }}' }" data-request="onModalReview">
                                     Оставить отзыв
                                 </button>
                             </div>
-                            <div class="mt-4 text-center">
+                            <div class="mt-4 justify-center">
                                 <p class="text-gray-500 text-sm">
                                     Только зарегистрированные пользователи могут оставлять отзывы.
                                 </p>
                             </div>
                         {% else %}
-                        <div class="mt-6">
+                        <div class="flex justify-center">
                             <button data-request="onModal" data-request-data="{ type: 'authorization' }"
                                     class="btn btn-primary">
                                 Войдите, чтобы оставить отзыв
                             </button>
                         </div>
-                        <div class="mt-4">
+                        <div class="mt-4 flex justify-center">
                             <p class="text-gray-500 text-sm">
                                 Только зарегистрированные пользователи могут оставлять отзывы.
                             </p>
@@ -36,7 +36,7 @@
                             <div class="border-b pb-4 mb-4 last:border-0">
                                 <div class="flex justify-between items-start">
                                     <div class="font-medium">
-                                        {{ review.user.username ?: 'Покупатель' }}
+                                        {{ review.props.username ?: 'Покупатель' }}
                                     </div>
                                     <div class="text-sm text-gray-500">
                                         {{ review.created_at|date('d.m.Y') }}

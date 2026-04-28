@@ -1,63 +1,84 @@
 <div data-product-id="{{ item.id }}" class="flex flex-col min-h-full" itemscope itemtype="https://schema.org/Product">
 
-    <div  class="relative block border rounded-md sm:rounded-2xl overflow-hidden" data-id="{{ item.id }}">   
+    <meta itemprop="sku" content="{{ item.id }}">
+    <meta itemprop="brand" content="{{ item.vendor.name }}">
+    <meta itemprop="description" content="{{ item.description|striptags|slice(0, 200) ?: item.name }}">
+
+    <div class="relative block border rounded-md sm:rounded-2xl overflow-hidden" data-id="{{ item.id }}">
 
         <div class="cursor-pointer bg-white" onclick="getModalProduct(this)" data-id="{{ item.id }}">
             {% if item.images | length %}
-                <div class="f-carousel product-photos">
-                    {% for photo in item.images %}
-                        <div class="f-carousel__slide">
-                            <div class="aspect-w-16 aspect-h-13">
-                                <img data-lazy-src="{{ photo.thumb(320,320) }}" alt="{{ item.name }}" class="block size-full object-contain" itemprop="image">
-                            </div>
-                        </div>
-                    {% endfor %}
+            <div class="f-carousel product-photos">
+                {% for photo in item.images %}
+                <div class="f-carousel__slide">
+                    <div class="aspect-w-16 aspect-h-13">
+                        <img data-lazy-src="{{ photo.thumb(320,320) }}" alt="{{ item.name }}" class="block size-full object-contain" {% if loop.first %}itemprop="image"{% endif %}>
+                    </div>
                 </div>
+                {% endfor %}
+            </div>
             {% else %}
-                <div class="aspect-w-16 aspect-h-13">
-                    <img src="{{ 'assets/images/350x350.jpg' | theme }}" alt="{{ item.name }}" itemprop="image">
-                </div>
+            <div class="aspect-w-16 aspect-h-13">
+                <img src="{{ 'assets/images/350x350.jpg' | theme }}" alt="{{ item.name }}" itemprop="image">
+            </div>
             {% endif %}
-        </div>            
+        </div>
 
         <div class="absolute left-3 top-4 z-10 text-[.5rem] sm:text-xs flex gap-1 sm:gap-2 flex-wrap flex-col sm:flex-row justify-start items-start">
             {% if item.is_new %}
-                <span class="bg-green-600 text-white rounded-md px-2 py-1">NEW</span>
+            <span class="bg-green-600 text-white rounded-md px-2 py-1">NEW</span>
             {% endif %}
             {% if item.is_popular %}
-                <span class="bg-rose text-white rounded-md px-2 py-1">Популярный</span>
+            <span class="bg-rose text-white rounded-md px-2 py-1">Популярный</span>
             {% endif %}
             {% if item.is_recomended %}
-                <span class="bg-blue-600 text-white rounded-md px-2 py-1">Рекомендуем</span>
+            <span class="bg-blue-600 text-white rounded-md px-2 py-1">Рекомендуем</span>
             {% endif %}
-        </div>  
+        </div>
 
     </div>
 
-    <div class="flex-1 pt-3 sm:pt-[30px]">
+    <div class="flex-1 pt-3 sm:pt-[20px]">
+        <div class="mb-1 text-gray-1 flex items-center gap-1" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 text-yellow-300">
+                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-sm leading-none mt-[3px]" itemprop="ratingValue">{{ item.avg_rating }}</span>
+            <meta itemprop="bestRating" content="5">
+            <meta itemprop="ratingCount" content="{{ item.reviews_count|default(0) }}">
+        </div>
+
         <h2 class="text-sm/none sm:text-lg/normal leading-tight line-clamp-2" itemprop="name">
             {{ item.name }}
-        </h2>  
+        </h2>
     </div>
 
-    <div class="pt-[18px] flex items-end flex-wrap gap-y-1 flex-1" itemprop="offers" itemscope itemtype="https://schema.org/Offer">                 
+    <div class="pt-[18px] flex items-end flex-wrap gap-y-1 flex-1" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
         <div class="leading-none text-lg sm:text-26px font-bold flex items-center me-3 text-gray font-roboto">
-            <span itemprop="price" content="{{ item.product_price }}">{{ item.product_price }}</span> 
+            <span itemprop="price" content="{{ item.product_price }}">{{ item.product_price|number_format(0, '.', ' ') }}</span>
             <span itemprop="priceCurrency" content="RUB">₽</span>
-        </div>    
-        <div class="text-gray-1 text-xs sm:text-lg">
-            {{ item.prices | join('/') }}        
         </div>
+
+        {% if item.prices|length > 1 %}
+        <div class="text-gray-1 text-xs sm:text-lg">
+            {{ item.prices | join('/') }}
+        </div>
+        {% endif %}
+
         <meta itemprop="availability" content="{% if item.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}">
-        <link itemprop="url" href="{{ item.url }}">
+        <meta itemprop="url" content="{{ item.url }}">
+
+        {% if item.available %}
+        <meta itemprop="availabilityEnds" content="{{ item.sale_until|date('Y-m-d')|default('') }}">
+        {% endif %}
     </div>
 
-    <div class=" mt-auto">
+    <div class="mt-auto">
         <div class="flex flex-wrap py-2 pt-4 items-center gap-y-2">
-            {% partial 'products/available-item' in_cart=item.in_cart available=item.available %} 
+            {% partial 'products/available-item' in_cart=item.in_cart available=item.available %}
         </div>
         <div class="text-center text-xs sm:text-base">
-            <a href="{{ item.link }}" class="underline hover:no-underline">Подробнее</a>
+            <a href="{{ item.link }}" class="underline hover:no-underline" itemprop="url">Подробнее</a>
         </div>
     </div>
 

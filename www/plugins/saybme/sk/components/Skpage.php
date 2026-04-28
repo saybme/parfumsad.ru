@@ -52,7 +52,7 @@ class Skpage extends \Cms\Classes\ComponentBase
 
     private function getContent(){
         $type = $this->property('type');
-        return $this->$type();        
+        return $this->$type();
     }
 
     private function getPageInfo($page){
@@ -63,11 +63,11 @@ class Skpage extends \Cms\Classes\ComponentBase
     // Все товары
     private function all(){
         $options['products'] = CatalogClass::getCategoryProducts();
-        $options['filters'] = $this->getFilterCategory();  
+        $options['filters'] = $this->getFilterCategory();
 
         return $this->renderPartial('catalog/category', $options);
-    }     
-    
+    }
+
     // Страница
     private function getPage(){
 
@@ -105,7 +105,7 @@ class Skpage extends \Cms\Classes\ComponentBase
             $item->name = $item->title;
             $item->active = $item->link === $page->link;
         });
-        
+
         return $items;
     }
 
@@ -122,7 +122,7 @@ class Skpage extends \Cms\Classes\ComponentBase
     // Хлебные крошки товара
     private function productBreadcrumbs($page){
         if(!$page->category) return;
-        $items = $page->category->getParentsAndSelf();  
+        $items = $page->category->getParentsAndSelf();
         return $items;
     }
 

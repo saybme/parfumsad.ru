@@ -64,7 +64,7 @@ class Skcatalog extends \Cms\Classes\ComponentBase
 
     private function getContent(){
         $type = $this->property('type');
-        return $this->$type();        
+        return $this->$type();
     }
 
     private function getPageInfo($page){
@@ -81,13 +81,13 @@ class Skcatalog extends \Cms\Classes\ComponentBase
     // Все товары
     private function products(){
 
-        $params['is_new'] = $this->property('is_new');      
+        $params['is_new'] = $this->property('is_new');
         $params['paginate'] = 30;
         $params['is_random'] = $this->property('is_random') ? true : false;
         $tmp = $this->property('tmp') ?: 'catalog/products';
 
-        $products = CatalogClass::getAllProducts($params);           
-        
+        $products = CatalogClass::getAllProducts($params);
+
 
         return $this->renderPartial($tmp, ['products' => $products]);
     }
@@ -98,13 +98,13 @@ class Skcatalog extends \Cms\Classes\ComponentBase
         $isNew = $this->property('is_new');
         $tmp = $this->property('tmp') ?: 'catalog/category';
 
-        $products = CatalogClass::getCategoryProducts(null, $isNew);        
+        $products = CatalogClass::getCategoryProducts(null, $isNew);
 
         $options['page'] = Page::active()->find(2);
         $options['products'] = $products;
-        $options['filters'] = $this->getFilterCategory();         
+        $options['filters'] = $this->getFilterCategory();
 
-        $currentURL = url()->current();        
+        $currentURL = url()->current();
 
         return $this->renderPartial($tmp, $options);
     }
@@ -125,19 +125,19 @@ class Skcatalog extends \Cms\Classes\ComponentBase
         // Поиск категории
         $page = Category::active()->where('uri', $slug)->first();
         if($page){
-            $this->getPageInfo($page);            
+            $this->getPageInfo($page);
             $options['page'] = $page;
             $options['breadcrumbs'] = $this->categoryBreadcrumbs($page);
             $isNew = $this->property('is_new');
             $options['products'] = CatalogClass::getCategoryProducts($page, $isNew);
-            $options['filters'] = $this->getFilterCategory();  
+            $options['filters'] = $this->getFilterCategory();
             return $this->renderPartial('catalog/category', $options);
         };
 
         // Поиск товара
         $page = Product::active()->where('uri', $slug)->first();
         if($page){
-            $this->getPageInfo($page);            
+            $this->getPageInfo($page);
             $options['product'] = $page;
             $isNew = $this->property('is_new');
             $options['products'] = CatalogClass::getSimilarProducts($page, $isNew);
@@ -159,8 +159,8 @@ class Skcatalog extends \Cms\Classes\ComponentBase
             if($vendor){
                 $options['vendor']['title'] = $vendor->name;
                 $options['vendor']['items'] = Input::get('vendor');
-            }            
-        }        
+            }
+        }
 
         return collect($options);
     }
@@ -183,7 +183,7 @@ class Skcatalog extends \Cms\Classes\ComponentBase
     // Хлебные крошки товара
     private function productBreadcrumbs($page){
         if(!$page->category) return;
-        $items = $page->category->getParentsAndSelf();  
+        $items = $page->category->getParentsAndSelf();
         return $items;
     }
 

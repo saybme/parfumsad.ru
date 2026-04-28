@@ -226,7 +226,7 @@ class Product extends Model
             )
             ->first();
 
-        return [
+        $data = [
             'count' => (int) $stats->count,
             'average' => (float) $stats->average,
             'stars' => [
@@ -238,6 +238,10 @@ class Product extends Model
             ],
             'percentage' => round(($stats->average / 5) * 100)
         ];
+
+        //Log::info(print_r($data, true));
+
+        return $data;
     }
 
 }

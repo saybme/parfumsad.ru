@@ -5,7 +5,11 @@ fields:
         span: full
         type: relation
         placeholder: Выберите товар
-        nameFrom: name
+        select: concat(name, ' ID', id)
+    product_link:
+        label: Ссылка на товар
+        span: full
+        type: partial
     props[username]:
         label: Имя пользователя
         span: full
