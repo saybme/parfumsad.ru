@@ -1,11 +1,15 @@
-fields:    
+fields:
     product:
         label: Товар
         comment: Выберите товар, который хотите оценить
         span: full
         type: relation
         placeholder: Выберите товар
-        nameFrom: name        
+        nameFrom: name
+    props[username]:
+        label: Имя пользователя
+        span: full
+        type: text
 tabs:
     fields:
         content:
@@ -38,9 +42,9 @@ tabs:
             type: datepicker
             mode: date
             tab: Ответ администратора
-            disabled: true        
+            disabled: true
 secondaryTabs:
-    fields:        
+    fields:
         is_verified_purchase:
             label: Подтвержденная покупка
             span: auto
@@ -61,4 +65,3 @@ secondaryTabs:
             type: relation
             placeholder: Выберите пользователя
             nameFrom: email
-    

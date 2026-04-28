@@ -20,18 +20,18 @@ class User extends Model
         'password_confirmation',
         'hash'
     ];
-    
+
     public $table = 'saybme_sk_users';
-    
+
     public $rules = [
         'email' => 'required|email|unique:saybme_sk_users,email',
         'phone' => 'required|phone|unique:saybme_sk_users,phone',
-        'inn' => 'required|size:10|unique:saybme_sk_users,inn',
+        'inn' => 'required|min:10|max:12|unique:saybme_sk_users,inn',
         'password' => ['required:create', 'string', 'confirmed'],
     ];
 
     public function beforeValidate(){
-        $phone = preg_replace("/[^0-9]/", "", $this->phone); 
+        $phone = preg_replace("/[^0-9]/", "", $this->phone);
         $phone = 7 . substr($phone, 1);
         $this->phone = $phone;
     }

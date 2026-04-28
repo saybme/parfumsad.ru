@@ -17,6 +17,9 @@ class Review extends Model
      */
     protected $dates = ['deleted_at'];
 
+    // jsonable props
+    protected $jsonable = ['props'];
+
     protected $fillable = [
         'user_id',
         'product_id',
@@ -30,7 +33,8 @@ class Review extends Model
         'admin_response',
         'admin_responded_at',
         'helpful_count',
-        'unhelpful_count'
+        'unhelpful_count',
+        'props'
     ];
 
     protected $casts = [

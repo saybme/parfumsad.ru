@@ -24,6 +24,7 @@ class Plugin extends PluginBase
         $this->registerConsoleCommand('saybme.skimport', \Saybme\Sk\Console\Skimport::class);
         $this->registerConsoleCommand('saybme.skproducts', \Saybme\Sk\Console\Skproducts::class);
         $this->registerConsoleCommand('saybme.currency', \Saybme\Sk\Console\Currency::class);
+        $this->registerConsoleCommand('saybme.skreview', \Saybme\Sk\Console\Skreview::class);
 
         $this->registerValidationRule('phone', PhoneRule::class);
         $this->registerValidationRule('user', UserRule::class);
@@ -72,7 +73,7 @@ class Plugin extends PluginBase
             $controller->vars['networks'] = GlobalClass::networks();
             $controller->vars['isUser'] = UserClass::isUser();
         });
-        
+
 
     }
 
@@ -138,7 +139,7 @@ class Plugin extends PluginBase
 
 
 
-   
+
 
 
 
