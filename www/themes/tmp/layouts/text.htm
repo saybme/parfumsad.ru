@@ -12,24 +12,24 @@ handle = "SkSettings"
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    {% partial 'site/head' %}    
+    {% partial 'site/head' %}
 </head>
 <body>
 
     <header>
         {% partial 'site/header' %}
     </header>
-    
+
     <div class="container text pt-8">
         {% page %}
     </div>
 
-    <footer>
+    <footer itemscope itemtype="https://schema.org/WPFooter">
         {% partial 'site/footer' %}
     </footer>
 
-    {% partial 'meta/scripts' %}    
+    {% partial 'meta/scripts' %}
     {{ global.body_scripts | raw }}
-    
+
 </body>
 </html>

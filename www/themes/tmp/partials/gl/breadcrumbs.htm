@@ -1,18 +1,27 @@
 <div class="container">
     <ul class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
 
+        {# Главная #}
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-2 sm:size-4 mr-2 relative -top-[1px]" fill="currentColor" viewBox="0 0 256 256"><path d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77ZM208,208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48V115.55l.11-.1L128,40l79.9,75.43.11.10Z"></path></svg>
-            <a href="/" itemprop="item"><span itemprop="name">Главная</span></a>
+            <a href="/" itemprop="item" class="flex items-center underline hover:no-underline">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-2 sm:size-4 mr-2 relative -top-[1px]" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77ZM208,208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48V115.55l.11-.1L128,40l79.9,75.43.11.10Z"></path>
+                </svg>
+                <span itemprop="name">Главная</span>
+            </a>
             <meta itemprop="position" content="1">
-        </li>          
+        </li>
 
         {% for item in items %}
             <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
                 {% if item.active %}
-                    <span itemprop="name">{{ item.name }}</span>
+                {# Для активного элемента - ссылка на текущую страницу #}
+                <link itemprop="item" href="{{ item.url|default(app.request.uri) }}">
+                <span itemprop="name">{{ item.name }}</span>
                 {% else %}
-                    <a href="{{ item.url }}" itemprop="item"><span itemprop="name">{{ item.name }}</span></a>
+                <a href="{{ item.url }}" class="underline hover:no-underline" itemprop="item">
+                    <span itemprop="name">{{ item.name }}</span>
+                </a>
                 {% endif %}
                 <meta itemprop="position" content="{{ loop.index + 1 }}">
             </li>

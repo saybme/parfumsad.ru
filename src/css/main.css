@@ -270,10 +270,6 @@
         @apply flex items-center before:content-['/'] first:before:content-[''] before:mr-2
     }
 
-    .breadcrumbs li a {
-        @apply hover:text-rose hover:underline
-    }
-
     .title-h1 {
         @apply text-lg sm:text-3xl leading-tight font-medium
     }         

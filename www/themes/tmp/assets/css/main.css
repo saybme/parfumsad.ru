@@ -3476,11 +3476,6 @@ details.collapse summary::-webkit-details-marker {
   --tw-content: '';
   content: var(--tw-content);
 }
-.breadcrumbs li a:hover {
-  --tw-text-opacity: 1;
-  color: rgb(241 84 142 / var(--tw-text-opacity, 1));
-  text-decoration-line: underline;
-}
 .title-h1 {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -4189,6 +4184,10 @@ details.collapse summary::-webkit-details-marker {
 }
 .gap-y-8 {
   row-gap: 2rem;
+}
+.gap-x-8 {
+  -moz-column-gap: 2rem;
+       column-gap: 2rem;
 }
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;

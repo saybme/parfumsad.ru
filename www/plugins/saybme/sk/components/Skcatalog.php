@@ -125,7 +125,7 @@ class Skcatalog extends \Cms\Classes\ComponentBase
         // Поиск категории
         $page = Category::active()->where('uri', $slug)->first();
         if($page){
-            $this->getPageInfo($page);
+            $this->categoryMeta($page);
             $options['page'] = $page;
             $options['breadcrumbs'] = $this->categoryBreadcrumbs($page);
             $isNew = $this->property('is_new');
@@ -146,6 +146,18 @@ class Skcatalog extends \Cms\Classes\ComponentBase
         };
 
         return $this->controller->run('404');
+
+    }
+
+    // Мета теги для категории
+    private function categoryMeta($page){
+        if(!$page) return;
+
+        $this->page->title = $page->name;
+        $this->page->meta_title = $page->props['seo_title'] ?? $page->name;
+        $this->page->url = $page->link;
+        $this->page->meta_description = $page->props['seo_description'] ?? '';
+        $this->page->meta_keywords = $page->props['seo_keywords'] ?? '';
 
     }
 
@@ -171,10 +183,8 @@ class Skcatalog extends \Cms\Classes\ComponentBase
         $items = $page->getParentsAndSelf();
 
         $items->each(function ($item, $key) use ($page) {
-            $item->active = false;
-            if($item->id == $page->id) $item->active = true;
-
-            $item->url = $item->slug;
+            $item->active = $page->id === $item->id;;
+            $item->url = $item->link;
         });
 
         return $items;

@@ -13,24 +13,24 @@ handle = "SkSettings"
     {% partial 'meta/product-schema' %}
     {% partial 'meta/article-schema' %}
     {% partial 'meta/faq-schema' %}
-    
+
 </head>
 <body data-overlayscrollbars-initialize>
 
     <header>
         {% partial 'site/header' %}
     </header>
-    
+
     <main>
         {% page %}
     </main>
 
-    <footer>
+    <footer itemscope itemtype="https://schema.org/WPFooter">
         {% partial 'site/footer' %}
     </footer>
 
-    {% partial 'meta/scripts' %}    
+    {% partial 'meta/scripts' %}
     {{ global.body_scripts | raw }}
-    
+
 </body>
 </html>
