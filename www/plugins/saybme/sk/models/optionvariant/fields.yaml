@@ -1,0 +1,22 @@
+fields:
+    label:
+        label: 'Название'
+        type: text
+        span: full
+        required: true
+        placeholder: 'например: Красный'
+        comment: 'Системное значение будет создано автоматически'
+
+    value:
+        label: 'Системное значение'
+        type: text
+        span: full
+        readonly: true
+        hidden: true
+        comment: 'Генерируется автоматически'
+
+    sort_order:
+        label: 'Порядок'
+        type: number
+        span: left
+        default: 0

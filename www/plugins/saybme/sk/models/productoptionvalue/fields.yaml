@@ -1,0 +1,25 @@
+fields:
+    option:
+        label: Опция
+        type: relation
+        nameFrom: label
+        placeholder: Выберите опцию
+        span: full
+
+    value_text:
+        label: Значение
+        type: text
+        dependsOn: option
+        span: full
+        trigger:
+            action: show
+            field: option
+
+    value_multiple:
+        label: Значение
+        type: taglist
+        dependsOn: option
+        span: full
+        trigger:
+            action: show
+            field: option

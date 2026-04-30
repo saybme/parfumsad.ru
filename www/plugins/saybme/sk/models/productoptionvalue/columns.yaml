@@ -1,0 +1,26 @@
+columns:
+    id:
+        label: ID
+        invisible: true
+
+    option_name:
+        label: 'Характеристика'
+        relation: option
+        valueFrom: label
+        searchable: true
+        sortable: true
+
+    value:
+        label: 'Значение'
+        type: text
+        searchable: true
+        sortable: true
+
+    value_extra:
+        label: 'Доп. данные'
+        type: text
+
+    created_at:
+        label: 'Добавлено'
+        type: datetime
+        invisible: true

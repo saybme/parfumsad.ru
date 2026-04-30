@@ -1,0 +1,12 @@
+columns:
+    value:
+        label: 'Системное значение'
+        type: text
+
+    label:
+        label: 'Название'
+        type: text
+
+    sort_order:
+        label: 'Порядок'
+        type: number

@@ -121,7 +121,9 @@ class Review extends Model
 
      // Ссылка на товар
      public function getProductLinkAttribute(){
-        return $this->product->link;
+        if ($this->product) {
+            return $this->product->link;
+        }
      }
 
     // Аксессор для получения текста статуса
