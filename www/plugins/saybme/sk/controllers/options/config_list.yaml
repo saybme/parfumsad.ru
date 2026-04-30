@@ -1,13 +1,16 @@
+# ===================================
+#  List Controller Configuration
+# ===================================
+
+modelClass: \Saybme\Sk\Models\Option
 list: $/saybme/sk/models/option/columns.yaml
-modelClass: Saybme\Sk\Models\Option
-title: Options
-noRecordsMessage: 'backend::lang.list.no_records'
-showSetup: true
-showCheckboxes: true
-recordsPerPage: 20
-recordOnClick: popup
+
+title: 'Характеристики'
+noRecordsMessage: 'Характеристики не найдены'
+
 toolbar:
     buttons: list_toolbar
     search:
-        prompt: 'backend::lang.list.search_prompt'
+        prompt: 'Поиск...'
+
 recordUrl: 'saybme/sk/options/update/:id'

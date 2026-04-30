@@ -36,6 +36,12 @@ class Plugin extends PluginBase
      */
     public function boot(){
 
+        \Backend\Controllers\Auth::extend(function($controller) {
+            if ($controller->action == 'update' && get_class($controller->controller) == 'Saybme\Sk\Controllers\Options') {
+                $controller->addJs('/plugins/saybme/sk/assets/js/option-form.js');
+            }
+        });
+
         Event::listen('cms.pageLookup.listTypes', function() {
             return [
                 'sk-category' => 'SK категории',

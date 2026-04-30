@@ -1,13 +1,13 @@
-name: Options
+modelClass: \Saybme\Sk\Models\Option
 form: $/saybme/sk/models/option/fields.yaml
-modelClass: Saybme\Sk\Models\Option
+
+name: 'Характеристика'
 defaultRedirect: saybme/sk/options
-design:
-    displayMode: popup
-    size: 750
+
 create:
     redirect: 'saybme/sk/options/update/:id'
     redirectClose: saybme/sk/options
+
 update:
     redirect: saybme/sk/options
     redirectClose: saybme/sk/options

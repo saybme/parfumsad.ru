@@ -1,27 +1,42 @@
 <?php namespace Saybme\Sk\Models;
 
 use Model;
-use Str;
 
 class Option extends Model
 {
-    use \October\Rain\Database\Traits\Validation;    
+    use \October\Rain\Database\Traits\Sortable;
+    use \October\Rain\Database\Traits\Validation;
 
-    protected $jsonable = ['props'];
-    
     public $table = 'saybme_sk_options';
-    
+
     public $rules = [
-        'name' => 'required'
+        'name' => 'required|unique:saybme_sk_options',
+        'label' => 'required'
     ];
 
-    public function scopeActive($query) {
-        return $query->where('is_active', true);
+    public $hasMany = [
+        'variants' => [OptionVariant::class]
+    ];
+
+    public static function getOptionsList()
+    {
+        return self::orderBy('sort_order')->pluck('label', 'id')->toArray();
     }
 
-    public function beforeCreate() {
-        $this->code = Str::slug($this->name);
+    public function getTypeOptions()
+    {
+        return [
+            'dropdown' => 'Выпадающий список',
+            'checkbox' => 'Чекбоксы',
+            'radio' => 'Переключатели',
+            'range' => 'Диапазон чисел',
+            'color' => 'Цвет',
+            'text' => 'Текст'
+        ];
     }
 
-
+    public function getVariantsCountAttribute()
+    {
+        return $this->variants()->count();
+    }
 }

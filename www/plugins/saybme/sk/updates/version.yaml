@@ -162,3 +162,16 @@ v1.0.54:
 v1.0.55:
     - 'Updated table saybme_sk_reviews'
     - builder_table_update_saybme_sk_reviews.php
+v1.0.56:
+    - 'Updated table saybme_sk_options'
+    - builder_table_update_saybme_sk_options_2.php
+v1.0.57:
+    - 'Создание таблиц'
+    - create_all_tables.php
+v1.0.58:
+    - 'Добавление внешних ключей'
+    - add_foreign_keys_to_option_variants.php
+    - add_foreign_keys_to_product_option_values.php
+v1.0.59:
+    - 'Добавление начальных данных'
+    - seed_default_options.php

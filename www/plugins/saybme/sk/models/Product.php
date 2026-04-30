@@ -62,13 +62,72 @@ class Product extends Model
             'table' => 'saybme_sk_category_product',
             'key' => 'product_id',
             'otherKey' => 'category_id'
+        ],
+        // ЭТО УЖЕ ЕСТЬ - ОСТАВЬТЕ
+        'options' => [
+            Option::class,
+            'table' => 'saybme_sk_product_option_values',
+            'key' => 'product_id',
+            'otherKey' => 'option_id',
+            'pivot' => ['value', 'value_extra'],  // ← ДОБАВЬТЕ ЭТУ СТРОКУ
+            'timestamps' => true
         ]
     ];
 
+    // ЭТО УЖЕ ЕСТЬ - ОСТАВЬТЕ
     public $hasMany = [
-        'offers' => \Saybme\Sk\Models\Offer::class,
-        'reviews' => \Saybme\Sk\Models\Review::class
+        'reviews' => \Saybme\Sk\Models\Review::class,
+        'option_values' => [ProductOptionValue::class, 'key' => 'product_id']  // ← ДОБАВЬТЕ ЭТУ СТРОКУ
     ];
+
+    // Аксессор для отображения опций в списке
+    public function getOptionsListAttribute()
+    {
+        return $this->options->map(function($option) {
+            return $option->label . ': ' . $option->pivot->value;
+        })->implode(', ');
+    }
+
+    // ========== ДОБАВЬТЕ ЭТИ МЕТОДЫ ==========
+
+    // Получить все характеристики товара для отображения на сайте
+    public function getProductOptionsAttribute()
+    {
+        $options = [];
+        foreach ($this->option_values as $value) {
+            $option = $value->option;
+            if (!isset($options[$option->id])) {
+                $options[$option->id] = [
+                    'option' => $option,
+                    'values' => []
+                ];
+            }
+            $options[$option->id]['values'][] = $value;
+        }
+        return $options;
+    }
+
+    // Получить HTML для отображения характеристик
+    public function getOptionsHtmlAttribute()
+    {
+        if ($this->option_values->isEmpty()) {
+            return '';
+        }
+
+        $html = '<div class="product-options">';
+        foreach ($this->option_values->groupBy('option_id') as $optionId => $values) {
+            $option = $values->first()->option;
+            $html .= '<div class="option-group">';
+            $html .= '<strong>' . e($option->label) . ':</strong> ';
+            $html .= implode(', ', $values->pluck('value')->toArray());
+            $html .= '</div>';
+        }
+        $html .= '</div>';
+
+        return $html;
+    }
+
+    // ========== ОСТАЛЬНОЙ ВАШ КОД БЕЗ ИЗМЕНЕНИЙ ==========
 
     public function scopeActive($query) {
         $query = $query->where('is_active', true);
@@ -143,7 +202,6 @@ class Product extends Model
         return url($url);
     }
 
-    // Цены
     public function getPricesAttribute(){
 
         $arr = array();
@@ -159,7 +217,6 @@ class Product extends Model
         return collect($arr);
     }
 
-    // Имя категории
     public function getCategoryNameAttribute(){
         if($this->category){
             return $this->category->name;
@@ -167,7 +224,6 @@ class Product extends Model
         return;
     }
 
-    // Опции
     public function getOptionsAttribute(){
         $offers = $this->offers;
         if(!$offers) return;
@@ -177,12 +233,10 @@ class Product extends Model
         });
     }
 
-    // Сохраняем URI
     public function beforeSave(){
         $this->uri = $this->productUri();
     }
 
-    // Процент скидки
     public function getPercentAttribute(){
 
         if(trim($this->old_price)){
@@ -195,7 +249,6 @@ class Product extends Model
         return;
     }
 
-    // Создаеи URI
     private function productUri(){
 
         if($this->category){
@@ -208,7 +261,6 @@ class Product extends Model
         return $url;
     }
 
-    // Количество отзывов
     public function getReviewsCountAttribute(){
         return $this->reviews->where('status', 'approved')->count();
     }
@@ -239,9 +291,6 @@ class Product extends Model
             'percentage' => round(($stats->average / 5) * 100)
         ];
 
-        //Log::info(print_r($data, true));
-
         return $data;
     }
-
 }

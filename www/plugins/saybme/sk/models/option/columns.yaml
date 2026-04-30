@@ -1,17 +1,50 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
 columns:
-    name:
-        label: Опция
+    id:
+        label: ID
+        invisible: true
+
+    label:
+        label: 'Название'
         type: text
         searchable: true
-    measure:
-        label: Единицы
+        sortable: true
+
+    name:
+        label: 'Системное имя'
         type: text
-    is_active:
-        label: Опубликован
-        type: switch
+        searchable: true
+        sortable: true
+
     type:
-        label: Тип
+        label: 'Тип'
         type: text
-    code:
-        label: Код
-        type: text
+
+    is_filterable:
+        label: 'В фильтре'
+        type: switch
+        sortable: true
+
+    sort_order:
+        label: 'Порядок'
+        type: number
+        sortable: true
+
+    variants_count:
+        label: 'Вариантов'
+        type: number
+        sortable: false
+        valueFrom: variants_count  # ← Используем аксессор
+
+    created_at:
+        label: 'Создано'
+        type: datetime
+        invisible: true
+
+    updated_at:
+        label: 'Обновлено'
+        type: datetime
+        invisible: true

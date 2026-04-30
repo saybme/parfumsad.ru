@@ -18,12 +18,11 @@ class Category extends Model
     protected $jsonable = ['props'];
 
     protected $slugs = ['slug' => 'name'];
-    
-    public $table = 'saybme_sk_categories';  
+
+    public $table = 'saybme_sk_categories';
 
     public $rules = [
-        'name' => 'required',
-        'slug' => 'required'
+        'name' => 'required'
     ];
 
     public $attachOne = [
@@ -45,13 +44,13 @@ class Category extends Model
     public function scopeActive($query) {
         return $query->where('is_active', true);
     }
-   
+
     public function getLinkAttribute(){
 
         $arr[] = '/directory';
         $arr[] = $this->uri;
         $url = implode('/', $arr);
-       
+
         return url($url);
     }
 
@@ -67,7 +66,7 @@ class Category extends Model
 
     public function getIsOpenAttribute(){
         $currentURL = url()->current();
-        $position = strpos($currentURL, $this->slug);        
+        $position = strpos($currentURL, $this->slug);
         return $position !== false;
     }
 
@@ -86,14 +85,14 @@ class Category extends Model
                 'nesting'      => true,
                 'dynamicItems' => true
             ];
-        }        
+        }
 
         if ($result) {
             $theme = Theme::getActiveTheme();
 
             $pages = CmsPage::listInTheme($theme, true);
             $cmsPages = [];
-            foreach ($pages as $page) {              
+            foreach ($pages as $page) {
 
                 $cmsPages[] = $page;
             }
@@ -177,18 +176,18 @@ class Category extends Model
 
                 $result['items'] = $iterator($category->children);
             }
-        }        
+        }
 
         return $result;
     }
 
-    protected static function getCategoryPageUrl($pageCode, $category, $theme) {        
+    protected static function getCategoryPageUrl($pageCode, $category, $theme) {
 
         $page = CmsPage::loadCached($theme, $pageCode);
         if (!$page) return;
 
         $paramName = 'ct';
-        $url = CmsPage::url($page->getBaseFileName(), ['slug' => $category->slug]);     
+        $url = CmsPage::url($page->getBaseFileName(), ['slug' => $category->slug]);
 
         return $url;
     }

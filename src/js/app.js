@@ -201,29 +201,55 @@ window.productPhotos = function () {
 
 // ====================== SCROLL TO TOP BUTTON (с RAF) ======================
 let scrollTicking = false;
+const scrollToTopBtn = document.getElementById('scroll-to-top');
 
-window.addEventListener('scroll', function () {
-    if (!scrollTicking) {
-        requestAnimationFrame(() => {
-            const scrollToTopBtn = document.getElementById('scroll-to-top');
-            if (!scrollToTopBtn) return;
+if (scrollToTopBtn) {
+    // Изначально скрыта, но с нулевой прозрачностью
+    scrollToTopBtn.style.display = 'flex';
+    scrollToTopBtn.style.transition = 'opacity 0.3s ease';
+    scrollToTopBtn.style.opacity = '0';
 
-            if (window.scrollY > 300) {
-                scrollToTopBtn.classList.remove('hidden');
-                // Плавное появление кнопки при скролле вниз
-                scrollToTopBtn.style.opacity = '1';
-            } else {
-                // Плавное скрытие кнопки при возвращении вверх
-                scrollToTopBtn.style.opacity = '0';
-                setTimeout(() => {
-                    scrollToTopBtn.classList.add('hidden');
-                }, 300);
-            }
-            scrollTicking = false;
-        });
-        scrollTicking = true;
-    }
-});
+    window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+            requestAnimationFrame(() => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.style.opacity = '1';
+                } else {
+                    scrollToTopBtn.style.opacity = '0';
+                }
+                scrollTicking = false;
+            });
+            scrollTicking = true;
+        }
+    });
+}
+
+// Кнопка вниз страницы
+let scrollTickingButton = false;
+const scrollToBottomBtn = document.getElementById('scroll-to-bottom');
+
+if (scrollToBottomBtn) {
+    scrollToBottomBtn.style.display = 'flex';
+    scrollToBottomBtn.style.transition = 'opacity 0.3s ease';
+    scrollToBottomBtn.style.opacity = '0';
+
+    window.addEventListener('scroll', () => {
+        if (!scrollTickingButton) {
+            requestAnimationFrame(() => {
+                // Проверяем, НЕ внизу ли страницы
+                const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
+
+                if (!isAtBottom && window.scrollY > 100) {
+                    scrollToBottomBtn.style.opacity = '1';
+                } else {
+                    scrollToBottomBtn.style.opacity = '0';
+                }
+                scrollTickingButton = false;
+            });
+            scrollTickingButton = true;
+        }
+    });
+}
 
 // ====================== MARQUEE ======================
 let marqueeInitialized = false;

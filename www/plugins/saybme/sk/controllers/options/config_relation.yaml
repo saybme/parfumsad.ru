@@ -1,0 +1,8 @@
+variants:
+    label: 'Варианты значений'
+    view:
+        list: $/saybme/sk/models/optionvariant/columns.yaml
+        toolbarButtons: create|delete
+    manage:
+        form: $/saybme/sk/models/optionvariant/fields.yaml
+        list: $/saybme/sk/models/optionvariant/columns.yaml

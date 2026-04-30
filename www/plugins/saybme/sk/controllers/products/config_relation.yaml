@@ -1,12 +1,3 @@
-offers:
-    label: Торговые предложения
-    view:
-        list: $/saybme/sk/models/offer/columns.yaml
-        toolbarButtons: create|delete
-        recordsPerPage: 10
-    manage:
-        form: $/saybme/sk/models/offer/fields.yaml
-
 reviews:
     label: Отзывы
     view:
@@ -15,4 +6,15 @@ reviews:
         recordsPerPage: 10
     manage:
         form: $/saybme/sk/models/review/fields.yaml
-        
+
+option_values:  # ← Используем hasMany отношение
+    label: 'Характеристики товара'
+    view:
+        list: $/saybme/sk/models/productoptionvalue/columns.yaml
+        toolbarButtons: create|delete
+        recordsPerPage: 10
+        showSearch: true
+    manage:
+        form: $/saybme/sk/models/productoptionvalue/fields.yaml
+        showSearch: true
+

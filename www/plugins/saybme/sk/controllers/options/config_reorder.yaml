@@ -1,0 +1,22 @@
+# ===================================
+#  Reorder Behavior Configuration
+# ===================================
+
+title: 'Сортировка характеристик'
+model: \Saybme\Sk\Models\Option
+nameFrom: label
+toolbar:
+    buttons: reorder_toolbar
+    # Кнопки: reorder_toolbar, reorder_toolbar_search, reorder_toolbar_delete
+
+sortOrder: sort_order
+# Поле в модели для хранения порядка сортировки
+
+showTree: false
+# Показывать как дерево (если есть родительские элементы)
+
+showSearch: true
+# Показывать поиск
+
+recordsPerPage: 100
+# Записей на страницу

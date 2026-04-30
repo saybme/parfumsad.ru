@@ -23,7 +23,7 @@ class Products extends Controller
     }
 
     public function onModalProductPrice()
-    {     
+    {
         $this->asExtension('FormController')->update(post('record_id'));
         $this->vars['recordId'] = post('record_id');
         return $this->makePartial('update_form');
@@ -35,5 +35,29 @@ class Products extends Controller
         return $this->listRefresh();
     }
 
+    public function onGetOptionVariants()
+    {
+        $optionId = post('option_id');
+
+        if (!$optionId) {
+            return ['variants' => []];
+        }
+
+        $option = Option::find($optionId);
+
+        $variants = [];
+        if ($option && $option->variants) {
+            foreach ($option->variants as $variant) {
+                $variants[$variant->value] = $variant->label;
+            }
+        }
+
+        return [
+            '#value-container' => $this->makePartial('$/saybme/sk/models/productoptionvalue/_value_container.htm', [
+                'variants' => $variants,
+                'selectedValue' => ''
+            ])
+        ];
+    }
 
 }

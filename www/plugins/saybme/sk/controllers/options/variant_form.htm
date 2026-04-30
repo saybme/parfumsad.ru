@@ -1,0 +1,50 @@
+{{ form_open([
+'data-request' => 'onSaveVariant',
+'data-request-update' => "{'option/_variants': '#variants-container'}",
+'data-request-success' => '$el.closest(\'.control-popup\').popup(\'hide\')'
+]) }}
+
+<input type="hidden" name="Variant[option_id]" value="{{ optionId }}">
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="popup">&times;</button>
+    <h4 class="modal-title">Добавить вариант</h4>
+</div>
+
+<div class="modal-body">
+    <div class="form-group">
+        <label>Системное значение <span class="text-danger">*</span></label>
+        <input type="text"
+               name="Variant[value]"
+               class="form-control"
+               placeholder="например: red"
+               required>
+        <p class="help-block">Используется в коде и фильтрации</p>
+    </div>
+
+    <div class="form-group">
+        <label>Отображаемое название <span class="text-danger">*</span></label>
+        <input type="text"
+               name="Variant[label]"
+               class="form-control"
+               placeholder="например: Красный"
+               required>
+        <p class="help-block">Что увидят пользователи</p>
+    </div>
+
+    <div class="form-group">
+        <label>Порядок сортировки</label>
+        <input type="number"
+               name="Variant[sort_order]"
+               class="form-control"
+               value="0">
+        <p class="help-block">Чем меньше число, тем выше в списке</p>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <button type="button" class="btn btn-default" data-dismiss="popup">Отмена</button>
+</div>
+
+{{ form_close() }}

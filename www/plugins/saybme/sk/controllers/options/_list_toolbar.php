@@ -1,14 +1,12 @@
 <div data-control="toolbar">
-    
 
-    <button
-        type="button"
-        data-control="popup"
-        data-handler="onLoadPopupForm"
+
+
+    <a
+        href="<?= Backend::url('saybme/sk/options/create') ?>"
         class="btn btn-primary oc-icon-plus">
-        Создать
-    </button>
-
+        <?= e(trans('backend::lang.form.create')) ?>
+    </a>
 
     <button
         class="btn btn-default oc-icon-trash-o"

@@ -18,23 +18,25 @@ tabs:
             mode: image
             span: full
             tab: Галерея
-        offers:
-            span: full
-            tab: Торговые предложения
+        option_values:
+            label: 'Характеристики товара'
             type: partial
+            path: $/saybme/sk/models/product/_options.htm
+            tab: 'Характеристики'
+            span: full
         is_new:
             label: Новинка
-            span: full            
+            span: full
             type: checkbox
             tab: Дополнительно
         is_popular:
             label: Популярный
-            span: full            
+            span: full
             type: checkbox
             tab: Дополнительно
         is_recomended:
             label: Рекомендуем
-            span: full            
+            span: full
             type: checkbox
             tab: Дополнительно
         categories:
@@ -83,7 +85,7 @@ tabs:
             span: full
             type: partial
             tab: Отзывы
-fields:    
+fields:
     name:
         label: Товар
         span: auto
@@ -96,8 +98,8 @@ fields:
             type: slug
         type: text
     _prices:
-        label: Цены 
-        span: full 
+        label: Цены
+        span: full
         type: section
     price:
         label: Цена, руб.
@@ -122,7 +124,7 @@ secondaryTabs:
             label: Опубликован
             span: full
             default: 1
-            type: checkbox        
+            type: checkbox
         preview:
             label: Превью
             type: fileupload
@@ -135,8 +137,8 @@ secondaryTabs:
             label: Категория
             span: full
             type: relation
-            placeholder: -- Выбрать --      
-        
+            placeholder: -- Выбрать --
+
         article:
             label: Артикул
             span: full

@@ -1,0 +1,61 @@
+<?php
+$variants = $variants ?? [];
+$selectedValue = $selectedValue ?? '';
+$hasVariants = !empty($variants);
+?>
+
+<div id="value-container">
+    <?php if ($hasVariants): ?>
+    <div class="form-group">
+        <select
+            name="ProductOptionValue[value]"
+            class="form-control"
+            id="value-select"
+            data-custom-input="#custom-value">
+            <option value="">-- Выберите из списка --</option>
+            <?php foreach ($variants as $key => $label): ?>
+            <option value="<?= e($key) ?>" <?= $selectedValue == $key ? 'selected' : '' ?>>
+            <?= e($label) ?>
+            </option>
+            <?php endforeach; ?>
+            <option value="__custom__">--- Ввести свое значение ---</option>
+        </select>
+        <input
+            type="text"
+            name="ProductOptionValue[value]"
+            class="form-control"
+            id="custom-value"
+            placeholder="Или введите свое значение"
+            style="margin-top: 10px; display: none;"
+            value="<?= $selectedValue ?>">
+    </div>
+    <?php else: ?>
+    <input
+        type="text"
+        name="ProductOptionValue[value]"
+        class="form-control"
+        placeholder="Введите значение вручную">
+    <?php endif; ?>
+</div>
+
+<script>
+    setTimeout(function() {
+        var select = document.getElementById('value-select');
+        var customInput = document.getElementById('custom-value');
+
+        if (select && customInput) {
+            select.addEventListener('change', function() {
+                if (this.value === '__custom__') {
+                    customInput.style.display = 'block';
+                    customInput.name = 'ProductOptionValue[value]';
+                    select.name = '';
+                    customInput.focus();
+                } else {
+                    customInput.style.display = 'none';
+                    customInput.name = '';
+                    select.name = 'ProductOptionValue[value]';
+                }
+            });
+        }
+    }, 100);
+</script>
