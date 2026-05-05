@@ -1,0 +1,22 @@
+{
+    "php.validate.executablePath": "C:\\xampp\\php\\php.exe",
+    "php.suggest.basic": true,
+    "intelephense.environment.phpVersion": "8.1",
+    "intelephense.files.maxSize": 5000000,
+    "intelephense.diagnostics.enable": true,
+    "intelephense.diagnostics.run": "onSave",
+    "intelephense.files.associations": ["*.php"],
+    "intelephense.include.paths": [
+        "c:\\xampp\\htdocs\\parfumsad.ru\\www\\modules",
+        "c:\\xampp\\htdocs\\parfumsad.ru\\www\\plugins",
+        "c:\\xampp\\htdocs\\parfumsad.ru\\www\\vendor"
+    ],
+    "files.associations": {
+        "*.htm": "html",
+        "*.php": "php"
+    },
+    "emmet.includeLanguages": {
+        "twig": "html"
+    },
+    "octobercms.support": true
+}

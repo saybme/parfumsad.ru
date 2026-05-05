@@ -42,3 +42,6 @@ Route::get('/fid/products.xml', function () {
 
 // Создаем отзыв по api
 Route::get('/api/review', 'Saybme\Sk\Controllers\ReviewController@store');
+
+// Заполняем карточку товаров
+Route::get('/api/product/content', 'Saybme\Sk\Controllers\ProductController@content');

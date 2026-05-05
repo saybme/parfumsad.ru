@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "bmewburn.vscode-intelephense-client",
+        "bradlc.vscode-tailwindcss",
+        "formulahendry.auto-rename-tag",
+        "octobercms.theme-support",
+        "mrmlnc.vscode-twig",
+        "Codeium.codeium",
+        "GitHub.copilot"
+    ]
+}
