@@ -29,12 +29,14 @@
                     <categoryId>{{ item.category_id }}</categoryId>
                     <picture>{{ item.preview.path }}</picture>
                     <url>{{ item.link }}</url>
+                    {% if item.content %}
                     <description>
                         <![CDATA[
                             {{ item.content | raw }}
                         ]]>
                     </description>
-                    <vendor>Dior</vendor>
+                    {% endif %}
+                    <vendor>{{ item.vendor.name }}</vendor>
                 </offer>
             {% endfor %}
         </offers>

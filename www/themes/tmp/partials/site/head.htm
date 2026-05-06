@@ -106,3 +106,9 @@
 {% styles %}
 
 {{ global.head_scripts | raw }}
+
+{% if json_ld %}
+<script type="application/ld+json">
+    {{ json_ld|raw }}
+</script>
+{% endif %}

@@ -64,6 +64,7 @@ class Skcatalog extends \Cms\Classes\ComponentBase
 
     private function getContent(){
         $type = $this->property('type');
+        //dd($type);
         return $this->$type();
     }
 
@@ -137,16 +138,70 @@ class Skcatalog extends \Cms\Classes\ComponentBase
         // Поиск товара
         $page = Product::active()->where('uri', $slug)->first();
         if($page){
-            $this->getPageInfo($page);
+
+            $this->getPageInfo($page);            
+
             $options['product'] = $page;
             $isNew = $this->property('is_new');
             $options['products'] = CatalogClass::getSimilarProducts($page, $isNew);
             $options['breadcrumbs'] = $this->productBreadcrumbs($page);
+            
+            $microdata = $this->productMicrodata($page);
+            $this->controller->vars['json_ld'] = $microdata;
+
             return $this->renderPartial('catalog/product', $options);
         };
 
         return $this->controller->run('404');
 
+    }
+
+    // Микроразметка товара в heade
+    private function productMicrodata($page) {
+        if (!$page) return null;
+        
+        // Базовые данные
+        $data = [
+            '@context' => 'https://schema.org/',
+            '@type' => 'Product',
+            'name' => $page->name,
+            'url' => $page->link,
+            'description' => strip_tags($page->description), // очищаем от HTML
+            'sku' => $page->id,
+        ];
+        
+        // Добавляем image только если есть
+        if ($page->photos->count() > 0) {
+            $data['image'] = $page->photos->first()->path;
+        }
+        
+        // Добавляем brand только если есть
+        if ($page->vendor && $page->vendor->name) {
+            $data['brand'] = [
+                '@type' => 'Brand',
+                'name' => $page->vendor->name
+            ];
+        }
+        
+        // Добавляем offers
+        $offer = [
+            '@type' => 'Offer',
+            'price' => (float) $page->price,
+            'priceCurrency' => 'RUB',
+            'availability' => $page->in_stock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+            'url' => $page->link,
+        ];
+        
+        // Добавляем seller
+        $offer['seller'] = [
+            '@type' => 'Organization',
+            'name' => 'Интернет магазин "Цветочный Сад"',
+            'url' => 'https://' . $_SERVER['HTTP_HOST']
+        ];
+        
+        $data['offers'] = [$offer];
+        
+        return json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
 
     // Мета теги для категории

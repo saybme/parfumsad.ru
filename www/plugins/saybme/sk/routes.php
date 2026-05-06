@@ -35,9 +35,25 @@ Route::get('/sitemap.xml', function () {
 
 // Фид прайса
 Route::get('/fid/products.xml', function () {
-    $data['update'] = date('Y-m-d H:i:s');
-    $data['products'] = Saybme\Sk\Models\Product::where('is_active', true)->get();
-    return Response::view('saybme.sk::products', $data)->header('Content-Type', 'text/xml');
+
+    try {
+        $data['update'] = now()->format('Y-m-d H:i:s');
+        
+        $products = Saybme\Sk\Models\Product::with('category','vendor')
+            ->where('is_active', true)
+            ->get();
+        
+        $data['products'] = $products;
+        $data['categories'] = $products->pluck('category')->filter()->unique();
+        
+        return response()
+            ->view('saybme.sk::products', $data)
+            ->header('Content-Type', 'text/xml');
+    } catch (\Exception $e) {
+        \Log::error('XML feed error: ' . $e->getMessage());
+        return response('Internal Server Error', 500);
+    }
+
 });
 
 // Создаем отзыв по api
