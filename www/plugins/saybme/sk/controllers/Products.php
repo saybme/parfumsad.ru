@@ -3,6 +3,8 @@
 use Backend;
 use BackendMenu;
 use Backend\Classes\Controller;
+use Saybme\Sk\Models\Product;
+use Flash;
 
 class Products extends Controller
 {
@@ -32,6 +34,18 @@ class Products extends Controller
     public function onUpdate()
     {
         $this->asExtension('FormController')->update_onSave(post('record_id'));
+        return $this->listRefresh();
+    }
+
+    // onResave
+    public function onResave()
+    {
+        $products = Product::whereHas('category')->get();
+        
+        foreach ($products as $product) {
+            $product->save();
+        }
+        Flash::success('Товары обновлены');
         return $this->listRefresh();
     }
 
