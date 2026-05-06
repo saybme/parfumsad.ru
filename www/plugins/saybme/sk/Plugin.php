@@ -25,6 +25,7 @@ class Plugin extends PluginBase
         $this->registerConsoleCommand('saybme.skproducts', \Saybme\Sk\Console\Skproducts::class);
         $this->registerConsoleCommand('saybme.currency', \Saybme\Sk\Console\Currency::class);
         $this->registerConsoleCommand('saybme.skreview', \Saybme\Sk\Console\Skreview::class);
+        $this->registerConsoleCommand('saybme.skdeepproducts', \Saybme\Sk\Console\Skdeepproducts::class);
 
         $this->registerValidationRule('phone', PhoneRule::class);
         $this->registerValidationRule('user', UserRule::class);
