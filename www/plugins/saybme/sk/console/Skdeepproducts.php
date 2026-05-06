@@ -6,30 +6,30 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Markdown;                    // ← Встроенный парсер October CMS
-use Saybme\Sk\Models\Product;    // ← Замени на правильный путь к твоей модели
+use Markdown;
+use Saybme\Sk\Models\Product;
 
 /**
- * Генерация SEO-описаний товаров через DeepSeek API
+ * Генерация SEO + описаний товаров через DeepSeek API
  */
 class Skdeepproducts extends Command
 {
     protected $signature = 'sk:skdeepproducts {limit?}';
 
-    protected $description = 'Генерация SEO-описаний для товаров через DeepSeek API';
+    protected $description = 'Генерация SEO-полей и описаний для товаров';
 
     public function handle()
     {
-        $limit = $this->argument('limit') ?? 10;
+        $limit = (int) ($this->argument('limit') ?? 10);
 
-        $this->info("Запуск генерации SEO-описаний...");
+        $this->info("🚀 Запуск генерации SEO (лимит: {$limit} товаров)...");
 
-        $this->processProducts();
+        $this->processProducts($limit);
     }
 
-    private function processProducts()
+    private function processProducts(int $limit)
     {
-        $products = $this->getProductsWithoutContent();
+        $products = $this->getProductsWithoutContent($limit);
 
         if ($products->isEmpty()) {
             $this->warn('✅ Нет товаров без описания.');
@@ -45,40 +45,45 @@ class Skdeepproducts extends Command
             $bar->setMessage(Str::limit($product->name, 40));
 
             if (!$product->category) {
-                Log::info("Товар ID {$product->id} пропущен — нет категории");
                 $bar->advance();
                 continue;
             }
 
-            $prompt = $this->buildPrompt($product, $product->category->name);
-            $description = $this->generateTextWithDeepSeek($prompt);
+            $categoryName = $product->category->name;
 
-            if ($description && strlen(strip_tags($description)) > 150) {
+            $seoTitle       = $this->generateSeoField($product, $categoryName, 'title');
+            $seoDescription = $this->generateSeoField($product, $categoryName, 'description');
+            $seoKeywords    = $this->generateSeoField($product, $categoryName, 'keywords');
+            $content        = $this->generateMainContent($product, $categoryName);
+
+            if ($content && strlen(strip_tags($content)) > 150) {
                 try {
-                    DB::transaction(function () use ($product, $description) {
-                        $product->content = $description;
+                    DB::transaction(function () use ($product, $seoTitle, $seoDescription, $seoKeywords, $content) {
+                        $product->content = $content;
+
+                        $props = is_string($product->props) ? json_decode($product->props, true) : ($product->props ?? []);
+                        if (!is_array($props)) $props = [];
+
+                        $props['seo_title']       = $seoTitle;
+                        $props['seo_description'] = $seoDescription;
+                        $props['seo_keywords']    = $seoKeywords;
+
+                        $product->props = $props;
                         $product->save();
                     });
-
-                    Log::info("Описание сгенерировано", [
-                        'product_id' => $product->id,
-                        'name'       => $product->name,
-                        'length'     => strlen($description)
-                    ]);
 
                     $this->newLine();
                     $this->info("✅ #{$product->id} — {$product->name}");
                 } catch (\Exception $e) {
-                    Log::error("Ошибка сохранения товара #{$product->id}", ['error' => $e->getMessage()]);
+                    Log::error("Ошибка сохранения #{$product->id}", ['error' => $e->getMessage()]);
                     $this->error("❌ Ошибка сохранения #{$product->id}");
                 }
             } else {
-                Log::warning("Не удалось получить описание", ['product_id' => $product->id]);
-                $this->error("❌ Ошибка генерации для #{$product->id}");
+                $this->error("❌ Не удалось сгенерировать контент для #{$product->id}");
             }
 
             $bar->advance();
-            usleep(1200000); // 1.2 секунды
+            usleep(1500000); // 1.5 сек
         }
 
         $bar->finish();
@@ -86,7 +91,7 @@ class Skdeepproducts extends Command
         $this->info('🎉 Генерация завершена!');
     }
 
-    private function getProductsWithoutContent()
+    private function getProductsWithoutContent(int $limit)
     {
         return Product::where(function ($q) {
                 $q->whereNull('content')
@@ -94,14 +99,26 @@ class Skdeepproducts extends Command
                   ->orWhere('content', 'LIKE', '%<p></p>%');
             })
             ->with('category')
-            ->limit($this->argument('limit') ?? 10)
+            ->limit($limit)
             ->get();
     }
 
-    private function buildPrompt($product, $categoryName)
+    private function generateSeoField($product, $categoryName, string $type)
     {
-        $prompt = "Составь продающее SEO-описание для интернет-магазина парфюмерии PARFUMSAD.\n\n";
-        $prompt .= "Название товара: {$product->name}\n";
+        $prompts = [
+            'title' => "Составь только SEO Title (максимум 60 символов) для товара:\nНазвание: {$product->name}\nКатегория: {$categoryName}\nМагазин: PARFUMSAD",
+            'description' => "Составь только SEO Description (150-170 символов) для товара:\nНазвание: {$product->name}\nКатегория: {$categoryName}\nМагазин: PARFUMSAD",
+            'keywords' => "Составь только SEO Keywords (через запятую, 10-15 слов) для товара:\nНазвание: {$product->name}\nКатегория: {$categoryName}"
+        ];
+
+        $text = $this->callDeepSeek($prompts[$type]);
+        return trim($text);
+    }
+
+    private function generateMainContent($product, $categoryName)
+    {
+        $prompt = "Составь продающее описание товара для магазина PARFUMSAD.\n\n";
+        $prompt .= "Название: {$product->name}\n";
         $prompt .= "Категория: {$categoryName}\n";
 
         if (!empty($product->props)) {
@@ -118,40 +135,36 @@ class Skdeepproducts extends Command
 
         $prompt .= "\nТребования:\n";
         $prompt .= "- Длина: 600–950 символов\n";
-        $prompt .= "- Стиль: продающий, естественный, экспертный\n";
-        $prompt .= "- Обязательно используй слова: купить, парфюм, аромат, оригинальный\n";
-        $prompt .= "- Упомяни магазин PARFUMSAD\n";
-        $prompt .= "- Используй Markdown: **жирный**, *курсив*, - списки\n";
-        $prompt .= "- Не пиши вступления типа «Вот описание», «SEO-описание» и т.п.";
+        $prompt .= "- Используй Markdown (**жирный**, *курсив*, списки)\n";
+        $prompt .= "- Стиль: продающий, естественный\n";
+        $prompt .= "- Обязательно упомяни PARFUMSAD\n";
+        $prompt .= "- **НИКОГДА** не добавляй в конце SEO Title, SEO Description, SEO Keywords, SEO-теги и любые другие блоки.\n";
+        $prompt .= "- Просто текст описания.";
 
-        return $prompt;
+        $text = $this->callDeepSeek($prompt);
+        return $this->markdownToHtml($text);
     }
 
-    private function generateTextWithDeepSeek($prompt, $attempt = 1)
+    private function callDeepSeek(string $prompt)
     {
         $apiKey = env('DEEPSEEK_API_KEY');
+        if (empty($apiKey)) return '';
 
-        if (empty($apiKey)) {
-            $this->error('DEEPSEEK_API_KEY не найден в .env');
-            return false;
-        }
-
-        $url = "https://api.deepseek.com/v1/chat/completions";
-
-        $systemPrompt = "Ты — профессиональный SEO-копирайтер магазина PARFUMSAD. "
-            . "Пиши только чистый Markdown без вступлений.";
+        $systemPrompt = "Ты — профессиональный SEO-копирайтер. "
+            . "Отвечай ТОЛЬКО запрошенным контентом. "
+            . "Не добавляй никаких дополнительных блоков, заголовков, SEO-тегов в конце.";
 
         $data = [
-            "model" => "deepseek-chat",
-            "messages" => [
+            "model"       => "deepseek-chat",
+            "messages"    => [
                 ["role" => "system", "content" => $systemPrompt],
                 ["role" => "user",   "content" => $prompt]
             ],
-            "temperature" => 0.75,
-            "max_tokens"  => 1200,
+            "temperature" => 0.7,
+            "max_tokens"  => 1100,
         ];
 
-        $ch = curl_init($url);
+        $ch = curl_init("https://api.deepseek.com/v1/chat/completions");
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST           => true,
@@ -160,53 +173,41 @@ class Skdeepproducts extends Command
                 "Authorization: Bearer " . $apiKey
             ],
             CURLOPT_POSTFIELDS     => json_encode($data, JSON_UNESCAPED_UNICODE),
-            CURLOPT_TIMEOUT        => 40,
+            CURLOPT_TIMEOUT        => 45,
         ]);
 
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $curlError = curl_error($ch);
         curl_close($ch);
-
-        if ($curlError) {
-            Log::error('cURL ошибка', ['error' => $curlError]);
-            return false;
-        }
 
         if ($httpCode === 200) {
             $result = json_decode($response, true);
-            $markdownText = $result['choices'][0]['message']['content'] ?? '';
-
-            return $this->markdownToHtml($markdownText);
+            return $result['choices'][0]['message']['content'] ?? '';
         }
 
-        // Retry при временных ошибках
-        if ($attempt < 3 && in_array($httpCode, [429, 500, 502, 503, 504])) {
-            sleep($attempt * 2);
-            return $this->generateTextWithDeepSeek($prompt, $attempt + 1);
-        }
-
-        Log::error('DeepSeek API error', ['code' => $httpCode]);
-        return false;
+        return '';
     }
 
     /**
-     * Конвертация Markdown в HTML с помощью встроенного парсера October CMS
+     * Улучшенная очистка
      */
     private function markdownToHtml(string $markdown): string
     {
-        if (empty(trim($markdown))) {
-            return '';
-        }
-
-        // Удаляем нежелательные вступления
-        $markdown = preg_replace('/^(Вот|SEO-описание|Описание для|Предлагаю).*?[:\n]/imu', '', $markdown);
         $markdown = trim($markdown);
+        if (empty($markdown)) return '';
 
-        // Используем встроенный парсер October CMS
+        // Удаляем любые SEO-блоки в конце
+        $markdown = preg_replace('/SEO-?теги:.*$/is', '', $markdown);
+        $markdown = preg_replace('/SEO Title:.*$/im', '', $markdown);
+        $markdown = preg_replace('/SEO Description:.*$/im', '', $markdown);
+        $markdown = preg_replace('/SEO Keywords:.*$/im', '', $markdown);
+        $markdown = preg_replace('/^\s*[\*\-]\s*seo_.*$/im', '', $markdown);
+
+        // Удаляем вступления
+        $markdown = preg_replace('/^(Вот|Я составил|SEO-описание|Описание товара).*?[:\n]/imu', '', $markdown);
+
         $html = Markdown::parse($markdown);
 
-        // Дополнительная очистка
         $html = preg_replace('/<p>\s*<\/p>/', '', $html);
         $html = preg_replace('/\n{3,}/', "\n\n", $html);
 
