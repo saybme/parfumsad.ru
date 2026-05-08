@@ -4574,10 +4574,6 @@ details.collapse summary::-webkit-details-marker {
 .leading-tight {
   line-height: 1.25;
 }
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
-}
 .text-error {
   --tw-text-opacity: 1;
   color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity, 1)));

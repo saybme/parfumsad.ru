@@ -1,15 +1,21 @@
 url = "/test"
+layout = "default"
 title = "Тест"
 is_hidden = 1
+
+[sphinxsearch]
 ==
-<?php
-function onStart(){
 
-    $url = URL::to('/');
+<div class="container">
 
-    return $url;
-    
+    <div class="space-y-4">
+        <form action="">
+            <input type="text" name="q" placeholder="Поиск товара по каталогу">
+            <button type="submit">Поиск</button>
+        </form>
+        <div class="">
+            {% component 'sphinxsearch' %}
+        </div>
+    </div>
 
-}
-?>
-==
+</div>

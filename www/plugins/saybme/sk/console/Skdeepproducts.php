@@ -148,7 +148,10 @@ class Skdeepproducts extends Command
     private function callDeepSeek(string $prompt)
     {
         $apiKey = env('DEEPSEEK_API_KEY');
-        if (empty($apiKey)) return '';
+        if (empty($apiKey)) {
+            Log::warning('DeepSeek: missing DEEPSEEK_API_KEY (skip request)');
+            return '';
+        }
 
         $systemPrompt = "Ты — профессиональный SEO-копирайтер. "
             . "Отвечай ТОЛЬКО запрошенным контентом. "
@@ -164,7 +167,19 @@ class Skdeepproducts extends Command
             "max_tokens"  => 1100,
         ];
 
-        $ch = curl_init("https://api.deepseek.com/v1/chat/completions");
+        $requestId = (string) Str::uuid();
+        $url = "https://api.deepseek.com/v1/chat/completions";
+
+        Log::info('DeepSeek: request start', [
+            'request_id'     => $requestId,
+            'model'          => $data['model'] ?? null,
+            'temperature'    => $data['temperature'] ?? null,
+            'max_tokens'     => $data['max_tokens'] ?? null,
+            'prompt_len'     => mb_strlen($prompt),
+            'prompt_preview' => mb_substr($prompt, 0, 220),
+        ]);
+
+        $ch = curl_init($url);
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST           => true,
@@ -177,13 +192,61 @@ class Skdeepproducts extends Command
         ]);
 
         $response = curl_exec($ch);
+        $curlErrNo = curl_errno($ch);
+        $curlError = $curlErrNo ? curl_error($ch) : null;
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
+        if ($response === false || $curlErrNo) {
+            Log::error('DeepSeek: curl error', [
+                'request_id' => $requestId,
+                'http_code'  => $httpCode,
+                'curl_errno' => $curlErrNo,
+                'curl_error' => $curlError,
+            ]);
+            return '';
+        }
+
+        $responsePreview = is_string($response) ? mb_substr($response, 0, 2000) : null;
+
         if ($httpCode === 200) {
             $result = json_decode($response, true);
-            return $result['choices'][0]['message']['content'] ?? '';
+            if (!is_array($result)) {
+                Log::error('DeepSeek: invalid JSON response', [
+                    'request_id' => $requestId,
+                    'http_code'  => $httpCode,
+                    'json_error' => function_exists('json_last_error_msg') ? json_last_error_msg() : json_last_error(),
+                    'preview'    => $responsePreview,
+                ]);
+                return '';
+            }
+
+            $content = $result['choices'][0]['message']['content'] ?? '';
+            if (!is_string($content) || trim($content) === '') {
+                Log::warning('DeepSeek: empty content in response', [
+                    'request_id' => $requestId,
+                    'http_code'  => $httpCode,
+                    'preview'    => $responsePreview,
+                ]);
+                return '';
+            }
+
+            Log::info('DeepSeek: request success', [
+                'request_id'        => $requestId,
+                'http_code'         => $httpCode,
+                'content_len'       => mb_strlen($content),
+                'content_preview'   => mb_substr($content, 0, 220),
+                'response_preview'  => $responsePreview,
+            ]);
+
+            return $content;
         }
+
+        Log::warning('DeepSeek: non-200 response', [
+            'request_id' => $requestId,
+            'http_code'  => $httpCode,
+            'preview'    => $responsePreview,
+        ]);
 
         return '';
     }

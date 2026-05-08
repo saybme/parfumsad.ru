@@ -72,6 +72,8 @@ class Skcategory extends \Cms\Classes\ComponentBase
             }
         }
 
+        
+
         $options['items'] = $this->getProducts();
         $result['#products'] = $this->renderPartial('settings/products', $options);        
         return $result;
