@@ -1,11 +1,3 @@
-{# $products приходит как массив/коллекция записей из Db::table()->get() #}
-{% if products is empty %}
-    <div>Ничего не найдено</div>
-{% else %}
-    <div>Найдено: {{ products|length }}</div>
-    <ul>
-        {% for p in products %}
-            <li>{{ p.name ?? ('#' ~ p.id) }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
+{% set sphinxsearch = __SELF__.sphinxsearch %}
+
+{{ sphinxsearch | raw }}

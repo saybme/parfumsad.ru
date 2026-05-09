@@ -2,8 +2,7 @@ url = "/result"
 layout = "default"
 title = "Результаты поиска"
 
-[skcatalog]
-slug = "{{ :slug }}"
-type = "search"
+[sphinxsearch]
+limit = 50
 ==
-{% component 'skcatalog' %}
+{% component 'sphinxsearch' %}
