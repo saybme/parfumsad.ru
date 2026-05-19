@@ -4,12 +4,14 @@ use Tailor\Models\GlobalRecord;
 use Model;
 use Input;
 use Log;
+use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \October\Rain\Database\Traits\Sluggable;
     use \October\Rain\Database\Traits\Sortable;
+    use Searchable;
 
     protected $fillable = [
         'name',
@@ -41,6 +43,10 @@ class Product extends Model
         'price_eur' => 'required',
         'category' => 'required',
         'available' => 'required'
+    ];
+
+    public $implement = [
+        \Saybme\Sk\Behaviors\AlgoliaSearchable::class
     ];
 
     public $attachOne = [
@@ -125,6 +131,22 @@ class Product extends Model
         $html .= '</div>';
 
         return $html;
+    }
+
+    // Scout использует методы трейта; делегируем в behavior AlgoliaSearchable
+    public function toSearchableArray()
+    {
+        return $this->asExtension('AlgoliaSearchable')->toSearchableArray();
+    }
+
+    public function searchableAs()
+    {
+        return $this->asExtension('AlgoliaSearchable')->searchableAs();
+    }
+
+    public function shouldBeSearchable()
+    {
+        return $this->asExtension('AlgoliaSearchable')->shouldBeSearchable();
     }
 
     // ========== ОСТАЛЬНОЙ ВАШ КОД БЕЗ ИЗМЕНЕНИЙ ==========

@@ -100,7 +100,8 @@ class Plugin extends PluginBase
             \Saybme\Sk\Components\Skpage::class => 'skpage',
             \Saybme\Sk\Components\Skcabinet::class => 'skcabinet',
             \Saybme\Sk\Components\Skreview::class => 'skreview',
-            \Saybme\Sk\Components\SphinxSearch::class => 'sphinxsearch'
+            \Saybme\Sk\Components\SphinxSearch::class => 'sphinxsearch',
+            \Saybme\Sk\Components\AlgoliaSearch::class => 'algoliaSearch'
         ];
     }
 
