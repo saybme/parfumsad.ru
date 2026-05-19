@@ -101,7 +101,7 @@ class Plugin extends PluginBase
             \Saybme\Sk\Components\Skcabinet::class => 'skcabinet',
             \Saybme\Sk\Components\Skreview::class => 'skreview',
             \Saybme\Sk\Components\SphinxSearch::class => 'sphinxsearch',
-            \Saybme\Sk\Components\AlgoliaSearch::class => 'algoliaSearch'
+            \Saybme\Sk\Components\Algoliasearch::class => 'algoliasearch'
         ];
     }
 

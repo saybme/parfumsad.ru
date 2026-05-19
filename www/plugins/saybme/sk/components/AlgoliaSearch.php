@@ -1,9 +1,8 @@
 <?php namespace Saybme\Sk\Components;
 
-use Cms\Classes\ComponentBase;
 use Saybme\Sk\Models\Product;
 
-class AlgoliaSearch extends ComponentBase
+class Algoliasearch extends \Cms\Classes\ComponentBase
 {
     public function componentDetails()
     {
@@ -13,20 +12,33 @@ class AlgoliaSearch extends ComponentBase
         ];
     }
 
+    public function defineProperties()
+    {
+        return [
+            'limit' => [
+                'title' => 'Количество товаров',
+                'description' => 'Количество товаров для вывода',
+                'type' => 'string',
+                'default' => '20'
+            ]
+        ];
+    }
+
     public function onRun()
     {
-        $this->algoliaSearch = $this->onSearch();
+        $this->algoliasearch = $this->onSearch();
     }
 
     public function onSearch()
     {
         
-        $searchQuery = input('q');
+        $searchQuery = input('q');        
+        
         $products = Product::search($searchQuery)
-            ->paginate(20);
+            ->paginate((int) ($this->property('limit') ?: 20));       
         
         return $this->renderPartial('catalog/search', ['products' => $products]);
     }
 
-    public $algoliaSearch;
+    public $algoliasearch;
 }
