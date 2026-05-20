@@ -175,3 +175,6 @@ v1.0.58:
 v1.0.59:
     - 'Добавление начальных данных'
     - seed_default_options.php
+v1.0.60:
+    - 'Создание таблицы saybme_sk_product_option_values (fix)'
+    - create_product_option_values_table.php

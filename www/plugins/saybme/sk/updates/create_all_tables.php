@@ -1,4 +1,4 @@
-<?php namespace Acme\ProductOptions\Updates;
+<?php namespace Saybme\Sk\Updates;
 
 use Schema;
 use October\Rain\Database\Schema\Blueprint;
