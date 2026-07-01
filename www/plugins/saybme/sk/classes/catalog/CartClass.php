@@ -420,23 +420,43 @@ class CartClass {
         if(!$id) return;
 
         try {
-            $order = Order::find($id);
+            $order = Order::with(['products', 'payment', 'delivery'])->find($id);
             if(!$order) return;
 
+            $vars = ['order' => $order];
+            $customerName = $order->profile['username'] ?? $order->email ?? 'Покупатель';
+
+            // Письмо покупателю
+            if (!empty($order->email) && filter_var($order->email, FILTER_VALIDATE_EMAIL)) {
+                Mail::send('order.new.user', $vars, function($message) use ($order, $customerName) {
+                    $message->to($order->email, $customerName);
+                    $message->subject('Ваш заказ на сайте www.parfumsad.ru');
+                });
+            }
+
             $gl = GlobalRecord::findForGlobalUuid('fbec6dba-044f-48b1-914f-7c29831e104d');
-            $emails = $gl->shop_emails;
+            if (!$gl || empty($gl->shop_emails)) {
+                return;
+            }
 
-            if(!$emails) return;        
+            $emails = is_array($gl->shop_emails)
+                ? array_values(array_filter($gl->shop_emails))
+                : array_filter(array_map('trim', explode(',', (string) $gl->shop_emails)));
 
-            // Уведомление
-            $vars['order'] = $order;
+            if (empty($emails)) {
+                return;
+            }
 
+            // Уведомление администратору
             Mail::send('order.new', $vars, function($message) use ($emails) {
-                $message->to($emails, 'Admin Person');
+                $message->to($emails);
                 $message->subject('Создан новый заказ на сайте www.parfumsad.ru');
             });
         } catch (\Exception $e) {
-            Log::error('Ошибка отправки email уведомления о заказе: ' . $e->getMessage());
+            Log::error('Ошибка отправки email уведомления о заказе: ' . $e->getMessage(), [
+                'order_id' => $id,
+                'trace' => mb_substr($e->getTraceAsString(), 0, 2000),
+            ]);
         }
     }
 
