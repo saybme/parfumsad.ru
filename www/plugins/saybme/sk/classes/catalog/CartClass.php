@@ -195,17 +195,12 @@ class CartClass {
             throw new ValidationException(['error' => 'Товар не найден в корзине.']);
         }
 
-        if($count <= 0) {
-            Session::forget('cart.products.' . $id);
-            $noty['type'] = 'success';
-            $noty['text'] = 'Товар удален из корзины';
-
-            $result['noty'] = $noty;
-            $result['cart'] = $this->cart();
-            return $result;
+        // Пустое или некорректное количество — не меняем корзину
+        if ($count === null || $count === '' || !is_numeric($count) || (int) $count <= 0) {
+            return ['cart' => $this->cart()];
         }
-        
-        Session::put('cart.products.' . $id . '.amount', $count);
+
+        Session::put('cart.products.' . $id . '.amount', (int) $count);
 
         $noty = [];
         $noty['type'] = 'success';

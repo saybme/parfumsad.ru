@@ -833,6 +833,12 @@ html {
   width: 3rem;
   padding: 0px;
 }
+.btn-circle {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 9999px;
+  padding: 0px;
+}
 :where(.btn:is(input[type="checkbox"])),
 :where(.btn:is(input[type="radio"])) {
   width: auto;
@@ -2791,6 +2797,18 @@ details.collapse summary::-webkit-details-marker {
   border-radius: 9999px;
   padding: 0px;
 }
+.btn-circle:where(.btn-md) {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 9999px;
+  padding: 0px;
+}
+.btn-circle:where(.btn-lg) {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 9999px;
+  padding: 0px;
+}
 [type="checkbox"].checkbox-sm {
   height: 1.25rem;
   width: 1.25rem;
@@ -3915,6 +3933,14 @@ details.collapse summary::-webkit-details-marker {
   width: 100%;
   height: 100%;
 }
+.size-\[20px\] {
+  width: 20px;
+  height: 20px;
+}
+.size-\[30px\] {
+  width: 30px;
+  height: 30px;
+}
 .h-1 {
   height: 0.25rem;
 }
@@ -3941,6 +3967,12 @@ details.collapse summary::-webkit-details-marker {
 }
 .h-full {
   height: 100%;
+}
+.h-\[20px\] {
+  height: 20px;
+}
+.h-\[30px\] {
+  height: 30px;
 }
 .min-h-0 {
   min-height: 0px;
@@ -4635,6 +4667,10 @@ details.collapse summary::-webkit-details-marker {
   --tw-text-opacity: 1;
   color: rgb(141 71 246 / var(--tw-text-opacity, 1));
 }
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity, 1));
+}
 .text-red-600 {
   --tw-text-opacity: 1;
   color: rgb(220 38 38 / var(--tw-text-opacity, 1));
@@ -4654,10 +4690,6 @@ details.collapse summary::-webkit-details-marker {
 .text-yellow-500 {
   --tw-text-opacity: 1;
   color: rgb(234 179 8 / var(--tw-text-opacity, 1));
-}
-.text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity, 1));
 }
 .underline {
   text-decoration-line: underline;
@@ -4697,6 +4729,14 @@ details.collapse summary::-webkit-details-marker {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.duration-300 {
+  transition-duration: 300ms;
 }
 @media (min-width: 640px) {
 
@@ -4800,6 +4840,10 @@ details.collapse summary::-webkit-details-marker {
   --tw-bg-opacity: 1;
   background-color: rgb(114 32 181 / var(--tw-bg-opacity, 1));
 }
+.hover\:bg-purple-1:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(193 153 252 / var(--tw-bg-opacity, 1));
+}
 .hover\:text-primary:hover {
   --tw-text-opacity: 1;
   color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity, 1)));
@@ -4843,6 +4887,18 @@ details.collapse summary::-webkit-details-marker {
     margin-bottom: 2rem;
   }
 
+  .sm\:mb-4 {
+    margin-bottom: 1rem;
+  }
+
+  .sm\:flex {
+    display: flex;
+  }
+
+  .sm\:hidden {
+    display: none;
+  }
+
   .sm\:size-4 {
     width: 1rem;
     height: 1rem;
@@ -4868,6 +4924,10 @@ details.collapse summary::-webkit-details-marker {
 
   .sm\:flex-row {
     flex-direction: row;
+  }
+
+  .sm\:items-center {
+    align-items: center;
   }
 
   .sm\:justify-between {
@@ -5074,6 +5134,10 @@ details.collapse summary::-webkit-details-marker {
 
   .lg\:h-\[60px\] {
     height: 60px;
+  }
+
+  .lg\:h-\[20px\] {
+    height: 20px;
   }
 
   .lg\:w-1\/2 {

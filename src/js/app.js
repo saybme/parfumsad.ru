@@ -283,8 +283,9 @@ window.changeCartCount = function (data) {
         let product = data.products[el];
         let row = document.querySelector('[product-id="' + el + '"]');
         if (row) {
-            let sumEl = row.querySelector('.product-sum');
-            if (sumEl) sumEl.innerHTML = sumFormat(product.sum);
+            row.querySelectorAll('.product-sum').forEach(sumEl => {
+                sumEl.innerHTML = sumFormat(product.sum);
+            });
         }
     }
     totalCart(data.total);
@@ -340,7 +341,10 @@ window.totalCart = function (data) {
 };
 
 window.sumFormat = function (number) {
-    return new Intl.NumberFormat().format(number);
+    return new Intl.NumberFormat('ru-RU', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    }).format(number);
 };
 
 window.sakuraNoty = function (data) {
